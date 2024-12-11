@@ -29,13 +29,13 @@ Demonstrações de como usar o projeto:
 
 ## Funcionalidades
 
-- Cadastro por parte do Usuário
+- Cadastro Por Parte do Usuário
 - Pesquisa de Medicamentos
-- Alertas de interações Medicamentosas
-- Consulta de bula dos medicamentos
-- Gestão de consumo de medicamentos
+- Alertas de Interações Medicamentosas
+- Consulta de Bula dos Medicamentos
+- Gestão de Consumo de Medicamentos
 - Listagem de Genéricos
-- Personalização e acessibilidade
+- Personalização e Acessibilidade
 
 ## Documentação
 Colocar aqui links também com ferramentars que formos usar, como drive, github projects e tals
