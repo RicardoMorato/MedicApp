@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
 ## Descrição
-Um aplicativo que permite os usuários acessarem informações detalhadas sobre medicamentos através de uma interface amigável
+Um aplicativo que permite os usuários acessarem informações detalhadas sobre medicamentos através de uma interface amigável.
 Ele permite que os usuários consultem dados completos sobre medicamentos, incluindo composição, indicações, contra-indicações, efeitos colaterais e orientações de uso, de forma simples e prática.
 Nossa solução foi pensada para dar maior autonomia e segurança aos pacientes e o público em geral, promovendo o uso seguro e consciente de medicamentos.
 
