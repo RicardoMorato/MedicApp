@@ -14,11 +14,11 @@ Nossa solução foi pensada para dar maior autonomia e segurança aos pacientes 
 
 Aqui teria que ter como seria os passos iniciais para executar o projeto, ou tiramos por agora, ou a gente faz simples e melhora depois
 
-### Pré-requisitos
+## Pré-requisitos
 
 O que é necessário para instalar o software e como instalá-lo: Mesma coisa do anterior
 
-### Instalação
+## Instalação
 
 Um passo a passo da série de exemplos que informam como fazer um ambiente de desenvolvimento em execução:
 
