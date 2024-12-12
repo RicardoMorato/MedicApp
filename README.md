@@ -6,13 +6,15 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
 ## Descrição
+
 Um aplicativo que permite os usuários acessarem informações detalhadas sobre medicamentos através de uma interface amigável.
 Ele permite que os usuários consultem dados completos sobre medicamentos, incluindo composição, indicações, contra-indicações, efeitos colaterais e orientações de uso, de forma simples e prática.
-Nossa solução foi pensada para dar maior autonomia e segurança aos pacientes e o público em geral, promovendo o uso seguro e consciente de medicamentos.
+Nossa solução foi pensada para dar maior autonomia e segurança aos pacientes e ao público em geral, promovendo o uso seguro e consciente de medicamentos.
 
 ## Funcionalidades
 
-- Cadastro Por Parte do Usuário
+- Cadastro de Usuários
+- Cadastro de Medicamentos Por Parte do Usuário
 - Pesquisa de Medicamentos
 - Alertas de Interações Medicamentosas
 - Consulta de Bula dos Medicamentos
@@ -21,19 +23,18 @@ Nossa solução foi pensada para dar maior autonomia e segurança aos pacientes 
 - Personalização e Acessibilidade
 
 ## Documentação
-Colocar aqui links também com ferramentars que formos usar, como drive, github projects e tals
-Além de definir parte de metodologias (Scrum, Kanban)
-[Documentação](link-para-documentação)
+
+O MedicApp possui [uma Wiki](https://github.com/RicardoMorato/MedicApp/wiki)! Lá, você consegue informações sobre as funcionalidades que nosso aplicativo dá suporte, as tecnologias que estamos usando e porque optamos por elas, além das ferramentas e metodologias utilizadas no desenvolvimento do projeto. Sinta-se livre para propor atualizações na documentação, o MedicApp é de todos nós.
 
 ## Créditos
 
-- Eduardo Matos (Desenvolverdor Front-End e Designer UX/UI)
+- Eduardo Matos (Desenvolvedor Front-End e Designer UX/UI)
 - Gabriel Mendonça (Desenvolvedor Back-End)
 - João Antônio (Desenvolvedor Back-End e Documentador)
 - Pedro Novaes (Desenvolvedor Back-End)
-- Ricardo Morato (Desenvolvedor Back-End e responsável pelos Testes)
+- Ricardo Morato (Gerente, Desenvolvedor Back-End e Responsável pelos Testes)
 - Weldon Pereira (Desenvolvedor Front-End e Documentador)
 
 ## Licença
 
-Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE.md](LICENSE) para detalhes.
+Este projeto está licenciado sob a Licença GNU General Public License v3.0 - veja o arquivo [LICENSE.md](LICENSE) para detalhes.
