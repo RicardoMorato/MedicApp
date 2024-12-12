@@ -11,7 +11,13 @@ Um aplicativo que permite os usuários acessarem informações detalhadas sobre 
 Ele permite que os usuários consultem dados completos sobre medicamentos, incluindo composição, indicações, contra-indicações, efeitos colaterais e orientações de uso, de forma simples e prática.
 Nossa solução foi pensada para dar maior autonomia e segurança aos pacientes e ao público em geral, promovendo o uso seguro e consciente de medicamentos.
 
+## Documentação
+
+O MedicApp possui [uma Wiki](https://github.com/RicardoMorato/MedicApp/wiki)! Lá, você consegue informações sobre as funcionalidades que nosso aplicativo dá suporte, as tecnologias que estamos usando e porque optamos por elas, além das ferramentas e metodologias utilizadas no desenvolvimento do projeto. Sinta-se livre para propor atualizações na documentação, o MedicApp é de todos nós.
+
 ## Funcionalidades
+
+Abaixo está uma lista não extensiva das principais funcionalidades que daremos suporte na versão 1.0.0 do MedicApp. Para mais detalhes, por favor, consulte a seção de [Funcionalidades e Histórias de Usuário na Wiki](https://github.com/RicardoMorato/MedicApp/wiki/Funcionalidades-e-Hist%C3%B3rias-de-Usu%C3%A1rio).
 
 - Cadastro de Usuários
 - Cadastro de Medicamentos Por Parte do Usuário
@@ -21,10 +27,6 @@ Nossa solução foi pensada para dar maior autonomia e segurança aos pacientes 
 - Gestão de Consumo de Medicamentos
 - Listagem de Genéricos
 - Personalização e Acessibilidade
-
-## Documentação
-
-O MedicApp possui [uma Wiki](https://github.com/RicardoMorato/MedicApp/wiki)! Lá, você consegue informações sobre as funcionalidades que nosso aplicativo dá suporte, as tecnologias que estamos usando e porque optamos por elas, além das ferramentas e metodologias utilizadas no desenvolvimento do projeto. Sinta-se livre para propor atualizações na documentação, o MedicApp é de todos nós.
 
 ## Créditos
 
