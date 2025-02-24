@@ -1,0 +1,36 @@
+services:
+  database:
+    restart: always
+    image: postgres:latest
+    container_name: database
+    environment:
+      POSTGRES_DB: "${DB_NAME}"
+      POSTGRES_USER: "${DB_USER}"
+      POSTGRES_PASSWORD: "${DB_PASSWORD}"
+      POSTGRES_PORT: "${DB_PORT}"
+    volumes:
+      - data-postgres:/var/lib/postgresql/data
+    ports:
+      - "${DB_PORT}:5432"
+
+  app:
+    image: python:3.9-slim
+    container_name: MedicaAppApi
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: >
+      sh -c " pip install --no-cache-dir -r requirements.txt && uvicorn main:app --host 0.0.0.0 --port 8200 --reload "
+    environment:
+      DB_NAME: ${DB_NAME}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "8200:8200"
+    depends_on:
+      - database
+
+volumes:
+  data-postgres:
