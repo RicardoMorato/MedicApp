@@ -1,13 +1,12 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native"
 
 const styles = StyleSheet.create({
     container: {
         backgroundColor: "#fff",
-        display: "flex",
-        height: "100%",
-        alignItems: "center", justifyContent: 'center'
-
-    }, title: {
+        flex: 1,
+        justifyContent: 'center'
+    }, 
+    title: {
         fontFamily: 'Poppins_700Bold',
         fontSize: 36, 
         color: '#000', 
@@ -16,25 +15,26 @@ const styles = StyleSheet.create({
     imageContainer: {
         display: "flex", 
         justifyContent: 'center',
-        flex: 1, 
-        width: '100%', 
-        height: '100%',
-        top: '5%'
+        width: '100%',
+        height: Dimensions.get('window').height / 8,
+    },
+    imageContainerSmall: {
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+        padding: 10,
     },
     formContainer: {
-        display: "flex",
-        flex: 6, 
         alignContent: 'center', 
         justifyContent: 'center', 
         width: '100%', 
-        height: '100%',
         alignItems: 'center',
-        paddingBottom: 90, 
-        gap: 20
+        gap: 20,
+        height: Dimensions.get('window').height / 1.3,
     },
     formInput: { 
         flexDirection: 'row', 
         alignItems: 'center',  
+        justifyContent: 'center',
         width: '70%', 
         alignSelf: 'center', 
         backgroundColor: '#D9D9D9',
@@ -42,14 +42,13 @@ const styles = StyleSheet.create({
         padding: 5
     },
     formButton: {
+        alignSelf: 'center',
          backgroundColor: '#419DFF', 
          padding: 12, 
          borderRadius: 50, 
          width: '40%', 
-         alignSelf: 'center',
-         boxShadow: '1px 2px 6px rgba(0, 0, 0, 0.25)'
-
+         boxShadow: '1px 2px 6px rgba(0, 0, 0, 0.25)',
     }
 })
-export default styles
 
+export default styles

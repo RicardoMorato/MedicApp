@@ -1,12 +1,10 @@
-import { StyleSheet } from "react-native"
+import { Dimensions, StyleSheet } from "react-native"
 
 
 const styles = StyleSheet.create({
     container: {
         backgroundColor: "#fff",
-        display: "flex",
-        height: "100%",
-        alignItems: "center", 
+        flex: 1,
         justifyContent: 'center'
     }, 
     title: {
@@ -18,21 +16,18 @@ const styles = StyleSheet.create({
     imageContainer: {
         display: "flex", 
         justifyContent: 'center',
-        flex: 1, 
-        width: '100%', 
-        height: '100%',
-        top: '5%'
+        width: '100%',
+        height: Dimensions.get('window').height/8,
+        //backgroundColor: 'red', 
     },
     formContainer: {
-        display: "flex",
-        flex: 6, 
         alignContent: 'center', 
         justifyContent: 'center', 
         width: '100%', 
-        height: '100%',
         alignItems: 'center',
-        paddingBottom: 90, 
-        gap: 20
+        gap: 20,
+        height: Dimensions.get('window').height/1.3,
+        //backgroundColor: 'blue'
     },
     formInput: { 
         flexDirection: 'row', 
