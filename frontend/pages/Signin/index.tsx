@@ -1,18 +1,19 @@
 import React from "react";
-import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, Image, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import styles  from "./style";
 import Logo from '../../assets/images/MedicApp-Logo.png';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from "react";
-import { useFonts, Poppins_700Bold} from '@expo-google-fonts/poppins';
+import { useFonts, Poppins_700Bold, Poppins_300Light} from '@expo-google-fonts/poppins';
 
 SplashScreen.preventAutoHideAsync();
 export default function Signin() {
     const navigation = useNavigation<any>();
     const [loaded, error] = useFonts({
         'Poppins_700Bold': Poppins_700Bold,
+        'Poppins_300Light': Poppins_300Light
       });
     
       useEffect(() => {
@@ -29,7 +30,7 @@ export default function Signin() {
             <View style={styles.imageContainer}>
                 <Image 
                 source={Logo}
-                style={{ width: 300, alignSelf: 'center'}}
+                style={{ width: '100%', height: 200}}
                 resizeMode="contain"
                 />
             </View>
@@ -37,27 +38,27 @@ export default function Signin() {
             <View style={styles.formContainer}>
                 <Text style={styles.title}>Entrar</Text>
                 <View style={styles.formInput}>
-                    <Ionicons name="mail" size={24} color="#BDBDBD" style={{ marginLeft: 10}} />
+                    <Ionicons name="mail" size={24} color="#419DFF" style={{ marginLeft: 10}} />
                     <TextInput
                         placeholder="Email"
-                        style={{ height: 40, flex: 1, marginLeft: 10, color:"#BDBDBD" }}
+                        style={{ height: 40, flex: 1, marginLeft: 10, color:"#000" }}
                     />
                 </View>
                 <View style={styles.formInput}>
-                    <Ionicons name="lock-closed" size={24} color="#BDBDBD"  style={{ marginLeft: 10 }} />
+                    <Ionicons name="lock-closed" size={24} color="#419DFF"  style={{ marginLeft: 10 }} />
                     <TextInput
                         placeholder="Senha"
-                        secureTextEntry
-                        style={{ height: 40, flex: 1, marginLeft: 10, color:"#BDBDBD" }}
+                        secureTextEntry={true}
+                        style={{ height: 40, flex: 1, marginLeft: 10, color:"#000" }}
                     />
                 </View>
-                <View style={{top: 20, display: 'flex', gap: 15, width: '100%', alignItems: 'center' }}>
+                <View style={{top: 20, display: 'flex', gap: 20, width: '100%', alignItems: 'center' }}>
                     <TouchableOpacity 
                         style={styles.formButton}
                     >
                         <Text style={{ color: 'white', textAlign: 'center' }}>Acessar</Text>
                     </TouchableOpacity>
-                    <Text onPress={() => navigation.navigate('Signup')} style={{color: '#0057B3'}}>Criar nova conta</Text>
+                    <Text onPress={() => navigation.navigate('Signup')} style={{color: '#0057B3', textDecorationLine: 'underline', fontFamily: 'Poppins_300Light'}}>Criar nova conta</Text>
                 </View>
             </View>
             
