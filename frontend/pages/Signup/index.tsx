@@ -11,15 +11,16 @@ import colors from "@/global/colors"
 import { useForm, Controller} from "react-hook-form";
 
 type FormData = {
-    NomeCompleto: string
+    Nome: string
     Email: string
 }
 
 export default function Signup() {
     const { control, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
-          NomeCompleto: '',
-          Email: ''
+          Nome: '',
+          Email: '',
+          Senha: ''
         }
       });
       const onSubmit = (data: FormData) => {
@@ -54,19 +55,19 @@ export default function Signup() {
             <View style={styles.formContainer}>
                 <Text style={styles.title}>Cadastrar</Text>
                 <Controller
-                    name="NomeCompleto"
+                    name="Nome"
                     control={control}
                     rules={{ 
-                        required: "O nome é obrigatório!"
+                        required: "O nome é obrigatório."
                     }}
                     render={({ field: { onChange, onBlur, value } }) => (
                         <View style={{ gap: 5 }}>
-                            <View style={[styles.formInput, errors?.NomeCompleto ? { borderColor: colors.error, borderWidth: 1 } 
+                            <View style={[styles.formInput, errors?.Nome ? { borderColor: colors.error, borderWidth: 1 } 
                                     : value 
                                         ? { borderColor: colors.primary, borderWidth: 1.5 } 
                                         : { borderColor: 'transparent', borderWidth: 0 }
                             ]}>
-                                <Ionicons name="person" size={24} color={errors?.NomeCompleto ? colors.error : colors.primary} style={{ marginLeft: 10 }} />
+                                <Ionicons name="person" size={24} color={errors?.Nome ? colors.error : colors.primary} style={{ marginLeft: 10 }} />
                                 <TextInput
                                     placeholder="Nome completo"
                                     style={{ height: 40, flex: 1, marginLeft: 10 }}
@@ -75,7 +76,7 @@ export default function Signup() {
                                     value={value}
                                 />
                             </View>
-                            {errors?.NomeCompleto && <Text style={{ color: colors.error }}>{errors?.NomeCompleto.message}</Text>}
+                            {errors?.Nome && <Text style={{ color: colors.error }}>{errors?.Nome.message}</Text>}
                         </View>
                     )}
                 />
@@ -83,10 +84,10 @@ export default function Signup() {
                 name="Email"
                 control={control}
                 rules={{
-                    required: "O email é obrigatório!",
+                    required: "O email é obrigatório.",
                     pattern: {
                         value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
-                        message: "Email inválido!"
+                        message: "Email inválido."
                     }
                 }}
                 
@@ -110,14 +111,45 @@ export default function Signup() {
                     </View>
                     )}
                 />
-                <View style={styles.formInput}>
-                    <Ionicons name="lock-closed" size={24} color={colors.primary} style={{ marginLeft: 10 }} />
-                    <TextInput
-                        placeholder="Senha"
-                        secureTextEntry={true}
-                        style={{ height: 40, flex: 1, marginLeft: 10 }}
-                    />
-                </View>
+
+            <Controller 
+            control={control}
+            name="Senha"
+            rules={{
+                required: "A senha é obrigatória.",
+                minLength: {
+                    value: 8,
+                    message: "A senha deve ter no mínimo 8 caracteres."
+                },
+                validate: {
+                    hasUpperCase: v => /[A-Z]/.test(v) || "A senha deve ter pelo menos uma letra maiúscula.",
+                    hasLowerCase: v => /[a-z]/.test(v) || "A senha deve ter pelo menos uma letra minúscula.",
+                    hasSpecialChar: v => /[!@#$%^&*(),.?":{}|<>]/.test(v) || "A senha deve ter pelo menos um caractere especial."
+                  }
+            }}
+            render={({ field: { onChange, onBlur, value } }) => (
+                <View style={{ gap: 5 }}>
+                    <View style={[styles.formInput, errors?.Senha ? { borderColor: colors.error, borderWidth: 1 } 
+                                    : value 
+                                        ? { borderColor: colors.primary, borderWidth: 1.5 } 
+                                        : { borderColor: 'transparent', borderWidth: 0 }
+                            ]}>
+                        <Ionicons name="lock-closed" size={24} color={errors?.Senha ? colors.error : colors.primary} style={{ marginLeft: 10 }} />
+                        <TextInput
+                            placeholder="Senha"
+                            secureTextEntry={true}
+                            onBlur={onBlur}
+                            onChangeText={onChange}
+                            value={value}
+                            style={{ height: 40, flex: 1, marginLeft: 10 }}
+                        />
+                    </View>
+                    {errors?.Senha && <Text style={{color: colors.error}}>{errors?.Senha?.message}</Text>}
+                    </View>
+            )}
+            />
+            
+            
                 <View style={{top: 20, display: 'flex', gap: 20, width: '100%', alignItems: 'center' }}>
                 <TouchableOpacity 
                     style={styles.formButton} onPress={handleSubmit(onSubmit)}
