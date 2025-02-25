@@ -6,7 +6,8 @@ import styles from "./style";
 import Logo from '../../assets/images/MedicApp-Logo.png';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from "react";
-import { useFonts, Poppins_700Bold, Poppins_100Thin, Poppins_300Light} from '@expo-google-fonts/poppins';
+import { useFonts, Poppins_700Bold, Poppins_300Light} from '@expo-google-fonts/poppins';
+import colors from "@/global/colors"
 
 SplashScreen.preventAutoHideAsync();
 
@@ -40,21 +41,21 @@ export default function Signup() {
             <View style={styles.formContainer}>
                 <Text style={styles.title}>Cadastrar</Text>
                 <View style={styles.formInput}>
-                    <Ionicons name="person" size={24} color="#419DFF" style={{ marginLeft: 10}} />
+                    <Ionicons name="person" size={24} color={colors.primary} style={{ marginLeft: 10}} />
                     <TextInput
                         placeholder="Nome completo"
                         style={{ height: 40, flex: 1, marginLeft: 10}}
                     />
                 </View>
                 <View style={styles.formInput}>
-                    <Ionicons name="mail" size={24} color="#419DFF" style={{ marginLeft: 10 }} />
+                    <Ionicons name="mail" size={24} color={colors.primary} style={{ marginLeft: 10 }} />
                     <TextInput
                         placeholder="Email"
-                        style={{height: 40, flex: 1, marginLeft: 10}}
+                        style={{ height: 40,  flex: 1, marginLeft: 10 }}
                     />
                 </View>
                 <View style={styles.formInput}>
-                    <Ionicons name="lock-closed" size={24} color="#419DFF" style={{ marginLeft: 10 }} />
+                    <Ionicons name="lock-closed" size={24} color={colors.primary} style={{ marginLeft: 10 }} />
                     <TextInput
                         placeholder="Senha"
                         secureTextEntry={true}
@@ -65,9 +66,9 @@ export default function Signup() {
                 <TouchableOpacity 
                     style={styles.formButton}
                 >
-                    <Text style={{ color: 'white', textAlign: 'center' }}>Cadastrar</Text>
+                    <Text style={{ color: colors.background, textAlign: 'center' }}>Cadastrar</Text>
                 </TouchableOpacity>
-                <Text style={{ textAlign: 'center', color: '#0057B3', fontFamily: 'Poppins_300Light' }} >Já tem uma conta? <Text onPress={() => navigation.navigate('Signin')} style={{ color: '#0057B3', 
+                <Text style={{ textAlign: 'center', color: colors.primary, fontFamily: 'Poppins_300Light' }} >Já tem uma conta? <Text onPress={() => navigation.navigate('Signin')} style={{ color: colors.secondary, 
                     textDecorationLine: 'underline' }}>{`Entrar`}</Text></Text>
                 </View>
             </View>
