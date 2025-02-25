@@ -16,7 +16,7 @@ type FormData = {
 }
 
 export default function Signup() {
-    const { control, handleSubmit, formState: { errors } } = useForm({
+    const { control, handleSubmit, formState: { errors, isSubmitted } } = useForm({
         defaultValues: {
           Nome: '',
           Email: '',
@@ -63,7 +63,7 @@ export default function Signup() {
                     render={({ field: { onChange, onBlur, value } }) => (
                         <View style={{ gap: 5 }}>
                             <View style={[styles.formInput, errors?.Nome ? { borderColor: colors.error, borderWidth: 1 } 
-                                    : value 
+                                    : isSubmitted && value 
                                         ? { borderColor: colors.primary, borderWidth: 1.5 } 
                                         : { borderColor: 'transparent', borderWidth: 0 }
                             ]}>
@@ -94,7 +94,7 @@ export default function Signup() {
                 render={({field: { onChange, onBlur, value }}) => (
                 <View style={{ gap: 5 }}>
                     <View style={[styles.formInput, errors?.Email ? { borderColor: colors.error, borderWidth: 1 } 
-                                    : value 
+                                    : isSubmitted && value 
                                         ? { borderColor: colors.primary, borderWidth: 1.5 } 
                                         : { borderColor: 'transparent', borderWidth: 0 }
                             ]}>
@@ -130,7 +130,7 @@ export default function Signup() {
             render={({ field: { onChange, onBlur, value } }) => (
                 <View style={{ gap: 5 }}>
                     <View style={[styles.formInput, errors?.Senha ? { borderColor: colors.error, borderWidth: 1 } 
-                                    : value 
+                                    : isSubmitted && value 
                                         ? { borderColor: colors.primary, borderWidth: 1.5 } 
                                         : { borderColor: 'transparent', borderWidth: 0 }
                             ]}>
