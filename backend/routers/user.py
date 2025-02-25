@@ -1,8 +1,8 @@
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, status
 from schemas.user import UserCreate, UserResponse  
 
 user_router = APIRouter()
 
 @user_router.post("/register", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
 def register_user(user: UserCreate):
-    return UserResponse(name=user.name)  # Retorna a resposta formatada com o e-mail
+    return UserResponse(name=user.name)  
