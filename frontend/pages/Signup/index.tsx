@@ -79,14 +79,37 @@ export default function Signup() {
                         </View>
                     )}
                 />
+                <Controller
+                name="Email"
+                control={control}
+                rules={{
+                    required: "O email é obrigatório!",
+                    pattern: {
+                        value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+                        message: "Email inválido!"
+                    }
+                }}
                 
-                <View style={styles.formInput}>
-                    <Ionicons name="mail" size={24} color={colors.primary} style={{ marginLeft: 10 }} />
-                    <TextInput
-                        placeholder="Email"
-                        style={{ height: 40,  flex: 1, marginLeft: 10 }}
-                    />
-                </View>
+                render={({field: { onChange, onBlur, value }}) => (
+                <View style={{ gap: 5 }}>
+                    <View style={[styles.formInput, errors?.Email ? { borderColor: colors.error, borderWidth: 1 } 
+                                    : value 
+                                        ? { borderColor: colors.primary, borderWidth: 1.5 } 
+                                        : { borderColor: 'transparent', borderWidth: 0 }
+                            ]}>
+                        <Ionicons name="mail" size={24} color={errors?.Email ? colors.error : colors.primary} style={{ marginLeft: 10 }} />
+                        <TextInput
+                            placeholder="Email"
+                            style={{ height: 40,  flex: 1, marginLeft: 10 }}
+                            onBlur={onBlur}
+                            onChangeText={onChange}
+                            value={value}
+                        />
+                    </View>
+                    {errors?.Email && <Text style={{ color: colors.error }}>{errors?.Email?.message}</Text>}
+                    </View>
+                    )}
+                />
                 <View style={styles.formInput}>
                     <Ionicons name="lock-closed" size={24} color={colors.primary} style={{ marginLeft: 10 }} />
                     <TextInput
