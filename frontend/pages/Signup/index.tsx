@@ -9,8 +9,6 @@ import { useEffect } from "react";
 import { useFonts, Poppins_700Bold, Poppins_300Light} from '@expo-google-fonts/poppins';
 import colors from "@/global/colors"
 
-SplashScreen.preventAutoHideAsync();
-
 export default function Signup() {
     const navigation = useNavigation<any>();
     const [loaded, error] = useFonts({
