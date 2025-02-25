@@ -32,7 +32,11 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
-      ]
+      ],
+      [
+      "expo-font",{
+        "fonts": ["./assets/fonts/Poppins-Bold.tff"]
+      }]
     ],
     "experiments": {
       "typedRoutes": true
