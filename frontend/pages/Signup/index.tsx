@@ -8,8 +8,23 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from "react";
 import { useFonts, Poppins_700Bold, Poppins_300Light} from '@expo-google-fonts/poppins';
 import colors from "@/global/colors"
+import { useForm, Controller} from "react-hook-form";
+
+type FormData = {
+    NomeCompleto: string
+    Email: string
+}
 
 export default function Signup() {
+    const { control, handleSubmit, formState: { errors } } = useForm({
+        defaultValues: {
+          NomeCompleto: '',
+          Email: ''
+        }
+      });
+      const onSubmit = (data: FormData) => {
+        console.log(data)
+      }
     const navigation = useNavigation<any>();
     const [loaded, error] = useFonts({
             'Poppins_700Bold': Poppins_700Bold,
@@ -38,13 +53,33 @@ export default function Signup() {
             </View>
             <View style={styles.formContainer}>
                 <Text style={styles.title}>Cadastrar</Text>
-                <View style={styles.formInput}>
-                    <Ionicons name="person" size={24} color={colors.primary} style={{ marginLeft: 10}} />
-                    <TextInput
-                        placeholder="Nome completo"
-                        style={{ height: 40, flex: 1, marginLeft: 10}}
-                    />
-                </View>
+                <Controller
+                    name="NomeCompleto"
+                    control={control}
+                    rules={{ 
+                        required: "O nome é obrigatório!"
+                    }}
+                    render={({ field: { onChange, onBlur, value } }) => (
+                        <View style={{ gap: 5 }}>
+                            <View style={[styles.formInput, errors?.NomeCompleto ? { borderColor: colors.error, borderWidth: 1 } 
+                                    : value 
+                                        ? { borderColor: colors.primary, borderWidth: 1.5 } 
+                                        : { borderColor: 'transparent', borderWidth: 0 }
+                            ]}>
+                                <Ionicons name="person" size={24} color={errors?.NomeCompleto ? colors.error : colors.primary} style={{ marginLeft: 10 }} />
+                                <TextInput
+                                    placeholder="Nome completo"
+                                    style={{ height: 40, flex: 1, marginLeft: 10 }}
+                                    onBlur={onBlur}
+                                    onChangeText={onChange}
+                                    value={value}
+                                />
+                            </View>
+                            {errors?.NomeCompleto && <Text style={{ color: colors.error }}>{errors?.NomeCompleto.message}</Text>}
+                        </View>
+                    )}
+                />
+                
                 <View style={styles.formInput}>
                     <Ionicons name="mail" size={24} color={colors.primary} style={{ marginLeft: 10 }} />
                     <TextInput
@@ -62,7 +97,7 @@ export default function Signup() {
                 </View>
                 <View style={{top: 20, display: 'flex', gap: 20, width: '100%', alignItems: 'center' }}>
                 <TouchableOpacity 
-                    style={styles.formButton}
+                    style={styles.formButton} onPress={handleSubmit(onSubmit)}
                 >
                     <Text style={{ color: colors.background, textAlign: 'center' }}>Cadastrar</Text>
                 </TouchableOpacity>
