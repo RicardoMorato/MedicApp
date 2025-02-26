@@ -9,6 +9,8 @@ import { useEffect } from "react";
 import { useFonts, Poppins_700Bold, Poppins_300Light} from '@expo-google-fonts/poppins';
 import colors from "@/global/colors"
 import { useForm, Controller} from "react-hook-form";
+import { emailValidationPattern } from "@/components/utils/dataValidation";
+import passwordValidation from "@/utils/passwordValidation";
 
 type FormData = {
     Nome: string
@@ -33,6 +35,8 @@ export default function Signup() {
             
           });
         
+    
+
           useEffect(() => {
             if (loaded || error) {
               SplashScreen.hideAsync();
@@ -86,7 +90,7 @@ export default function Signup() {
                 rules={{
                     required: "O email é obrigatório.",
                     pattern: {
-                        value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+                        value: emailValidationPattern,
                         message: "Email inválido."
                     }
                 }}
@@ -121,11 +125,7 @@ export default function Signup() {
                     value: 8,
                     message: "A senha deve ter no mínimo 8 caracteres."
                 },
-                validate: {
-                    hasUpperCase: v => /[A-Z]/.test(v) || "A senha deve ter pelo menos uma letra maiúscula.",
-                    hasLowerCase: v => /[a-z]/.test(v) || "A senha deve ter pelo menos uma letra minúscula.",
-                    hasSpecialChar: v => /[!@#$%^&*(),.?":{}|<>]/.test(v) || "A senha deve ter pelo menos um caractere especial."
-                  }
+                validate: passwordValidation
             }}
             render={({ field: { onChange, onBlur, value } }) => (
                 <View style={{ gap: 5 }}>
