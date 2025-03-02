@@ -1,11 +1,16 @@
 from typing import Union
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from pydantic import BaseModel
+from routers import users
+from database import get_db
+from sqlalchemy.orm import Session
+from models import User
 
 app = FastAPI()
 
 
+app.include_router(users.router)
 
 class Medicament(BaseModel):
     name: str
@@ -16,7 +21,6 @@ class Medicament(BaseModel):
 
 @app.get("/")
 def read_root(db: Session = Depends(get_db)):
-    # return db.query(User).all()
     return {"Hello": "World"}
 
 
