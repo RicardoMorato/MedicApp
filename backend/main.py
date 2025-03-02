@@ -1,10 +1,16 @@
 from typing import Union
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from pydantic import BaseModel
+from routers import users
+from database import get_db
+from sqlalchemy.orm import Session
+from models import User
 
 app = FastAPI()
 
+
+app.include_router(users.router)
 
 class Medicament(BaseModel):
     name: str
@@ -14,13 +20,14 @@ class Medicament(BaseModel):
 
 
 @app.get("/")
-def read_root():
+def read_root(db: Session = Depends(get_db)):
     return {"Hello": "World"}
 
 
 @app.get("/medicaments/{medicament_id}")
-def read_medicament(medicament_id: int, q: Union[str, None] = None):
-    return {"medicament_id": medicament_id, "q": q}
+def read_medicament(medicament_id: int, q: Union[str, None] = None, db: Session = Depends(get_db)):
+    return db.query(User).all()
+    # return {"medicament_id": medicament_id, "q": q}
 
 
 @app.put("/medicaments/{medicament_id}")
