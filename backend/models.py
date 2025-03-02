@@ -2,36 +2,26 @@ from sqlalchemy import Column, String, Integer, Boolean, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from sqlalchemy.ext.declarative import declarative_base
+import uuid
 
 Base = declarative_base()
 
-class Account(Base):
-    __tablename__ = "accounts"
+class User(Base):
+    __tablename__ = "users"
     
-    id = Column(String, primary_key=True)
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
     name = Column(String, nullable=False)
     email = Column(String, unique=True, nullable=False)
     password = Column(String, nullable=False)
     created_at = Column(DateTime, server_default=func.now())
 
-    users = relationship("User", back_populates="account")
-
-class User(Base):
-    __tablename__ = "users"
-    
-    id = Column(String, primary_key=True)
-    name = Column(String, nullable=False)
-    account_id = Column(String, ForeignKey("accounts.id"), nullable=False)
-    created_at = Column(DateTime, server_default=func.now())
-
-    account = relationship("Account", back_populates="users")
     user_drugs = relationship("UserDrugs", back_populates="user")
     favorite_drugs = relationship("FavoriteDrugs", back_populates="user")
 
 class Drug(Base):
     __tablename__ = "drugs"
     
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String, nullable=False)
     principio_ativo = Column(String, nullable=False)
     created_at = Column(DateTime, server_default=func.now())
@@ -42,7 +32,7 @@ class Drug(Base):
 class UserDrugs(Base):
     __tablename__ = "user_drugs"
     
-    id = Column(String, primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(String, ForeignKey("users.id"), nullable=False)
     drug_id = Column(Integer, ForeignKey("drugs.id"), nullable=False)
     active = Column(Boolean, default=True)

@@ -35,3 +35,5 @@ websockets==14.1
 alembic
 sqlalchemy
 psycopg2-binary
+pyjwt
+passlib[bcrypt]
