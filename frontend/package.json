@@ -51,6 +51,7 @@
     "jest-expo": "~52.0.6",
     "metro": "^0.81.0",
     "metro-core": "^0.81.0",
+    "miragejs": "^0.1.48",
     "react-test-renderer": "18.3.1",
     "typescript": "^5.3.3"
   },
