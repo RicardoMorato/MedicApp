@@ -3,7 +3,14 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
 from fastapi import Depends
 
-DATABASE_URL = "postgresql://admin:Medicap4563@database:5432/medicapp"
+from config import Settings
+
+settings = Settings()
+
+DATABASE_URL = (
+    f"postgresql://{settings.db_user}:{settings.db_password}@"
+    f"database:{settings.db_port}/{settings.db_name}"
+)
 
 # Create engine
 engine = create_engine(DATABASE_URL)

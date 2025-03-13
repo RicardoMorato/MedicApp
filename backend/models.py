@@ -6,9 +6,10 @@ import uuid
 
 Base = declarative_base()
 
+
 class User(Base):
     __tablename__ = "users"
-    
+
     id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
     name = Column(String, nullable=False)
     email = Column(String, unique=True, nullable=False)
@@ -18,9 +19,10 @@ class User(Base):
     user_drugs = relationship("UserDrugs", back_populates="user")
     favorite_drugs = relationship("FavoriteDrugs", back_populates="user")
 
+
 class Drug(Base):
     __tablename__ = "drugs"
-    
+
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String, nullable=False)
     principio_ativo = Column(String, nullable=False)
@@ -29,9 +31,10 @@ class Drug(Base):
     user_drugs = relationship("UserDrugs", back_populates="drug")
     favorite_drugs = relationship("FavoriteDrugs", back_populates="drug")
 
+
 class UserDrugs(Base):
     __tablename__ = "user_drugs"
-    
+
     id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(String, ForeignKey("users.id"), nullable=False)
     drug_id = Column(Integer, ForeignKey("drugs.id"), nullable=False)
@@ -43,22 +46,25 @@ class UserDrugs(Base):
     user = relationship("User", back_populates="user_drugs")
     drug = relationship("Drug", back_populates="user_drugs")
 
+
 class Bula(Base):
     __tablename__ = "bulas"
-    
+
     id = Column(Integer, primary_key=True, autoincrement=True)
     texto = Column(String, nullable=False)
     medicamento_id = Column(Integer, ForeignKey("drugs.id"), nullable=False)
 
+
 class DrugCategory(Base):
     __tablename__ = "drug_categories"
-    
+
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String, nullable=False)
 
+
 class FavoriteDrugs(Base):
     __tablename__ = "favorite_drugs"
-    
+
     id = Column(Integer, primary_key=True, autoincrement=True)
     drug_id = Column(Integer, ForeignKey("drugs.id"), nullable=False)
     user_id = Column(String, ForeignKey("users.id"), nullable=False)
