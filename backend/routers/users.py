@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Header
+from fastapi import APIRouter, Depends, Header, HTTPException
 from controllers import users as controller
 from database import get_db
 from sqlalchemy.orm import Session
