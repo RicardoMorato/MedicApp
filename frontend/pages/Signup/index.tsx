@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from '@expo/vector-icons';
@@ -11,11 +11,7 @@ import colors from "@/global/colors"
 import { useForm, Controller} from "react-hook-form";
 import { emailValidationPattern } from "@/components/utils/dataValidation";
 import passwordValidation from "@/utils/passwordValidation";
-
-type FormData = {
-    Nome: string
-    Email: string
-}
+import { onSubmit } from "@/services/auth";
 
 export default function Signup() {
     const { control, handleSubmit, formState: { errors, isSubmitted } } = useForm({
@@ -25,18 +21,13 @@ export default function Signup() {
           Senha: ''
         }
       });
-      const onSubmit = (data: FormData) => {
-        console.log(data)
-      }
+      
     const navigation = useNavigation<any>();
     const [loaded, error] = useFonts({
             'Poppins_700Bold': Poppins_700Bold,
             'Poppins_300Light': Poppins_300Light
             
           });
-        
-    
-
           useEffect(() => {
             if (loaded || error) {
               SplashScreen.hideAsync();
@@ -152,7 +143,8 @@ export default function Signup() {
             
                 <View style={{top: 20, display: 'flex', gap: 20, width: '100%', alignItems: 'center' }}>
                 <TouchableOpacity 
-                    style={styles.formButton} onPress={handleSubmit(onSubmit)}
+                    style={styles.formButton} 
+                    onPress={handleSubmit((data) => onSubmit(data, navigation))}
                 >
                     <Text style={{ color: colors.background, textAlign: 'center' }}>Cadastrar</Text>
                 </TouchableOpacity>
