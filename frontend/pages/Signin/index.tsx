@@ -1,5 +1,5 @@
-import React from "react";
-import { View, Text, Image, TextInput, TouchableOpacity} from "react-native";
+import React, { useState } from "react";
+import { View, Text, Image, TextInput, TouchableOpacity, ActivityIndicator} from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import styles  from "./style";
@@ -14,6 +14,7 @@ import { useForm, Controller } from "react-hook-form";
 SplashScreen.preventAutoHideAsync();
 
 export default function Signin() {
+    const [loading, setLoading] = useState(false)
     const navigation = useNavigation<any>();
     const [loaded, error] = useFonts({
         'Poppins_700Bold': Poppins_700Bold,
@@ -105,9 +106,15 @@ export default function Signin() {
                 <View style={{top: 20, display: 'flex', gap: 20, width: '100%', alignItems: 'center' }}>
                     <TouchableOpacity 
                         style={styles.formButton} 
-                        onPress={handleSubmit((data) => login(data, navigation))}
+                        onPress={handleSubmit((data) => login(data, navigation, setLoading))}
                     >
-                        <Text style={{ color: colors.background, textAlign: 'center' }}>Acessar</Text>
+                        {loading 
+                        ? <ActivityIndicator color="#fff"/> 
+                        : <Text style={{ 
+                            color: colors.background, 
+                            textAlign: 'center' 
+                            }}>Acessar</Text>}
+
                     </TouchableOpacity>
                     <Text onPress={() => navigation.navigate('Signup')} style={{color: colors.secondary, textDecorationLine: 'underline', fontFamily: 'Poppins_300Light'}}>Criar nova conta</Text>
                 </View>

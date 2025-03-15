@@ -1,3 +1,4 @@
+import { set } from "react-hook-form";
 import api from "./api";
 import { Alert } from "react-native";
 
@@ -12,8 +13,13 @@ type FormDataLogin = {
   Senha: string
 }
 
-export const onSubmit = async (data: FormData, navigation: any) => {
+export const onSubmit = async (
+  data: FormData, 
+  navigation: any,
+  setLoading: (loading: boolean) => void
+) => {
   try {
+    setLoading(true)
     const response = await api.post('/users/signup', {
       name: data.Nome,
       email: data.Email,
@@ -22,25 +28,38 @@ export const onSubmit = async (data: FormData, navigation: any) => {
 
     if (response.status === 200) {
       Alert.alert('Cadastro realizado com sucesso', '\nFaça login para continuar.')
-      setTimeout(() =>
-        navigation.navigate('Signin'), 1500)
+      
+      setTimeout(() => {
+        setLoading(false)
+        navigation.navigate('Signin'), 1500})
     }
+    
   } catch (error: any) {
     Alert.alert('Erro', error.response?.data?.detail || 'Erro ao realizar cadastro. Tente novamente.');
   }
 }
 
-export const login = async (data: FormDataLogin, navigation: any) => {
+export const login = async (
+  data: FormDataLogin, 
+  navigation: any, 
+  setLoading: (loading: boolean) => void
+) => {
   try {
+    setLoading(true)
     const response = await api.post('/users/login', {
       email: data.Email,
       password: data.Senha
     })
 
     if (response.status === 200) {
-      Alert.alert('Sucesso', 'Login realizado com sucesso!');
+      setTimeout(() => {
+        setLoading(false)
+        Alert.alert('Sucesso', 'Login realizado com sucesso!')}
+        ,1000)
       setTimeout(() =>
-        navigation.navigate('Home'), 1000);
+        navigation.navigate('Home'), 1500); 
+        // não demora 1.5s para redirecionar, demora .5s. 
+        // As duas funções de seTimeout são executadas em paralelo.
     } 
   } catch (error: any) {
     Alert.alert('Erro', error.response?.data?.detail || 'Erro ao realizar login. Tente novamente.');

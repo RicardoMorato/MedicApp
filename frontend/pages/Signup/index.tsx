@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, Image, TextInput, TouchableOpacity, ActivityIndicator } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from '@expo/vector-icons';
 import styles from "./style";
@@ -21,7 +21,7 @@ export default function Signup() {
           Senha: ''
         }
       });
-      
+    const [loading, setLoading] = useState(false)
     const navigation = useNavigation<any>();
     const [loaded, error] = useFonts({
             'Poppins_700Bold': Poppins_700Bold,
@@ -144,9 +144,15 @@ export default function Signup() {
                 <View style={{top: 20, display: 'flex', gap: 20, width: '100%', alignItems: 'center' }}>
                 <TouchableOpacity 
                     style={styles.formButton} 
-                    onPress={handleSubmit((data) => onSubmit(data, navigation))}
+                    onPress={handleSubmit((data) => onSubmit(data, navigation, setLoading))}
                 >
-                    <Text style={{ color: colors.background, textAlign: 'center' }}>Cadastrar</Text>
+                    {loading 
+                    ? <ActivityIndicator color="#fff"/> 
+                    : <Text style={{ 
+                        color: colors.background, 
+                        textAlign: 'center' 
+                        }}>Cadastrar</Text>}
+                    
                 </TouchableOpacity>
                 <Text style={{ textAlign: 'center', color: colors.primary, fontFamily: 'Poppins_300Light' }} >Já tem uma conta? <Text onPress={() => navigation.navigate('Signin')} style={{ color: colors.secondary, 
                     textDecorationLine: 'underline' }}>{`Entrar`}</Text></Text>
