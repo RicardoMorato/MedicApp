@@ -13,11 +13,9 @@ const StackNav = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
-      }}>
-      <Stack.Screen
-        name="HomeScreen"
-        component={Home}
-      />
+      }}
+    >
+      <Stack.Screen name="HomeScreen" component={Home} />
       <Stack.Screen name="SigninScreen" component={LoginNav} />
     </Stack.Navigator>
   );
@@ -38,7 +36,6 @@ export const HomeNav = () => {
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
-
   );
 };
 
@@ -66,21 +63,17 @@ export const LoginNav = () => {
 };
 
 export default function Routes() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   async function getData() {
-    const data = await AsyncStorage.getItem('isLoggedIn')
-    console.log(data, 'at app.jsx')
-    setIsLoggedIn(data)
+    const data = await AsyncStorage.getItem("isLoggedIn");
+    console.log(data, "at app.jsx");
+    setIsLoggedIn(data ? true : false);
   }
   useEffect(() => {
-    getData()
+    getData();
     setTimeout(() => {
       SplashScreen.hide();
-    }, 900)
-  }, [isLoggedIn])
-  return (
-    <>
-      {isLoggedIn ? <HomeNav /> : <LoginNav />}
-    </>
-  );
+    }, 900);
+  }, [isLoggedIn]);
+  return <>{isLoggedIn ? <HomeNav /> : <LoginNav />}</>;
 }
