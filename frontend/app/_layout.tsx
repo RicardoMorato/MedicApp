@@ -1,30 +1,86 @@
-import {createNativeStackNavigator} from "@react-navigation/native-stack"
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useEffect, useState } from "react";
+import { SplashScreen, useNavigation } from "expo-router";
 
-import Signin from "@/pages/Signin" 
-import Signup from "@/pages/Signup"
-import Home from "@/pages/Home"
-const Stack = createNativeStackNavigator()
+import Signin from "@/pages/Signin";
+import Signup from "@/pages/Signup";
+import Home from "@/pages/Home";
 
-export default function Routes(){
-    return(
-        <Stack.Navigator>
-            <Stack.Screen
-            name="Signin"
-            component={Signin}
-            options={{headerShown: false}}
+const StackNav = () => {
+  const Stack = createNativeStackNavigator();
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <Stack.Screen
+        name="HomeScreen"
+        component={Home}
+      />
+      <Stack.Screen name="SigninScreen" component={LoginNav} />
+    </Stack.Navigator>
+  );
+};
 
-            />
-            <Stack.Screen
-            name="Signup"
-            component={Signup}
-            options={{headerShown: false}}
-            />
-            <Stack.Screen
-            name="Home"
-            component={Home}
-            options={{headerShown: false}}
-            />
-            
-        </Stack.Navigator>
-    )
+export const HomeNav = () => {
+  const Stack = createNativeStackNavigator();
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="MainHome"
+        component={StackNav}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="SignOut"
+        component={LoginNav}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+
+  );
+};
+
+export const LoginNav = () => {
+  const Stack = createNativeStackNavigator();
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Signin"
+        component={Signin}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Signup"
+        component={Signup}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="HomeNav"
+        component={HomeNav}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+export default function Routes() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  async function getData() {
+    const data = await AsyncStorage.getItem('isLoggedIn')
+    console.log(data, 'at app.jsx')
+    setIsLoggedIn(data)
+  }
+  useEffect(() => {
+    getData()
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 900)
+  }, [isLoggedIn])
+  return (
+    <>
+      {isLoggedIn ? <HomeNav /> : <LoginNav />}
+    </>
+  );
 }
