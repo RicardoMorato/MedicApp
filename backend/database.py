@@ -9,7 +9,7 @@ settings = Settings()
 
 DATABASE_URL = (
     f"postgresql://{settings.db_user}:{settings.db_password}@"
-    f"database:{settings.db_port}/{settings.db_name}"
+    f"{settings.db_host}:{settings.db_port}/{settings.db_name}"
 )
 
 # Create engine
