@@ -1,9 +1,12 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import styles from "./style";
+import { logOut } from "@/services/auth";
+import { useNavigation } from 'expo-router';
 
 
 function Home() {
+  const navigation = useNavigation<any>();
   return (
     <>
     <View style={styles.container}>
@@ -16,7 +19,11 @@ function Home() {
           <Text style={styles.logo}>MedicApp</Text>
         </View>
         <View>
-          <Text>Menu</Text>
+        <TouchableOpacity style={{
+          backgroundColor: "red", 
+          paddingVertical:10, 
+          paddingHorizontal: 20
+          }} onPress={() => logOut(navigation)}><Text>Sair</Text></TouchableOpacity>
         </View>
 
       </View>
