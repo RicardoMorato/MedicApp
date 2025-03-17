@@ -29,9 +29,10 @@ export const onSubmit = async (
     if (response.status === 201) {
       Alert.alert(
         "Cadastro realizado com sucesso",
-        "\nFaça login para continuar."
+        "\nVocê será redirecionado para a tela inicial."
       );
 
+      AsyncStorage.setItem("isLoggedIn", JSON.stringify(true));
       setTimeout(() => {
         setLoading(false);
         navigation.replace("MainHome");
@@ -42,8 +43,8 @@ export const onSubmit = async (
       "Erro",
       error.response?.data?.detail ||
         "Erro ao realizar cadastro. Tente novamente."
-    );
-  }
+      );
+    } setLoading(false);
 };
 
 export const login = async (
