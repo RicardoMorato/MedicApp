@@ -7,27 +7,13 @@ import Signin from "@/pages/Signin";
 import Signup from "@/pages/Signup";
 import Home from "@/pages/Home";
 
-const StackNav = () => {
-  const Stack = createNativeStackNavigator();
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen name="HomeScreen" component={Home} />
-      <Stack.Screen name="SigninScreen" component={LoginNav} />
-    </Stack.Navigator>
-  );
-};
-
 export const HomeNav = () => {
   const Stack = createNativeStackNavigator();
   return (
     <Stack.Navigator>
       <Stack.Screen
         name="MainHome"
-        component={StackNav}
+        component={Home}
         options={{ headerShown: false }}
       />
       <Stack.Screen
