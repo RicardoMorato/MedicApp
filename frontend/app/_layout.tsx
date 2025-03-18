@@ -3,16 +3,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
 import { SplashScreen, useNavigation } from "expo-router";
 
-<<<<<<< HEAD
-import Signin from "@/pages/Signin" 
-import Signup from "@/pages/Signup"
-import AddMedicine from "@/pages/AddMedicine"
-const Stack = createNativeStackNavigator()
-=======
 import Signin from "@/pages/Signin";
 import Signup from "@/pages/Signup";
 import Home from "@/pages/Home";
->>>>>>> main
+import AddMedicine from "@/pages/AddMedicine";
 
 export const HomeNav = () => {
   const Stack = createNativeStackNavigator();
@@ -32,24 +26,6 @@ export const HomeNav = () => {
   );
 };
 
-<<<<<<< HEAD
-            />
-            <Stack.Screen
-            name="Signup"
-            component={Signup}
-            options={{headerShown: false}}
-            />
-
-            <Stack.Screen
-            name="AddMedicine"
-            component={AddMedicine}
-            options={{headerShown: false}}
-            />
-            
-        </Stack.Navigator>
-    )
-}
-=======
 export const LoginNav = () => {
   const Stack = createNativeStackNavigator();
   return (
@@ -62,6 +38,11 @@ export const LoginNav = () => {
       <Stack.Screen
         name="Signup"
         component={Signup}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="AddMedicine"
+        component={AddMedicine}
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -88,4 +69,3 @@ export default function Routes() {
   }, [isLoggedIn]);
   return <>{isLoggedIn ? <HomeNav /> : <LoginNav />}</>;
 }
->>>>>>> main
