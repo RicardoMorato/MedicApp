@@ -3,6 +3,7 @@ from typing import Union
 from fastapi import FastAPI, Depends
 from pydantic import BaseModel
 from routers.users import router as users_router
+from routers.user_drugs import router as user_drugs
 from database import get_db
 from sqlalchemy.orm import Session
 from models import User
@@ -20,6 +21,7 @@ app.add_middleware(
 )
 
 app.include_router(users_router)
+app.include_router(user_drugs)
 
 
 class Medicament(BaseModel):
