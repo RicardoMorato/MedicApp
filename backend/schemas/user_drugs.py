@@ -3,9 +3,7 @@ from typing import Optional
 
 class DrugCreate(BaseModel):
     name: str
-    active_principle: str
+    principio_ativo: str
     is_generic: bool
     brand: Optional[str] = None
 
-    class Config:
-        orm_mode = True
