@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from models import Drug, User, UserDrugs
+from models import User, UserDrugs
 from schemas.user_drugs import DrugCreate
 from fastapi import HTTPException, status
 
@@ -11,15 +11,16 @@ def add_medicament_to_user(db: Session, user_id: str, drug_data: DrugCreate):
             detail="Usuário não encontrado."
         )
 
-    existing_drug = db.query(Drug).filter(Drug.name == drug_data.name, Drug.principio_ativo == drug_data.principio_ativo).first()
-    
+    existing_drug = db.query(UserDrugs).filter(UserDrugs.name == drug_data.name, 
+                                               UserDrugs.principio_ativo == drug_data.principio_ativo).first()
+
     if existing_drug:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Este medicamento já está cadastrado."
         )
 
-    new_drug = Drug(
+    new_drug = UserDrugs(
         name=drug_data.name,
         principio_ativo=drug_data.principio_ativo,
         is_generic=drug_data.is_generic,
@@ -30,8 +31,10 @@ def add_medicament_to_user(db: Session, user_id: str, drug_data: DrugCreate):
     db.commit()
     db.refresh(new_drug)
 
-    user_drug = UserDrugs(user_id=user.id, drug_id=new_drug.id)
+    user_drug = UserDrugs(user_id=user.id, 
+                          drug_id=new_drug.id)
     db.add(user_drug)
     db.commit()
+    db.refresh(user_drug)
 
     return {"message": "Medicamento cadastrado com sucesso e associado ao usuário!", "drug": new_drug,"user_drug_association": user_drug}

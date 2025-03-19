@@ -36,6 +36,10 @@ class UserDrugs(Base):
     __tablename__ = "user_drugs"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String)  
+    principio_ativo = Column(String)  
+    is_generic = Column(Boolean)  
+    brand = Column(String, nullable=True)  
     user_id = Column(String, ForeignKey("users.id"), nullable=False)
     drug_id = Column(Integer, ForeignKey("drugs.id"), nullable=False)
     active = Column(Boolean, default=True)
