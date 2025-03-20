@@ -9,4 +9,4 @@ router = APIRouter()
 
 @router.post("/users/{user_id}/drugs/", status_code=status.HTTP_201_CREATED)
 def add_drug(drug: DrugCreate, db: Session = Depends(get_db), current_user=Depends(get_current_user)):
-    return controller.add_drug_to_user(db, current_user, drug)
+    return controller.add_medicament_to_user(db, current_user, drug)
