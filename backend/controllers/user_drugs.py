@@ -11,7 +11,11 @@ def add_medicament_to_user(db: Session, user_id: str, drug_data: DrugCreate):
             detail="Usuário não encontrado."
         )
 
-    existing_drug = db.query(UserDrugs).filter(UserDrugs.name == drug_data.name, UserDrugs.principio_ativo == drug_data.principio_ativo).first()
+    existing_drug = db.query(UserDrugs).filter(
+        UserDrugs.name == drug_data.name,
+        UserDrugs.principio_ativo == drug_data.principio_ativo,
+        UserDrugs.user_id == user_id
+    ).first()
 
     if existing_drug:
         raise HTTPException(
