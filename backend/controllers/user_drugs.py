@@ -20,6 +20,7 @@ def add_medicament_to_user(db: Session, user_id: str, drug_data: DrugCreate):
         )
 
     new_drug = UserDrugs(
+        user_id=user_id,
         name=drug_data.name,
         principio_ativo=drug_data.principio_ativo,
         is_generic=drug_data.is_generic,
@@ -30,9 +31,4 @@ def add_medicament_to_user(db: Session, user_id: str, drug_data: DrugCreate):
     db.commit()
     db.refresh(new_drug)
 
-    user_drug = UserDrugs(user_id=user.id, drug_id=new_drug.id)
-    db.add(user_drug)
-    db.commit()
-    db.refresh(user_drug)
-
-    return {"message": "Medicamento cadastrado com sucesso e associado ao usuário!", "drug": new_drug,"user_drug_association": user_drug}
+    return {"message": "Medicamento cadastrado com sucesso e associado ao usuário!", "drug": new_drug,"user_drug_association": user_id}
