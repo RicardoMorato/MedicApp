@@ -13,7 +13,7 @@ from config import SECRET_KEY, ALGORITHM
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-ACCESS_TOKEN_EXPIRE_MINUTES = 999999999999999
+ACCESS_TOKEN_EXPIRE_MINUTES = 10000
 
 router = APIRouter()
 
