@@ -7,6 +7,8 @@ import Signin from "@/pages/Signin";
 import Signup from "@/pages/Signup";
 import Home from "@/pages/Home";
 import AddMedicine from "@/pages/AddMedicine";
+import MedicationList from "@/pages/MedicationList";
+import MedicationDetails from "@/pages/MedicationDetails";
 
 export const HomeNav = () => {
   const Stack = createNativeStackNavigator();
@@ -49,6 +51,14 @@ export const LoginNav = () => {
         name="AddMedicine"
         component={AddMedicine}
         options={{ headerShown: false }}
+        name="MedicationList"
+        component={MedicationList}
+        options={{ headerShown: true }}
+      />
+      <Stack.Screen
+        name="MedicationDetails"
+        component={MedicationDetails}
+        options={{ headerShown: true }}
       />
     </Stack.Navigator>
   );
