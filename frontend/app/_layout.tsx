@@ -6,6 +6,7 @@ import { SplashScreen, useNavigation } from "expo-router";
 import Signin from "@/pages/Signin";
 import Signup from "@/pages/Signup";
 import Home from "@/pages/Home";
+import DrugInteraction from "@/pages/DrugInteraction";
 
 export const HomeNav = () => {
   const Stack = createNativeStackNavigator();
@@ -13,7 +14,12 @@ export const HomeNav = () => {
     <Stack.Navigator>
       <Stack.Screen
         name="MainHome"
-        component={Home}
+        component={DrugInteraction}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="DrugInteraction"
+        component={DrugInteraction}
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -61,5 +67,5 @@ export default function Routes() {
       SplashScreen.hide();
     }, 900);
   }, [isLoggedIn]);
-  return <>{isLoggedIn ? <HomeNav /> : <LoginNav />}</>;
+  return <>{!isLoggedIn ? <HomeNav /> : <LoginNav />}</>;
 }
