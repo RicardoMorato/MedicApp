@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity} from "react-native";
+
+import { View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
-import styles  from "./style";
+import styles from "./style";
 
 const AddMedicine = () => {
   const navigation = useNavigation();
@@ -10,13 +11,28 @@ const AddMedicine = () => {
   const [activeIngredient, setActiveIngredient] = useState("");
   const [isGeneric, setIsGeneric] = useState<boolean | null>(null);
   const [brandName, setBrandName] = useState("");
+  
+  const handleAddMedicine = () => {
+    if (!medicineName || !activeIngredient || isGeneric === null || (!isGeneric && !brandName)) {
+      Alert.alert("Por favor, preencha todos os campos.");
+    } else {
+      Alert.alert("Medicamento adicionado com sucesso!");
+      setMedicineName("");
+      setActiveIngredient("");
+      setIsGeneric(null);
+      setBrandName("");
+    }
+  };
+  
 
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-        <Ionicons name="arrow-back" size={24} color="#FFF" />
+        <Ionicons name="arrow-back" size={24} color="#000" />
         <Text style={styles.headerText}>Adicionar medicamento</Text>
       </TouchableOpacity>
+      <View style={styles.headerDivider}></View>
+
 
       <View style={styles.form}>
         <TextInput
@@ -56,7 +72,8 @@ const AddMedicine = () => {
           />
         )}
 
-        <TouchableOpacity style={styles.button}>
+
+        <TouchableOpacity style={styles.button} onPress={handleAddMedicine}>
           <Text style={styles.buttonText}>Adicionar</Text>
         </TouchableOpacity>
       </View>

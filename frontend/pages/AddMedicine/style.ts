@@ -4,23 +4,38 @@ import colors from "@/global/colors";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#1E1E1E",
-    padding: 20,
+    backgroundColor: colors.background,
+    padding: 0,
     justifyContent: "center",
   }, 
   backButton: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 20,
     position: "absolute",
     top: 40,
     left: 20,
   },
   headerText: {
-    color: colors.background,
+    color: colors.textPrimary,
     fontSize: 18,
     fontWeight: "bold",
     marginLeft: 10,
+  },  
+  headerContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    marginBottom: 8,
+  },
+  headerDivider: {
+    position: "absolute",
+    top: 75,
+    left: 0,
+    right: 0,
+    width: "100%",
+    height: 2,
+    backgroundColor: colors.textPrimary,
   },
   form: {
     backgroundColor: "#3F6684",
@@ -63,8 +78,10 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     borderRadius: 10,
-    backgroundColor: colors.background,
+    backgroundColor: colors.primary,
     marginRight: 5,
+    borderColor: colors.background,
+    borderWidth: 3,
   },
   radioText: {
     color: colors.background,
@@ -82,4 +99,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default styles
+export default styles;
