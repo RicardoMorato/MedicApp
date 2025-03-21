@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import { View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
@@ -31,6 +32,7 @@ const AddMedicine = () => {
         <Text style={styles.headerText}>Adicionar medicamento</Text>
       </TouchableOpacity>
       <View style={styles.headerDivider}></View>
+
 
       <View style={styles.form}>
         <TextInput
@@ -69,6 +71,7 @@ const AddMedicine = () => {
             onChangeText={setBrandName}
           />
         )}
+
 
         <TouchableOpacity style={styles.button} onPress={handleAddMedicine}>
           <Text style={styles.buttonText}>Adicionar</Text>

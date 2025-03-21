@@ -35,7 +35,7 @@ export const onSubmit = async (
       AsyncStorage.setItem("isLoggedIn", JSON.stringify(true));
       setTimeout(() => {
         setLoading(false);
-        navigation.replace("MainHome");
+        navigation.replace("HomeNav");
       }, 1500);
     }
   } catch (error: any) {
@@ -65,7 +65,7 @@ export const login = async (
       setTimeout(() => {
         setLoading(false);
         Alert.alert("Sucesso", "Login realizado com sucesso!");
-        navigation.replace("MainHome");
+        navigation.replace("HomeNav");
       }, 1000); // Usando replace em vez de navigate
       // por que ao tentar voltar quando estiver no home,
       // nao voltar para a tela de login, apenas se sair da conta
