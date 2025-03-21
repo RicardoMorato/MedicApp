@@ -26,7 +26,7 @@ export const onSubmit = async (
       password: data.Senha,
     });
 
-    if (response.status === 201) {
+    if (response.status === 200) {
       Alert.alert(
         "Cadastro realizado com sucesso",
         "\nVocê será redirecionado para a tela inicial."
@@ -58,8 +58,9 @@ export const login = async (
       email: data.Email,
       password: data.Senha,
     });
+    
 
-    if (response.status === 201) {
+    if (response.status === 200) {
       AsyncStorage.setItem("userToken", response.data.token);
       AsyncStorage.setItem("isLoggedIn", JSON.stringify(true));
       setTimeout(() => {
