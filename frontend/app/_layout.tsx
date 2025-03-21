@@ -86,5 +86,5 @@ export default function Routes() {
       SplashScreen.hide();
     }, 900);
   }, [isLoggedIn]);
-  return <>{isLoggedIn ? <HomeNav /> : <LoginNav />}</>;
+  return <>{!isLoggedIn ? <HomeNav /> : <LoginNav />}</>;
 }
