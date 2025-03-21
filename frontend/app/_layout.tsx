@@ -9,6 +9,7 @@ import Home from "@/pages/Home";
 import AddMedicine from "@/pages/AddMedicine";
 import MedicationList from "@/pages/MedicationList";
 import MedicationDetails from "@/pages/MedicationDetails";
+import DrugInteraction from "@/pages/DrugInteraction";
 
 export const HomeNav = () => {
   const Stack = createNativeStackNavigator();
@@ -16,7 +17,12 @@ export const HomeNav = () => {
     <Stack.Navigator>
       <Stack.Screen
         name="MainHome"
-        component={Home}
+        component={DrugInteraction}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="DrugInteraction"
+        component={DrugInteraction}
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -80,5 +86,5 @@ export default function Routes() {
       SplashScreen.hide();
     }, 900);
   }, [isLoggedIn]);
-  return <>{isLoggedIn ? <HomeNav /> : <LoginNav />}</>;
+  return <>{!isLoggedIn ? <HomeNav /> : <LoginNav />}</>;
 }
