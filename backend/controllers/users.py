@@ -2,7 +2,6 @@ from sqlalchemy.orm import Session
 from models import User
 from schemas import users as schema
 from fastapi import HTTPException, status
-from typing import Annotated
 from dependencies.auth_dependency import hash_password, verify_password, create_access_token
 
 
