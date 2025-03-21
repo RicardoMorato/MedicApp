@@ -35,7 +35,7 @@ export const onSubmit = async (
       AsyncStorage.setItem("isLoggedIn", JSON.stringify(true));
       setTimeout(() => {
         setLoading(false);
-        navigation.replace("MainHome");
+        navigation.replace("HomeNav");
       }, 1500);
     }
   } catch (error: any) {
