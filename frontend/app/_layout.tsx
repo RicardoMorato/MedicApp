@@ -6,6 +6,7 @@ import { SplashScreen, useNavigation } from "expo-router";
 import Signin from "@/pages/Signin";
 import Signup from "@/pages/Signup";
 import Home from "@/pages/Home";
+import AddMedicine from "@/pages/AddMedicine";
 
 export const HomeNav = () => {
   const Stack = createNativeStackNavigator();
@@ -42,6 +43,11 @@ export const LoginNav = () => {
       <Stack.Screen
         name="HomeNav"
         component={HomeNav}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="AddMedicine"
+        component={AddMedicine}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
