@@ -7,23 +7,16 @@ import Header from '../Header';
 
 export const MedicamentsListed = () => {
     const [searchQuery, setSearchQuery] = useState("");
-    const [listMedicaments, setListMedicaments] = useState(DATA);
-    console.log("renderizou")
-    useEffect(() => {
-        const filteredData = DATA.map((section) => ({
-            titleLetter: section.titleLetter,
-            data: section.data.filter((medicament) =>
-                medicament.name.toLowerCase().includes(searchQuery.toLowerCase())
-            ),
-        })).filter(section => section.data.length > 0);
-
-        setListMedicaments(filteredData);
-    }, [searchQuery]);
-
+    const filteredData = DATA.map((section) => ({
+        titleLetter: section.titleLetter,
+        data: section.data.filter((medicament) =>
+            medicament.name.toLowerCase().includes(searchQuery.toLowerCase())
+        ),
+    })).filter(section => section.data.length > 0);
     return (
         <View style={styles.container}>
             <View style={styles.sectionMain}>
-                {listMedicaments.length === 0 ? (
+                {filteredData.length === 0 ? (
                     <>
                     <Header 
                     searchQuery={searchQuery}
@@ -37,7 +30,7 @@ export const MedicamentsListed = () => {
                     </>
                 ) : (
                     <Animated.SectionList
-                        sections={listMedicaments}
+                        sections={filteredData}
                         keyExtractor={(item, index) => item.id + index}
                         renderItem={({ item }) => <Item item={item} />}
                         ListHeaderComponent={
