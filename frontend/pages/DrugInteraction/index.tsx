@@ -11,8 +11,8 @@ import { Colors } from "@/constants/Colors";
 
 export default function DrugInteraction() {
   const navigation = useNavigation<any>();
-  const [drugA, setDrugA] = useState<any>();
-  const [drugB, setDrugB] = useState<any>();
+  const [drugA, setDrugA] = useState<string | null>(null);
+  const [drugB, setDrugB] = useState<string | null>(null);
   const [interactionResult, setInteractionResult] = useState<boolean | null>(
     null
   );
@@ -25,14 +25,10 @@ export default function DrugInteraction() {
     return parsedDrugs;
   }
 
-  function setSelect(val: any) {
-    console.log(val);
-  }
-
   useEffect(() => {}, []);
 
   async function checkDrugsInteraction() {
-    console.log(drugA);
+    if (!drugA || !drugB) return;
     const result = await checkDrugInteraction([drugA, drugB]);
     setInteractionResult(result);
   }
@@ -49,7 +45,7 @@ export default function DrugInteraction() {
         </Text>
       </TouchableOpacity>
       <View style={styles.content}>
-        {interactionResult != null && (
+        {interactionResult != null && drugA && drugB && (
           <InteractionResultPopover
             drugA={drugA}
             drugB={drugB}
