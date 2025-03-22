@@ -17,7 +17,7 @@ export const HomeNav = () => {
     <Stack.Navigator>
       <Stack.Screen
         name="MainHome"
-        component={DrugInteraction}
+        component={Home}
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -86,5 +86,5 @@ export default function Routes() {
       SplashScreen.hide();
     }, 900);
   }, [isLoggedIn]);
-  return <>{!isLoggedIn ? <HomeNav /> : <LoginNav />}</>;
+  return <>{isLoggedIn ? <HomeNav /> : <LoginNav />}</>;
 }
