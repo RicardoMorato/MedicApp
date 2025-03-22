@@ -1,7 +1,7 @@
 import { drugs, drugsInteractions } from "@/data";
 import { Drug } from "@/type";
 
-export async function checkDrugInteraction(drugs: Drug[]) {
+export async function checkDrugInteraction(drugs: string[]) {
   const hasInteraction = hasDrugInteraction(drugs[0], drugs[1]);
   return hasInteraction;
 }
