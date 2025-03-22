@@ -8,7 +8,7 @@ import Header from '../Header';
 export const MedicamentsListed = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [listMedicaments, setListMedicaments] = useState(DATA);
-
+    console.log("renderizou")
     useEffect(() => {
         const filteredData = DATA.map((section) => ({
             titleLetter: section.titleLetter,
@@ -24,11 +24,17 @@ export const MedicamentsListed = () => {
         <View style={styles.container}>
             <View style={styles.sectionMain}>
                 {listMedicaments.length === 0 ? (
+                    <>
+                    <Header 
+                    searchQuery={searchQuery}
+                    setSearchQuery={setSearchQuery} 
+                    />
                     <View style={styles.emptyState}>
                         <Text style={styles.emptyStateText}>
                             Nenhum medicamento encontrado para "{searchQuery}"
                         </Text>
                     </View>
+                    </>
                 ) : (
                     <Animated.SectionList
                         sections={listMedicaments}
