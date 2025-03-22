@@ -13,31 +13,24 @@ export const MedicamentsListed = () => {
             medicament.name.toLowerCase().includes(searchQuery.toLowerCase())
         ),
     })).filter(section => section.data.length > 0);
+
     return (
         <View style={styles.container}>
-            <View style={styles.sectionMain}>
-                {filteredData.length === 0 ? (
-                    <>
-                    <Header 
-                    searchQuery={searchQuery}
-                    setSearchQuery={setSearchQuery} 
-                    />
-                    <View style={styles.emptyState}>
-                        <Text style={styles.emptyStateText}>
-                            Nenhum medicamento encontrado para "{searchQuery}"
-                        </Text>
-                    </View>
-                    </>
-                ) : (
+            <View style={styles.sectionMain}>                
                     <Animated.SectionList
                         sections={filteredData}
                         keyExtractor={(item, index) => item.id + index}
                         renderItem={({ item }) => <Item item={item} />}
                         ListHeaderComponent={
                         <Header 
-                        searchQuery={searchQuery}
-                        setSearchQuery={setSearchQuery} 
+                            searchQuery={searchQuery}
+                            setSearchQuery={setSearchQuery} 
                         />}
+                        ListEmptyComponent={<View style={styles.emptyState}>
+                        <Text style={styles.emptyStateText}>
+                            Nenhum medicamento encontrado para "{searchQuery}"
+                        </Text>
+                    </View>}
                         renderSectionHeader={({ section: { titleLetter } }) => (
                             <View style={styles.containerSectionHeader}>
                                 <View style={styles.sectionHeader}>
@@ -47,7 +40,7 @@ export const MedicamentsListed = () => {
                             </View>
                         )}
                     />
-                )}
+                
             </View>
         </View>
     );
