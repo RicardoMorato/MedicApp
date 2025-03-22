@@ -51,6 +51,8 @@ export const LoginNav = () => {
         name="AddMedicine"
         component={AddMedicine}
         options={{ headerShown: false }}
+        />
+        <Stack.Screen
         name="MedicationList"
         component={MedicationList}
         options={{ headerShown: true }}
