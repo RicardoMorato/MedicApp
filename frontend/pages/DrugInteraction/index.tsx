@@ -2,63 +2,93 @@ import colors from "@/global/colors";
 import { checkDrugInteraction } from "@/services/drugs.service";
 import { useNavigation } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, TouchableOpacity } from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
-
-const drugs = [
-  { id: 1, value: "dipirona" },
-  { id: 5, value: "tilenol" },
-  { id: 2, value: "histamin" },
-  { id: 3, value: "dipirona" },
-  { id: 4, value: "dipirona" },
-];
+import styles from "./style";
+import InteractionResultPopover from "@/components/InteractionResultPopover";
+import { drugs } from "@/data";
+import { Colors } from "@/constants/Colors";
 
 export default function DrugInteraction() {
   const navigation = useNavigation<any>();
   const [drugA, setDrugA] = useState<any>();
   const [drugB, setDrugB] = useState<any>();
+  const [interactionResult, setInteractionResult] = useState<boolean | null>(
+    null
+  );
+
+  function parseDrugsToSelect(drugs: any[]) {
+    const parsedDrugs: { key: number; value: string }[] = [];
+    drugs.forEach((drug) =>
+      parsedDrugs.push({ key: drug.id, value: drug.name })
+    );
+    return parsedDrugs;
+  }
+
+  function setSelect(val: any) {
+    console.log(val);
+  }
 
   useEffect(() => {}, []);
 
   async function checkDrugsInteraction() {
+    console.log(drugA);
     const result = await checkDrugInteraction([drugA, drugB]);
-    console.log(result);
+    setInteractionResult(result);
   }
   return (
-    <>
-      <View
-        style={{
-          backgroundColor: colors.darkBg,
-        }}
+    <View style={styles.container}>
+      <TouchableOpacity
+        style={{ padding: 12 }}
+        onPress={() => navigation.navigate("MainHome")}
       >
-        <View
-          style={{
-            backgroundColor: colors.lightGray,
-          }}
+        <Text
+          style={{ color: Colors.light.tint, fontSize: 24, fontWeight: 700 }}
         >
-          <Text>
+          Verificar Interações
+        </Text>
+      </TouchableOpacity>
+      <View style={styles.content}>
+        {interactionResult != null && (
+          <InteractionResultPopover
+            drugA={drugA}
+            drugB={drugB}
+            result={interactionResult}
+          />
+        )}
+        <View style={styles.interactionContainer}>
+          <Text style={styles.title}>
             Verifique se você pode tomar dois medicamentos simultâneamente.
           </Text>
 
           <SelectList
             placeholder="Selecione um medicamento"
-            setSelected={(id: number) => setDrugA(id)}
-            data={drugs}
+            setSelected={setDrugA}
+            data={parseDrugsToSelect(drugs)}
             save="value"
+            boxStyles={styles.dropdownWrapper}
+            inputStyles={styles.dropdownText}
+            dropdownStyles={styles.dropdown}
           />
-
-          <Text>e</Text>
 
           <SelectList
             placeholder="Selecione um medicamento"
-            setSelected={(id: number) => setDrugB(id)}
-            data={drugs}
+            setSelected={setDrugB}
+            data={parseDrugsToSelect(drugs)}
             save="value"
+            boxStyles={styles.dropdownWrapper}
+            inputStyles={styles.dropdownText}
+            dropdownStyles={styles.dropdown}
           />
 
-          <Button onPress={checkDrugsInteraction} title="Verificar interação" />
+          <TouchableOpacity
+            onPress={checkDrugsInteraction}
+            style={styles.confirmButton}
+          >
+            <Text style={styles.confirmText}>Verificar Interação</Text>
+          </TouchableOpacity>
         </View>
       </View>
-    </>
+    </View>
   );
 }
