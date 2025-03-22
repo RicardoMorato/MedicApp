@@ -1,9 +1,9 @@
-const drugs = [
+export const drugs = [
   { id: 1, name: "dipirona" },
   { id: 2, name: "tilenol" },
   { id: 3, name: "histamin" },
-  { id: 4, name: "dipirona" },
-  { id: 5, name: "dipirona" },
+  { id: 4, name: "bezetacial" },
+  { id: 5, name: "maxilina" },
 ];
 
 export const drugsInteractions = [
