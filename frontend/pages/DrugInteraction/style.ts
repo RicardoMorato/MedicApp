@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: Colors.dark.text,
     textAlign: "center",
+    marginBottom: 20,
   },
   dropdownWrapper: {
     backgroundColor: "#fff",
