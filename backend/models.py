@@ -22,11 +22,15 @@ class User(Base):
 
 class Drug(Base):
     __tablename__ = "drugs"
-
+    
     id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String, nullable=False)
-    principio_ativo = Column(String, nullable=False)
-    created_at = Column(DateTime, server_default=func.now())
+    farmaco = Column(String, nullable=False)
+    detentor = Column(String, nullable=False)
+    medicamento = Column(String, nullable=False)
+    registro = Column(Integer, nullable=False)
+    concentracao = Column(String, nullable=False)
+    forma_farmaceutica = Column(String, nullable=False)
+    data_inclusao = Column(String, nullable=False)
 
     favorite_drugs = relationship("FavoriteDrugs", back_populates="drug")
 
@@ -72,3 +76,14 @@ class FavoriteDrugs(Base):
 
     user = relationship("User", back_populates="favorite_drugs")
     drug = relationship("Drug", back_populates="favorite_drugs")
+
+class Interaction(Base):
+    __tablename__ = "interactions"
+    
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    principio_ativo1 = Column(String, nullable=False)
+    principio_ativo2 = Column(String, nullable=False)
+    gravidade_interacao = Column(String, nullable=False)
+    inicio_interacao = Column(String, nullable=False)
+    probabilidade_ocorrencia = Column(String, nullable=False)
+    efeito = Column(String, nullable=False)
