@@ -5,7 +5,7 @@ from fastapi import HTTPException, status
 
 def add_medicament(db: Session, drug_data: MedicamentResponse):
     existing_med = db.query(Drug).filter(
-        MedicamentResponse.id == drug_data.id
+        Drug.registro == drug_data.registro
     ).first()
 
     if existing_med:

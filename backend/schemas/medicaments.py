@@ -1,7 +1,6 @@
 from pydantic import BaseModel
 
 class MedicamentResponse(BaseModel):
-    id: int
     farmaco: str
     detentor: str
     medicamento: str
