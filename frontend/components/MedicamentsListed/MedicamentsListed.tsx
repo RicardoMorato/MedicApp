@@ -1,19 +1,37 @@
 import { View, Text, Animated } from 'react-native';
 import { styles } from '../styles/style';
-import { DATA } from '../Medicaments/Medication';
 import { Item } from '../Item/Item';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Header from '../Header';
 
-export const MedicamentsListed = () => {
-    const [searchQuery, setSearchQuery] = useState("");
-    const filteredData = DATA.map((section) => ({
-        titleLetter: section.titleLetter,
-        data: section.data.filter((medicament) =>
-            medicament.name.toLowerCase().includes(searchQuery.toLowerCase())
-        ),
-    })).filter(section => section.data.length > 0);
+interface Medication {
+    id: string;
+    name: string;
+    description: string;
+    dosage: string;
+    category: string;
+}
 
+interface MedicamentsListedProps {
+    medications: Medication[];
+}
+
+export const MedicamentsListed = ({ medications }: MedicamentsListedProps) => {
+    const [searchQuery, setSearchQuery] = useState("");
+    const filteredData = medications
+        .filter((medicament) =>
+            medicament.name.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+        .reduce((sections: { titleLetter: string, data: Medication[] }[], medicament) => {
+            const firstLetter = medicament.name[0].toUpperCase();
+            const section = sections.find(section => section.titleLetter === firstLetter);
+            if (section) {
+                section.data.push(medicament);
+            } else {
+                sections.push({ titleLetter: firstLetter, data: [medicament] });
+            }
+            return sections;
+        }, []);
     return (
         <View style={styles.container}>
             <View style={styles.sectionMain}>                
@@ -40,7 +58,7 @@ export const MedicamentsListed = () => {
                             </View>
                         )}
                     />
-                
+            
             </View>
         </View>
     );
