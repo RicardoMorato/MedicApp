@@ -3,8 +3,13 @@ from routers.users import router as users_router
 from routers.user_drugs import router as user_drugs
 from routers.medicament import router as pesquisar_medicamentos
 from dependencies.auth_dependency import router as auth
+<<<<<<< HEAD
 from routers.interactions import router as interactions
 from routers.pharma import router as pharma
+=======
+from routers.medicaments import router as medicaments
+from routers.interactions import router as interactions
+>>>>>>> 74d607a (fix: final adjustments to the interaction add logic)
 from database import get_db
 from sqlalchemy.orm import Session
 from fastapi.middleware.cors import CORSMiddleware
