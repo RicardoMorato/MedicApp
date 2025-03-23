@@ -3,7 +3,6 @@ from sqlalchemy.orm import Session
 from database import get_db
 from schemas.medicaments import MedicamentResponse
 from controllers.medicaments import add_medicament as controller  
-from dependencies.auth_dependency import get_current_user
 
 router = APIRouter()
 
