@@ -28,7 +28,6 @@ class Drug(Base):
     principio_ativo = Column(String, nullable=False)
     created_at = Column(DateTime, server_default=func.now())
 
-    user_drugs = relationship("UserDrugs", back_populates="drug")
     favorite_drugs = relationship("FavoriteDrugs", back_populates="drug")
 
 
@@ -36,15 +35,17 @@ class UserDrugs(Base):
     __tablename__ = "user_drugs"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String)  
+    principio_ativo = Column(String)  
+    is_generic = Column(Boolean)  
+    brand = Column(String, nullable=True)  
     user_id = Column(String, ForeignKey("users.id"), nullable=False)
-    drug_id = Column(Integer, ForeignKey("drugs.id"), nullable=False)
     active = Column(Boolean, default=True)
     total = Column(Integer)
     taked = Column(Integer)
     created_at = Column(DateTime, server_default=func.now())
 
     user = relationship("User", back_populates="user_drugs")
-    drug = relationship("Drug", back_populates="user_drugs")
 
 
 class Bula(Base):
