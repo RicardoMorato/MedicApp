@@ -8,3 +8,8 @@ class MedicamentResponse(BaseModel):
     concentracao: str
     forma_farmaceutica: str
     data_inclusao: str
+
+
+class MedicamentCall(BaseModel):
+    name_1: str
+    name_2: str
