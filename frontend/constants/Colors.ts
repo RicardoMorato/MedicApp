@@ -28,9 +28,13 @@ export const Colors = {
   dark: {
     text: "#ECEDEE",
     background: "#151718",
+    bg: "#2F2F2F",
+    lightBg: "#595959",
     tint: tintColorDark,
     icon: "#9BA1A6",
     tabIconDefault: "#9BA1A6",
     tabIconSelected: tintColorDark,
+    warning: "#FFE311",
+    green: "#14AE5C",
   },
 };
