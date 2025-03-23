@@ -1,44 +1,109 @@
 import { Colors } from "@/constants/Colors";
-import { View, Text } from "react-native";
-
+import { View, Text, Image, TouchableOpacity } from "react-native";
 export default function InteractionResultPopover({
   result,
   drugA,
   drugB,
+  closeCallback,
 }: {
   result: boolean;
   drugA: string;
   drugB: string;
+  closeCallback: () => void;
 }) {
+  const greenIcon = "@/assets/icons/greenFlag.png";
+  const warningIcon = "@/assets/icons/warning.png";
+  const icon = result ? require(warningIcon) : require(greenIcon);
+
+  function closeModal(e: any, i: number) {
+    if (i < 1) return;
+
+    e.stopPropagation();
+    closeCallback();
+  }
   return (
-    <View
+    <TouchableOpacity
+      onPress={(e: any) => closeModal(e, 1)}
       style={{
-        padding: 16,
+        padding: 50,
+        paddingHorizontal: 8,
         gap: 12,
-        backgroundColor: Colors.light.tint,
-        marginBottom: 12,
+        backgroundColor: Colors.dark.background,
+        height: "100%",
         borderRadius: 12,
         alignItems: "center",
+        position: "fixed",
+        zIndex: 10,
+        top: 0,
+        justifyContent: "center",
+        cursor: "pointer",
+        width: "100%",
+        left: "50%",
+        transform: "translateX(-50%)",
       }}
     >
-      <Text
+      <TouchableOpacity
+        onPress={(e: any) => closeModal(e, 0)}
         style={{
-          color: Colors.light.whiteText,
-          backgroundColor: result ? Colors.light.atention : Colors.light.green,
-          fontSize: 20,
-          fontFamily: "Poppins_700Bold",
-          borderRadius: 4,
-          padding: 8,
-          textAlign: "center",
+          padding: 50,
+          paddingHorizontal: 8,
+          gap: 12,
+          backgroundColor: Colors.dark.lightBg,
+          borderRadius: 12,
+          alignItems: "center",
+          left: "50%",
+          transform: "translateX(-50%)",
         }}
       >
-        {!result ? "Tudo certo" : "Atenção!"}
-      </Text>
-      <Text style={{ color: Colors.light.whiteText }}>
-        {!result
-          ? ` Não foram detectadas interações entre ${drugA} e ${drugB}. Esses medicamentos são compatíveis.`
-          : ` Os medicamentos ${drugA} e ${drugB} possuem interação severa. Consulte seu médico antes de usá-los juntos.`}
-      </Text>
-    </View>
+        <Text
+          style={{
+            color: result ? Colors.light.atention : Colors.light.green,
+            fontSize: 60,
+            fontFamily: "Poppins_300Light",
+            borderRadius: 4,
+            fontWeight: 600,
+            textAlign: "center",
+          }}
+        >
+          {!result ? "Tudo certo" : "Atenção!"}
+        </Text>
+        <Image source={icon} style={{ width: 100, height: 100 }} />
+
+        <View>
+          {result ? (
+            <Text
+              style={{
+                color: Colors.light.whiteText,
+                fontSize: 20,
+                fontFamily: "Poppins_300Light",
+                textAlign: "center",
+                wordWrap: "break-all",
+              }}
+            >
+              Os medicamentos{" "}
+              <Text style={{ color: Colors.dark.warning }}>{drugA} </Text> e{" "}
+              <Text style={{ color: Colors.dark.warning }}>{drugB}</Text>.
+              possuem interação severa. Consulte seu médico antes de usá-los
+              juntos.
+            </Text>
+          ) : (
+            <Text
+              style={{
+                color: Colors.light.whiteText,
+                fontSize: 20,
+                fontFamily: "Poppins_300Light",
+                textAlign: "center",
+                wordWrap: "break-all",
+              }}
+            >
+              Não foram detectadas interações entre{" "}
+              <Text style={{ color: Colors.dark.green }}>{drugA} </Text> e{" "}
+              <Text style={{ color: Colors.dark.green }}>{drugB}</Text>. Esses
+              medicamentos são compatíveis.
+            </Text>
+          )}
+        </View>
+      </TouchableOpacity>
+    </TouchableOpacity>
   );
 }
