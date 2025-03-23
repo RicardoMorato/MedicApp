@@ -1,9 +1,15 @@
 import { Text, View, TouchableOpacity, Animated } from 'react-native';
 import React, { useState } from 'react';
-import { Medication } from '../../components/Medicaments/Medication';
 import { styles } from '../styles/style';
 import { useNavigation } from '@react-navigation/native';
 
+export interface Medication {
+  id: string;
+  name: string;
+  description: string;
+  dosage: string;
+  category: string;
+}
 export interface ItemProps {
   item: Medication;
 }
@@ -34,7 +40,7 @@ export const Item: React.FC<ItemProps> = ({ item }) => {
         <View style={styles.TitleDosageSectionRow}>
           <Text style={styles.itemName}>{item.name}</Text>
           <View style={styles.dosageBg}>
-            <Text style={styles.itemDosage}>{item.dosage}</Text>
+            <Text style={styles.itemDosage}>{item.dosage.split(' ')[0]}</Text>
           </View>
         </View>
         <Text style={styles.itemDosage}>{item.category}</Text>
