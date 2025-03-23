@@ -4,6 +4,7 @@ from routers.user_drugs import router as user_drugs
 from routers.medicament import router as pesquisar_medicamentos
 from dependencies.auth_dependency import router as auth
 from routers.medicaments import router as medicaments
+from routers.interactions import router as interactions
 from database import get_db
 from sqlalchemy.orm import Session
 from fastapi.middleware.cors import CORSMiddleware
