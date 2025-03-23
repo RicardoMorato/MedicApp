@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderBottomColor: Colors.dark.tint,
   },
+
   interactionContainer: {
     backgroundColor: "#477FAB",
     padding: 20,
