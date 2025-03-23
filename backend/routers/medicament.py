@@ -6,8 +6,8 @@ from controllers.medicament import search_medicaments
 
 router = APIRouter(prefix="/medicamentos", tags=["Medicamentos"])
 
-@router.get("/busca/", response_model=list[MedicamentResponse])
-def pesquisar_medicamentos(termo: str, db: Session = Depends(get_db)):
+@router.get("/search/", response_model=list[MedicamentResponse])
+def search_medicamentos(termo: str, db: Session = Depends(get_db)):
     try:
         medicamentos = search_medicaments(db, termo)
         return medicamentos
