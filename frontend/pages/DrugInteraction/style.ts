@@ -4,20 +4,29 @@ import { Colors } from "@/constants/Colors";
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.background,
+    backgroundColor: Colors.dark.bg,
     flex: 1,
     justifyContent: "flex-start",
-    padding: 24,
   },
   content: {
-    justifyContent: "center",
-    padding: 12,
     height: "100%",
   },
+
+  navButton: {
+    padding: 12,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    marginTop: 64,
+    borderBottomWidth: 2,
+    borderBottomColor: Colors.dark.tint,
+  },
   interactionContainer: {
-    backgroundColor: Colors.light.tint,
+    backgroundColor: Colors.dark.lightBg,
     padding: 24,
-    borderRadius: 4,
+    paddingVertical: 64,
+    marginTop: 96,
+    borderRadius: 24,
     gap: 24,
     alignItems: "center",
     textAlign: "center",
@@ -26,13 +35,15 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: "Poppins_700Bold",
     fontSize: 16,
-    color: Colors.light.whiteText,
-    marginBottom: 20,
+    color: Colors.dark.text,
+    textAlign: "center",
   },
   dropdownWrapper: {
     backgroundColor: "#fff",
     color: "#777777",
     position: "relative",
+    minWidth: 200,
+    borderRadius: 0,
   },
   dropdown: {
     backgroundColor: "#fff",
@@ -42,18 +53,14 @@ const styles = StyleSheet.create({
   dropdownText: {
     color: "#777777",
   },
-  imageContainer: {
-    display: "flex",
-    justifyContent: "center",
-    width: "100%",
-    height: Dimensions.get("window").height / 8,
-  },
   confirmButton: {
     padding: 10,
     borderRadius: 4,
     backgroundColor: colors.primary,
     color: Colors.light.whiteText,
     fontFamily: "Poppins_700Bold",
+    flexDirection: "row",
+    gap: 8,
   },
   confirmText: {
     color: Colors.light.whiteText,
