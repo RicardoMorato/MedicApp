@@ -7,5 +7,9 @@ class MedicamentResponse(BaseModel):
     medicamento: str
     registro: int
     concentracao: str
-    form_farmaceutica: str
+    forma_farmaceutica: str
     data_inclusao: str
+
+    class Config:
+        orm_mode = True 
+        from_attributes = True 

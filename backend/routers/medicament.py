@@ -1,17 +1,12 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 from database import get_db
 from schemas.medicament import MedicamentResponse
-from controllers.medicament import search_medicaments
+from models import Drug
 
-router = APIRouter(prefix="/medicamentos")
+router = APIRouter()
 
-from fastapi import Query
-
-@router.get("/search/", response_model=list[MedicamentResponse])
-def search_medicamentos(termo: str, db: Session = Depends(get_db), skip: int = Query(0, ge=0), limit: int = Query(10, le=100)):
-    try:
-        medicamentos = search_medicaments(db, termo, skip=skip, limit=limit)
-        return medicamentos
-    except HTTPException as e:
-        raise HTTPException(status_code=e.status_code, detail=e.detail)
+@router.get("/medicament/search/", status_code=status.HTTP_200_OK)
+async def search_medicamentos_route(db: Session = Depends(get_db)):
+    medicamentos = db.query(Drug).all()
+    return [MedicamentResponse.from_orm(med) for med in medicamentos]
