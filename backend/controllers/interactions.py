@@ -2,10 +2,17 @@ from sqlalchemy.orm import Session
 from models import Interaction
 from schemas.interactions import InteractionsResponse
 from fastapi import HTTPException, status
+from sqlalchemy import or_
 
 def add_interaction(db: Session, interaction_data: InteractionsResponse):
     existing_interaction = db.query(Interaction).filter(
-        Interaction.principio_ativo1 == interaction_data.principio_ativo1, Interaction.principio_ativo2 == interaction_data.principio_ativo2
+        or_(
+            (Interaction.principio_ativo1 == interaction_data.principio_ativo1) & 
+            (Interaction.principio_ativo2 == interaction_data.principio_ativo2),
+
+            (Interaction.principio_ativo1 == interaction_data.principio_ativo2) & 
+            (Interaction.principio_ativo2 == interaction_data.principio_ativo1)
+        )
     ).first()
 
     if existing_interaction:
