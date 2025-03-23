@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
   },
   content: {
     height: "100%",
+    justifyContent: "center",
   },
 
   navButton: {
@@ -25,12 +26,12 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.dark.lightBg,
     padding: 24,
     paddingVertical: 64,
-    marginTop: 96,
     borderRadius: 24,
     gap: 24,
     alignItems: "center",
     textAlign: "center",
     justifyContent: "center",
+    transform: [{ translateY: -50 }],
   },
   title: {
     fontFamily: "Poppins_700Bold",
@@ -42,13 +43,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     color: "#777777",
     position: "relative",
-    minWidth: 200,
+    width: 236,
     borderRadius: 0,
   },
   dropdown: {
     backgroundColor: "#fff",
     maxHeight: 100,
     overflowY: "scroll",
+    position: "absolute",
+    top: 40,
+    width: 236,
+    zIndex: 1000,
   },
   dropdownText: {
     color: "#777777",
