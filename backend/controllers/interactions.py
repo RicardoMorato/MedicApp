@@ -40,9 +40,7 @@ def add_interaction(db: Session, interaction_data: InteractionsResponse):
 def check_interactions(db: Session, check_data: MedicamentCall):
     drug1 = db.query(Drug.farmaco).filter(Drug.medicamento == check_data.name_1).scalar()
     drug2 = db.query(Drug.farmaco).filter(Drug.medicamento == check_data.name_2).scalar()
-    print(drug1)
-    print(drug2)
-
+    
     existing_interaction = db.query(Interaction).filter(
         or_(
             (Interaction.principio_ativo1 == drug1) & 
