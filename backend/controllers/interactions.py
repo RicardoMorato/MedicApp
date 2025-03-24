@@ -28,8 +28,8 @@ def add_interaction(db: Session, interaction_data: InteractionsResponse):
     return {"message": "Interação cadastrada com sucesso!", "interação": new_interaction}
 
 def check_interactions(db: Session, interaction_data: MedicamentCall):
-    drug1 = db.query(Drug.farmaco).filter(Drug.medicamento == interaction_data.name_1).one()
-    drug2 = db.query(Drug.farmaco).filter(Drug.medicamento == interaction_data.name_2).one()
+    drug1 = db.query(Drug.farmaco).filter(Drug.medicamento == interaction_data.name_1).scalar()
+    drug2 = db.query(Drug.farmaco).filter(Drug.medicamento == interaction_data.name_2).scalar()
 
     interaction = existing_interaction(db, drug1, drug2)
 
