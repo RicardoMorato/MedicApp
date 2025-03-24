@@ -31,7 +31,7 @@ export const onSubmit = async (
         "Cadastro realizado com sucesso",
         "\nVocê será redirecionado para a tela inicial."
       );
-
+      AsyncStorage.setItem("userToken", response.data.access_token);
       AsyncStorage.setItem("isLoggedIn", JSON.stringify(true));
       setTimeout(() => {
         setLoading(false);
@@ -61,7 +61,7 @@ export const login = async (
     
 
     if (response.status === 200) {
-      AsyncStorage.setItem("userToken", response.data.token);
+      AsyncStorage.setItem("userToken", response.data.access_token);
       AsyncStorage.setItem("isLoggedIn", JSON.stringify(true));
       setTimeout(() => {
         setLoading(false);
