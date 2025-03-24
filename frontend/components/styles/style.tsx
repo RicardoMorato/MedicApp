@@ -1,12 +1,13 @@
+import { Colors } from '../../constants/Colors';
 import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
     scrollContainer: {
       flex: 1,
-      backgroundColor: '#F3F3F3',
+      backgroundColor: Colors.light.backgroundGrey,
     },
     container: {
       flex: 1,
-      backgroundColor: '#F3F3F3',
+      backgroundColor: Colors.light.backgroundGrey,
       borderRadius: 10,
   
     },
@@ -17,10 +18,10 @@ export const styles = StyleSheet.create({
     },
     header: {
       alignItems: 'center',
-      backgroundColor: '#fff',
+      backgroundColor: Colors.light.background,
       justifyContent: 'center',
       paddingBottom: 20,
-      boxShadow: '1px 2px 6px rgba(0, 0, 0, 0.25)'
+      boxShadow: Colors.light.boxShadow,
   
     },
     title: {
@@ -32,10 +33,10 @@ export const styles = StyleSheet.create({
     description: {
       fontSize: 18,
       textAlign: 'center',
-      color: '#595959'
+      color: Colors.light.backgroundGreyBlack,
     },
     separator: {
-      backgroundColor: '#BBBBBB',
+      backgroundColor: Colors.light.separator,
       marginBottom: 15,
       height: 1,
       width: '100%',
@@ -50,7 +51,7 @@ export const styles = StyleSheet.create({
       
     },
     sectionHeader: {
-      backgroundColor: '#007BFF',
+      backgroundColor: Colors.light.primary,
       width: 50,
       height: 50,
       borderRadius: 50,
@@ -59,7 +60,7 @@ export const styles = StyleSheet.create({
     },
     sectionHeaderText: {
       fontSize: 22,
-      color: '#fff',
+      color: Colors.light.background,
       fontWeight: 'bold',
     },
     sectionHeaderTextSide: {
@@ -68,19 +69,19 @@ export const styles = StyleSheet.create({
       fontWeight: 'bold',
     },
     card: {
-      backgroundColor: '#fff',
+      backgroundColor: Colors.light.background,
       padding: 20,
       marginVertical: 10,
       borderRadius: 10,
       marginHorizontal: 35,
-      boxShadow: '1px 2px 6px rgba(0, 0, 0, 0.25)'
+      boxShadow: Colors.light.boxShadow,
     },
     TitleDosageSectionRow: {
       flexDirection: 'row',
       justifyContent: 'space-between',
     },
     dosageBg: {
-      backgroundColor: "#ECF5FC",
+      backgroundColor: Colors.light.backgroundDosage,
       borderRadius: 50,
       width:60,
       alignItems: 'center',
@@ -93,18 +94,18 @@ export const styles = StyleSheet.create({
     itemDescription: {
       marginTop: 15,
       fontSize: 16,
-      color: '#595959',
+      color: Colors.light.backgroundGreyBlack,
       fontWeight: 'bold',
     },
     dividerCard: {
       height: 1,
-      backgroundColor: '#E0E0E0',
+      backgroundColor: Colors.light.separatorCard,
       marginTop: 15,
     },
     itemDosage: {
       marginTop: 5,
       fontSize: 15,
-      color: '#419DFF',
+      color: Colors.light.primary,
     },
     linkToDetails: {
         marginTop: 5,
@@ -112,7 +113,7 @@ export const styles = StyleSheet.create({
     },
     details: {
         fontSize: 15,
-        color: '#419DFF',
+        color: Colors.light.primary,
         fontWeight: 'bold',
     },
     emptyState: {
@@ -124,7 +125,7 @@ export const styles = StyleSheet.create({
     },
     emptyStateText: {
         fontSize: 18,
-        color: '#595959',
+        color: Colors.light.backgroundGreyBlack,
         textAlign: 'center',
     }
   
