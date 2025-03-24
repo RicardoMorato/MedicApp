@@ -28,8 +28,10 @@ def add_interaction(db: Session, interaction_data: InteractionsResponse):
     return {"message": "Interação cadastrada com sucesso!", "interação": new_interaction}
 
 def check_interactions(db: Session, interaction_data: MedicamentCall):
-    drug1 = db.query(Drug.farmaco).filter(Drug.medicamento == interaction_data.name_1).scalar()
-    drug2 = db.query(Drug.farmaco).filter(Drug.medicamento == interaction_data.name_2).scalar()
+    drug1 = db.query(Drug.farmaco).filter(Drug.medicamento == interaction_data.name_1).first()
+    drug2 = db.query(Drug.farmaco).filter(Drug.medicamento == interaction_data.name_2).first()
+    drug1= drug1[0]  
+    drug2 = drug2[0] 
 
     interaction = existing_interaction(db, drug1, drug2)
 
@@ -40,7 +42,7 @@ def check_interactions(db: Session, interaction_data: MedicamentCall):
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Esta interação não existe."
         )
-    
+
 def existing_interaction(db: Session, drug1, drug2):
     existing_interaction = db.query(Interaction).filter(
         or_(
