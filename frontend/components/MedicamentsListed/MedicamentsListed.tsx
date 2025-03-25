@@ -3,14 +3,7 @@ import { styles } from '../styles/style';
 import { Item } from '../Item/Item';
 import { useState } from 'react';
 import Header from '../Header';
-
-interface Medication {
-    id: string;
-    name: string;
-    description: string;
-    dosage: string;
-    category: string;
-}
+import { Medication } from '../../interfaces/Medication';
 
 interface MedicamentsListedProps {
     medications: Medication[];
