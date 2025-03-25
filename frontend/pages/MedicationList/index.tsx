@@ -1,16 +1,14 @@
 import { MedicamentsListed } from '@/components/MedicamentsListed/MedicamentsListed'
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import  API_URL from "../../config/config";
+import api from '../../services/api'
 import SplashLoading from '@/components/SplashLoading'
 
 function MedicationList() {
   const [medications, setMedications] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true)
-    axios.get(`${API_URL}drugs`)
+    api.get('/drugs')
     .then(response => {
         setMedications(response.data)
         setLoading(false)

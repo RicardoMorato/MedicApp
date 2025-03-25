@@ -14,7 +14,7 @@ createServer({
 
     this.passthrough(`${API_URL}/users/login`)//permite a requisição passar pelo mirage, ou seja, ele não intercepta
     this.passthrough(`${API_URL}/users/signup`)
-    this.get(`${API_URL}drugs`, () => [
+    this.get(`${API_URL}/drugs`, () => [
       {
         id: "1",
         name: "Aspirina",
