@@ -6,6 +6,7 @@ import styles from "./style";
 import { addMedicine } from "@/services/addmedicine";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { jwtDecode } from "jwt-decode";
+import { MedicineData } from "../../interfaces/MedicineData";
 
 const AddMedicine = () => {
   
@@ -14,14 +15,7 @@ const AddMedicine = () => {
   const [activeIngredient, setActiveIngredient] = useState("");
   const [isGeneric, setIsGeneric] = useState<boolean | null>(null);
   const [brandName, setBrandName] = useState("");
-  const [loading, setLoading] = useState(false)
-
-  type MedicineData = {
-    name: string;
-    activeIngredient: string;
-    isGeneric: boolean;
-    brand?: string;
-  }
+  const [loading, setLoading] = useState(false)  
 
   const handleAddMedicine = async () => {
     if (!medicineName || !activeIngredient || isGeneric === null || (!isGeneric && !brandName)) {

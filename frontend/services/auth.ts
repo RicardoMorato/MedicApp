@@ -34,8 +34,6 @@ export const onSubmit = async (
       const userLogged = await AsyncStorage.getItem("userToken")
       if ( userLogged === null) {
         await AsyncStorage.setItem("userToken", response.data.access_token);
-        const userLoggedCreated = await AsyncStorage.getItem("userToken")
-        console.log("userLoggedCreated: ", userLoggedCreated)
       } 
 
       await AsyncStorage.setItem("isLoggedIn", JSON.stringify(true));

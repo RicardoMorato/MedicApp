@@ -1,14 +1,7 @@
 import api from "./api";
 import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
-
-type MedicineData = {
-  name: string;
-  activeIngredient: string;
-  isGeneric: boolean;
-  brand?: string;
-};
+import { MedicineData } from "../interfaces/MedicineData";
 
 export const addMedicine = async (
   data: MedicineData,
@@ -18,7 +11,6 @@ export const addMedicine = async (
   try {
     setLoading(true);
     const token = await AsyncStorage.getItem("userToken");
-    console.log({userId})
     const response = await api.post(
       `/users/${userId}/drugs/`,
       {
