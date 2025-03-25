@@ -2,6 +2,7 @@ import api from "./api";
 import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+
 type MedicineData = {
   name: string;
   activeIngredient: string;
@@ -11,14 +12,13 @@ type MedicineData = {
 
 export const addMedicine = async (
   data: MedicineData,
-  userId: string,
+  userId: string | undefined,
   setLoading: (loading: boolean) => void,
-  navigation: any
 ) => {
   try {
     setLoading(true);
     const token = await AsyncStorage.getItem("userToken");
-
+    console.log({userId})
     const response = await api.post(
       `/users/${userId}/drugs/`,
       {
@@ -34,7 +34,7 @@ export const addMedicine = async (
       }
     );
 
-    if (response.status === 201) {
+    if (response.status === 201) { 
       Alert.alert("Sucesso", "Medicamento cadastrado com sucesso!");
     }
   } catch (error: any) {
