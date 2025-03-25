@@ -87,14 +87,3 @@ class Interaction(Base):
     inicio_interacao = Column(String, nullable=False)
     probabilidade_ocorrencia = Column(String, nullable=False)
     efeito = Column(String, nullable=False)
-
-class Interaction(Base):
-    __tablename__ = "interactions"
-    
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    principio_ativo1 = Column(String, nullable=False)
-    principio_ativo2 = Column(String, nullable=False)
-    gravidade_interacao = Column(String, nullable=False)
-    inicio_interacao = Column(String, nullable=False)
-    probabilidade_ocorrencia = Column(String, nullable=False)
-    efeito = Column(String, nullable=False)
