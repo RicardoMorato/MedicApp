@@ -58,7 +58,7 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
     if user is None:
         raise credentials_exception
 
-    return user.id
+    return user
 
 def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
@@ -89,4 +89,3 @@ def authenticate_user(db: Session, username: str, password: str):
 
 def get_user(db: Session, username: str):
     return db.query(User).filter(User.name == username).first()
- 
