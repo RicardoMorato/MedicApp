@@ -6,8 +6,8 @@ import { SelectList } from "react-native-dropdown-select-list";
 import styles from "./style";
 import InteractionResultPopover from "@/components/InteractionResultPopover";
 import { drugs } from "@/data";
-import { Colors } from "@/constants/Colors";
 import { Provider } from "react-native-paper";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function DrugInteraction() {
   const navigation = useNavigation<any>();
@@ -35,22 +35,11 @@ export default function DrugInteraction() {
   return (
     <Provider>
       <View style={styles.container}>
-        <TouchableOpacity
-          style={styles.navButton}
-          onPress={() => navigation.navigate("MainHome")}
-        >
-          <Image source={require("@/assets/icons/backArrow.png")} />
-          <Text
-            style={{
-              color: Colors.dark.text,
-              fontFamily: "Poppins_700Bold",
-              fontSize: 20,
-              fontWeight: 700,
-            }}
-          >
-            Verificar Interações
-          </Text>
-        </TouchableOpacity>
+      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+        <Ionicons name="arrow-back" size={24} color="#000" />
+        <Text style={styles.headerText}>Verificar interações</Text>
+      </TouchableOpacity>
+      <View style={styles.headerDivider}></View>
         <View style={styles.content}>
           {interactionResult != null && drugA && drugB && (
             <InteractionResultPopover
@@ -60,13 +49,13 @@ export default function DrugInteraction() {
               closeCallback={() => setInteractionResult(null)}
             />
           )}
+          <Text style={styles.subtitle}>
+            Verifique se você pode tomar dois medicamentos <Text style={styles.highlight}>simultaneamente</Text>.
+          </Text>
           <View style={styles.interactionContainer}>
-            <Text style={styles.title}>
-              Verifique se você pode tomar dois medicamentos simultâneamente.
-            </Text>
 
             <SelectList
-              placeholder="Selecione um medicamento"
+              placeholder="Selecione o primeiro medicamento"
               searchPlaceholder="Buscar"
               setSelected={setDrugA}
               data={parseDrugsToSelect(drugs)}
@@ -76,10 +65,8 @@ export default function DrugInteraction() {
               dropdownStyles={styles.dropdown}
             />
 
-            <Image source={require("@/assets/icons/Cycle.png")} />
-
             <SelectList
-              placeholder="Selecione um medicamento"
+              placeholder="Selecione o segundo medicamento"
               searchPlaceholder="Buscar"
               setSelected={setDrugB}
               data={parseDrugsToSelect(drugs)}
@@ -89,14 +76,14 @@ export default function DrugInteraction() {
               dropdownStyles={styles.dropdown}
             />
 
-            <TouchableOpacity
-              onPress={checkDrugsInteraction}
-              style={styles.confirmButton}
-            >
-              <Text style={styles.confirmText}>Verificar Interação</Text>
-              <Image source={require("@/assets/icons/smallCycle.png")} />
-            </TouchableOpacity>
           </View>
+          <TouchableOpacity
+              onPress={checkDrugsInteraction}
+              style={styles.button}
+            >
+            <Text style={styles.buttonText}>Verificar Interação</Text>
+          </TouchableOpacity>
+          <Text style={styles.disclaimer}>Este aplicativo avalia interações medicamentosas, mas não substitui a consulta médica. Sempre busque orientação de um profissional de saúde.</Text>
         </View>
       </View>
     </Provider>
