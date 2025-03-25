@@ -1,7 +1,11 @@
 import { createServer } from "miragejs"
 import API_URL from "@/config/config";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { jwtDecode } from "jwt-decode";
 
-export function initializeMirage() {
+export async function initializeMirage() {
+  const token = await AsyncStorage.getItem("userToken") || "";
+  const user_id = jwtDecode(token).sub
 createServer({
   
   routes() {
@@ -11,9 +15,10 @@ createServer({
   delete request.onloadend;
   return request;
 };
-
-    this.passthrough(`${API_URL}/users/login`)//permite a requisição passar pelo mirage, ou seja, ele não intercepta
+    //permite a requisição passar pelo mirage, ou seja, ele não intercepta
+    this.passthrough(`${API_URL}/users/login`)
     this.passthrough(`${API_URL}/users/signup`)
+    this.passthrough(`${API_URL}/users/${user_id}/drugs/`)
     this.get(`${API_URL}/drugs`, () => [
       {
         id: "1",
