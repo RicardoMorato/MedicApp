@@ -7,3 +7,7 @@ class InteractionsResponse(BaseModel):
     inicio_interacao: int
     probabilidade_ocorrencia: str
     efeito: str
+
+class InteractionCall(BaseModel):
+    name_1: str
+    name_2: str

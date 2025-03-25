@@ -1,11 +1,11 @@
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 from database import get_db
-from schemas.interactions import InteractionsResponse
-from controllers.interactions import add_interaction as controller
+from schemas.interactions import InteractionCall
+from controllers.interactions import check_interactions
 
 router = APIRouter()
 
-@router.post("/interactions/add", status_code=status.HTTP_201_CREATED)
-def add_drug(drug: InteractionsResponse, db: Session = Depends(get_db)):
-    return controller(db, drug)
+@router.post("/drug/check drug interaction", status_code=status.HTTP_201_CREATED)
+def check_drugs(drug: InteractionCall, db: Session = Depends(get_db)):
+    return check_interactions(db, drug)
