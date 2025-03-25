@@ -7,6 +7,7 @@ import { addMedicine } from "@/services/addmedicine";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { jwtDecode } from "jwt-decode";
 import { MedicineData } from "../../interfaces/MedicineData";
+import { utilDecodeToken } from "@/utils/utilDecodeToken";
 
 const AddMedicine = () => {
   
@@ -26,8 +27,7 @@ const AddMedicine = () => {
       setIsGeneric(null);
       setBrandName("");
 
-      const token = await AsyncStorage.getItem("userToken") || "";
-      const user_id = jwtDecode(token).sub
+      const user_id = await utilDecodeToken();
     
       const data: MedicineData = {
         name: medicineName,

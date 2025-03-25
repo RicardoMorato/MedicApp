@@ -1,14 +1,11 @@
 import { createServer } from "miragejs"
 import API_URL from "@/config/config";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { jwtDecode } from "jwt-decode";
+import { utilDecodeToken } from "@/utils/utilDecodeToken";
 
-export async function initializeMirage() {
-  const token = await AsyncStorage.getItem("userToken") || "";
-  const user_id = jwtDecode(token).sub
+export function initializeMirage() {
 createServer({
   
-  routes() {
+  async routes() {
   const NativeXMLHttpRequest = window.XMLHttpRequest;
   window.XMLHttpRequest = function () {
   const request = new NativeXMLHttpRequest();
@@ -16,6 +13,7 @@ createServer({
   return request;
 };
     //permite a requisição passar pelo mirage, ou seja, ele não intercepta
+    const user_id = await utilDecodeToken() 
     this.passthrough(`${API_URL}/users/login`)
     this.passthrough(`${API_URL}/users/signup`)
     this.passthrough(`${API_URL}/users/${user_id}/drugs/`)
