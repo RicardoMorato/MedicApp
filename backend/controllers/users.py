@@ -1,9 +1,11 @@
+from datetime import timedelta
 from sqlalchemy.orm import Session
 from models import User
 from schemas import users as schema
 from fastapi import HTTPException, status
 from dependencies.auth_dependency import hash_password, verify_password, create_access_token
 
+ACCESS_TOKEN_EXPIRE_MINUTES = 60
 
 def create_new_user(db: Session, user: schema.UserCreate):
     user_exists = db.query(User).filter(User.email == user.email).first()
@@ -22,7 +24,8 @@ def create_new_user(db: Session, user: schema.UserCreate):
     db.commit()
     db.refresh(new_user)
 
-    access_token = create_access_token(data={"sub": user.email})
+    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token = create_access_token(data={"sub": new_user.id, "token_type": "Bearer", "sub": new_user.id, "name": new_user.name, "email": new_user.email}, expires_delta=access_token_expires)
     return {"access_token": access_token, "token_type": "Bearer"}
 
 def login_user(db: Session, login: schema.UserLogin):
@@ -35,5 +38,6 @@ def login_user(db: Session, login: schema.UserLogin):
             headers={"WWW-Authenticate": "Bearer"},
         )
     
-    access_token = create_access_token(data={"sub": login.email})
+    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token = create_access_token(data={"sub": user.id, "token_type": "Bearer", "sub": user.id, "name": user.name, "email": user.email}, expires_delta=access_token_expires)
     return {"access_token": access_token, "token_type": "Bearer"}
