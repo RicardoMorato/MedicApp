@@ -1,10 +1,10 @@
-from pydantic import BaseModel, EmailStr, validator
+from pydantic import BaseModel, validator
 from fastapi import HTTPException, status
 import re
 
 class UserBase(BaseModel):
     name: str
-    email: EmailStr
+    email: str
 
 class UserCreate(UserBase):
     password: str
@@ -23,5 +23,5 @@ class UserCreate(UserBase):
 
         return password
 class UserLogin(BaseModel):
-    email: EmailStr
+    email: str
     password: str

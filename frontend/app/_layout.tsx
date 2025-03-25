@@ -24,6 +24,21 @@ export const HomeNav = () => {
         component={LoginNav}
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        name="AddMedicine"
+        component={AddMedicine}
+        options={{ headerShown: false }}
+      />
+        <Stack.Screen
+        name="MedicationList"
+        component={MedicationList}
+        options={{ headerShown: true }}
+      />
+      <Stack.Screen
+        name="MedicationDetails"
+        component={MedicationDetails}
+        options={{ headerShown: true }}
+      />
     </Stack.Navigator>
   );
 };
@@ -47,21 +62,7 @@ export const LoginNav = () => {
         component={HomeNav}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name="AddMedicine"
-        component={AddMedicine}
-        options={{ headerShown: false }}
-        />
-        <Stack.Screen
-        name="MedicationList"
-        component={MedicationList}
-        options={{ headerShown: true }}
-      />
-      <Stack.Screen
-        name="MedicationDetails"
-        component={MedicationDetails}
-        options={{ headerShown: true }}
-      />
+     
     </Stack.Navigator>
   );
 };

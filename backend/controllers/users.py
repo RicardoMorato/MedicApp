@@ -22,7 +22,7 @@ def create_new_user(db: Session, user: schema.UserCreate):
     db.commit()
     db.refresh(new_user)
 
-    access_token = create_access_token(data={"sub": user.email})
+    access_token = create_access_token(data={"sub": user.id, "nome":user.name, "email": user.email})
     return {"access_token": access_token, "token_type": "Bearer"}
 
 def login_user(db: Session, login: schema.UserLogin):
@@ -35,5 +35,5 @@ def login_user(db: Session, login: schema.UserLogin):
             headers={"WWW-Authenticate": "Bearer"},
         )
     
-    access_token = create_access_token(data={"sub": login.email})
+    access_token = create_access_token(data={"sub": user.id, "email": user.email})
     return {"access_token": access_token, "token_type": "Bearer"}
