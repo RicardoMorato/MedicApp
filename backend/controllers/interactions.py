@@ -8,7 +8,6 @@ from sqlalchemy import or_, and_
 def check_interactions(db: Session, interaction_data: InteractionCall):
     drug1 = interaction_data.name_1
     drug2 = interaction_data.name_2
-    print(drug1, drug2)
     interaction = existing_interaction(db, drug1, drug2)
 
     if interaction:
