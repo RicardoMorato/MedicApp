@@ -2,14 +2,8 @@ import { Text, View, TouchableOpacity, Animated } from 'react-native';
 import React, { useState } from 'react';
 import { styles } from '../styles/style';
 import { useNavigation } from '@react-navigation/native';
+import { Medication } from '@/interfaces/Medication';
 
-export interface Medication {
-  id: string;
-  name: string;
-  description: string;
-  dosage: string;
-  category: string;
-}
 export interface ItemProps {
   item: Medication;
 }
