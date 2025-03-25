@@ -2,6 +2,8 @@ import { Dimensions, StyleSheet } from "react-native";
 import colors from "@/global/colors";
 import { Colors } from "@/constants/Colors";
 
+const { height, width } = Dimensions.get("window");
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -29,13 +31,13 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-around",
-    gap: 12
+    gap: 12,
   },
   subtitle: {
     fontSize: 20,
     marginBottom: 20,
     color: "#595959",
-    textAlign: "center"
+    textAlign: "center",
   },
   highlight: {
     color: "#477FAB",
@@ -78,9 +80,9 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     alignSelf: "center",
     width: "90%",
-    height: "40%",
+    minHeight: height * 0.3,
     elevation: 3,
-    gap: 12
+    gap: 12,
   },
   title: {
     fontFamily: "Poppins_700Bold",
@@ -97,15 +99,15 @@ const styles = StyleSheet.create({
   },
   dropdown: {
     backgroundColor: "#fff",
-    maxHeight: 100,
-    overflowY: "scroll",
+    maxHeight: height * 0.15,
+    overflow: "scroll",
     position: "absolute",
     top: 35,
     width: "100%",
-    zIndex: 1000,
+    zIndex: 2,
     borderRadius: 0,
   },
-   disclaimer: {
+  disclaimer: {
     marginTop: 20,
     fontSize: 16,
     color: "#595959",
@@ -113,17 +115,6 @@ const styles = StyleSheet.create({
   },
   dropdownText: {
     color: "#777777",
-  },
-  confirmButton: {
-    padding: 16,
-    borderRadius: 4,
-    backgroundColor: colors.primary,
-    color: Colors.light.whiteText,
-    fontFamily: "Poppins_700Bold",
-  },
-  confirmText: {
-    color: Colors.light.whiteText,
-    fontWeight: 600,
   },
 });
 
