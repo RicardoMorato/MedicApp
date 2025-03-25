@@ -22,6 +22,11 @@ export const HomeNav = () => {
         component={LoginNav}
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        name="AddMedicine"
+        component={AddMedicine}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 };
@@ -43,11 +48,6 @@ export const LoginNav = () => {
       <Stack.Screen
         name="HomeNav"
         component={HomeNav}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="AddMedicine"
-        component={AddMedicine}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
