@@ -31,8 +31,12 @@ export const onSubmit = async (
         "Cadastro realizado com sucesso",
         "\nVocê será redirecionado para a tela inicial."
       );
-      AsyncStorage.setItem("userToken", response.data.access_token);
-      AsyncStorage.setItem("isLoggedIn", JSON.stringify(true));
+      const userLogged = await AsyncStorage.getItem("userToken")
+      if ( userLogged === null) {
+        await AsyncStorage.setItem("userToken", response.data.access_token);
+      } 
+
+      await AsyncStorage.setItem("isLoggedIn", JSON.stringify(true));
       setTimeout(() => {
         setLoading(false);
         navigation.replace("HomeNav");
@@ -60,9 +64,9 @@ export const login = async (
     });
     
 
-    if (response.status === 200 || response.status === 201) {
-      AsyncStorage.setItem("userToken", response.data.access_token);
-      AsyncStorage.setItem("isLoggedIn", JSON.stringify(true));
+    if (response.status === 201) {
+      await AsyncStorage.setItem("userToken", response.data.access_token);
+      await AsyncStorage.setItem("isLoggedIn", JSON.stringify(true));
       setTimeout(() => {
         setLoading(false);
         Alert.alert("Sucesso", "Login realizado com sucesso!");

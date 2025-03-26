@@ -1,26 +1,42 @@
 import React, { useState } from "react";
-
-import { View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Alert, ActivityIndicator } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import styles from "./style";
+import { addMedicine } from "@/services/addmedicine";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { jwtDecode } from "jwt-decode";
+import { MedicineData } from "../../interfaces/MedicineData";
+import { utilDecodeToken } from "@/utils/utilDecodeToken";
 
 const AddMedicine = () => {
+  
   const navigation = useNavigation();
   const [medicineName, setMedicineName] = useState("");
   const [activeIngredient, setActiveIngredient] = useState("");
   const [isGeneric, setIsGeneric] = useState<boolean | null>(null);
   const [brandName, setBrandName] = useState("");
-  
-  const handleAddMedicine = () => {
+  const [loading, setLoading] = useState(false)  
+
+  const handleAddMedicine = async () => {
     if (!medicineName || !activeIngredient || isGeneric === null || (!isGeneric && !brandName)) {
       Alert.alert("Por favor, preencha todos os campos.");
     } else {
-      Alert.alert("Medicamento adicionado com sucesso!");
       setMedicineName("");
       setActiveIngredient("");
       setIsGeneric(null);
       setBrandName("");
+
+      const user_id = await utilDecodeToken();
+    
+      const data: MedicineData = {
+        name: medicineName,
+        activeIngredient: activeIngredient,
+        isGeneric: isGeneric,
+        brand: isGeneric ? "" : brandName,
+      };
+      
+      addMedicine(data, user_id, setLoading);
     }
   };
   
@@ -74,7 +90,9 @@ const AddMedicine = () => {
 
 
         <TouchableOpacity style={styles.button} onPress={handleAddMedicine}>
-          <Text style={styles.buttonText}>Adicionar</Text>
+          {loading 
+          ? <ActivityIndicator color="#fff"/>
+          : <Text style={styles.buttonText}>Adicionar</Text>}
         </TouchableOpacity>
       </View>
     </View>

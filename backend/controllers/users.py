@@ -23,9 +23,9 @@ def create_new_user(db: Session, user: schema.UserCreate):
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
-
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(data={"sub": new_user.id, "token_type": "Bearer", "sub": new_user.id, "name": new_user.name, "email": new_user.email}, expires_delta=access_token_expires)
+
     return {"access_token": access_token, "token_type": "Bearer"}
 
 def login_user(db: Session, login: schema.UserLogin):
@@ -38,6 +38,7 @@ def login_user(db: Session, login: schema.UserLogin):
             headers={"WWW-Authenticate": "Bearer"},
         )
     
+
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(data={"sub": user.id, "token_type": "Bearer", "sub": user.id, "name": user.name, "email": user.email}, expires_delta=access_token_expires)
     return {"access_token": access_token, "token_type": "Bearer"}

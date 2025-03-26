@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import styles from "./style";
 import { logOut } from "@/services/auth";
 import { useNavigation } from 'expo-router';
+import colors from '@/global/colors';
 
 
 function Home() {
@@ -29,6 +30,10 @@ function Home() {
       </View>
     </View>
     <View style={styles.horizontalLine} />
+     <View style={{top: 20, display: 'flex', gap: 20, width: '100%', alignItems: 'center' }}>
+        <Text onPress={() => navigation.navigate('AddMedicine')} style={{color: colors.secondary, textDecorationLine: 'underline', fontFamily: 'Poppins_300Light'}}>Adicionar medicamento</Text>
+        <Text onPress={() => navigation.navigate('MedicationList')} style={{color: colors.secondary, textDecorationLine: 'underline', fontFamily: 'Poppins_300Light'}}>ir para lista de medicamentos</Text>
+      </View>
     </>
   )
 }
