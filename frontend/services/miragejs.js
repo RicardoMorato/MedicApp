@@ -3,9 +3,13 @@ import API_URL from "@/config/config";
 import { utilDecodeToken } from "@/utils/utilDecodeToken";
 
 export function initializeMirage() {
+  async function getUserId() {
+    const user_id = await utilDecodeToken()
+    return user_id
+  }
 createServer({
   
-  async routes() {
+  routes() {
   const NativeXMLHttpRequest = window.XMLHttpRequest;
   window.XMLHttpRequest = function () {
   const request = new NativeXMLHttpRequest();
@@ -13,7 +17,7 @@ createServer({
   return request;
 };
     //permite a requisição passar pelo mirage, ou seja, ele não intercepta
-    const user_id = await utilDecodeToken() 
+    const user_id = getUserId()
     this.passthrough(`${API_URL}/users/login`)
     this.passthrough(`${API_URL}/users/signup`)
     this.passthrough(`${API_URL}/users/${user_id}/drugs/`)
