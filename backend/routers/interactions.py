@@ -6,6 +6,6 @@ from controllers.interactions import check_interactions
 
 router = APIRouter()
 
-@router.post("/interactions/check-pharm-interaction", status_code=status.HTTP_201_CREATED)
+@router.post("/interactions", status_code=status.HTTP_201_CREATED)
 def check_drugs(drug: InteractionCall, db: Session = Depends(get_db)):
     return check_interactions(db, drug)
