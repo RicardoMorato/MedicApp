@@ -6,6 +6,7 @@ import { SplashScreen, useNavigation } from "expo-router";
 import Signin from "@/pages/Signin";
 import Signup from "@/pages/Signup";
 import Home from "@/pages/Home";
+import DrugInteraction from "@/pages/DrugInteraction";
 import AddMedicine from "@/pages/AddMedicine";
 import DrugInteraction from "@/pages/DrugInteraction";
 
