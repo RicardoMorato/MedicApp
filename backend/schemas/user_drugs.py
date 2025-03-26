@@ -7,3 +7,5 @@ class DrugCreate(BaseModel):
     is_generic: bool
     brand: Optional[str] = None
 
+    class Config:
+        from_attributes = True
