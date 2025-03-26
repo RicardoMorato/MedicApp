@@ -1,15 +1,10 @@
 from sqlalchemy.orm import Session
-from models import User, UserDrugs
+from models import  UserDrugs
 from schemas.user_drugs import DrugCreate
 from fastapi import HTTPException, status
 
-def add_medicament_to_user(db: Session, user_id: str, drug_data: DrugCreate):
-    user = db.query(User).filter(User.id == user_id).first()
-    if not user:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Usuário não encontrado."
-        )
+def add_medicament_to_user(db: Session, user, drug_data: DrugCreate):
+    user_id = user.id
 
     existing_drug = db.query(UserDrugs).filter(
         UserDrugs.name == drug_data.name,

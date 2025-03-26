@@ -13,7 +13,7 @@ from config import SECRET_KEY, ALGORITHM
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-ACCESS_TOKEN_EXPIRE_MINUTES = 10000
+ACCESS_TOKEN_EXPIRE_MINUTES = 100
 
 router = APIRouter()
 
@@ -34,7 +34,7 @@ async def login_for_access_token(
         )
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
-        data={"sub": user.email}, expires_delta=access_token_expires
+        data={"sub": user.id}, expires_delta=access_token_expires
     )
     return Token(access_token=access_token, token_type="bearer")
 
@@ -46,19 +46,19 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
     )
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        email: str = payload.get("email")
-        if email is None:
+        id: str = payload.get("sub")
+        if id is None:
             raise credentials_exception
     except jwt.ExpiredSignatureError:
         raise HTTPException(status_code=401, detail="Token expired")
     except jwt.PyJWTError:
         raise HTTPException(status_code=401, detail="Invalid token")
 
-    user = db.query(User).filter(User.email == email).first()
+    user = db.query(User).filter(User.id == id).first()
     if user is None:
         raise credentials_exception
 
-    return user.id
+    return user
 
 def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
@@ -89,4 +89,3 @@ def authenticate_user(db: Session, username: str, password: str):
 
 def get_user(db: Session, username: str):
     return db.query(User).filter(User.name == username).first()
- 
