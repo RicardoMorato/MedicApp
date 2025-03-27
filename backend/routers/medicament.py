@@ -13,19 +13,11 @@ async def search_medicamentos_route(db: Session = Depends(get_db), name: str = Q
     query = db.query(Drug).order_by(Drug.medicamento)
 
     if name:
-        query = query.filter(
-            or_(
-                Drug.medicamento.ilike(f"%{name}%"),
-                Drug.farmaco.ilike(f"%{name}%")
-               )
-            )
+        query = query.filter(Drug.medicamento.ilike(f"%{name}%"))
     else:
         query = query.offset(skip).limit(limit)
 
     medicamentos = query.all()
-
-    for med in medicamentos:
-        med.medicamento = to_pascal_case(med.medicamento)
 
     return [MedicamentResponse.from_orm(med) for med in medicamentos]
 
