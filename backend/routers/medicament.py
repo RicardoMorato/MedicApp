@@ -19,8 +19,12 @@ async def search_medicamentos_route(db: Session = Depends(get_db), name: str = Q
 
     medicamentos = query.all()
 
+    for med in medicamentos:
+        med.medicamento = to_pascal_case(med.medicamento)
+
     return [MedicamentResponse.from_orm(med) for med in medicamentos]
 
+import re
 
 def to_pascal_case(text: str) -> str:
     words = re.sub(r'[-_]', ' ', text).split()
