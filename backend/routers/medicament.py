@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, status, Query
 from sqlalchemy.orm import Session
+from sqlalchemy import or_
 from database import get_db
 from schemas.medicament import MedicamentResponse
 from models import Drug
@@ -12,7 +13,12 @@ async def search_medicamentos_route(db: Session = Depends(get_db), name: str = Q
     query = db.query(Drug).order_by(Drug.medicamento)
 
     if name:
-        query = query.filter(Drug.medicamento.ilike(f"%{name}%"))
+        query = query.filter(
+            or_(
+                Drug.medicamento.ilike(f"%{name}%"),
+                Drug.farmaco.ilike(f"%{name}%")
+               )
+            )
     else:
         query = query.offset(skip).limit(limit)
 
