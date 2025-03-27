@@ -1,7 +1,7 @@
 import { checkDrugInteraction } from "@/services/drugs.service";
 import { useNavigation } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, Alert } from "react-native";
+import { View, Text, TouchableOpacity, Alert, KeyboardAvoidingView, Platform } from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
 import styles from "./style";
 import InteractionResultPopover from "@/components/InteractionResultPopover";
@@ -35,6 +35,11 @@ export default function DrugInteraction() {
   }
 
   return (
+    <KeyboardAvoidingView
+    style = {{flex: 1}}
+    behavior={Platform.OS === "ios" ? "padding" : "height"}
+    keyboardVerticalOffset={Platform.OS == "ios" ? 0 : -150}
+    >
     <Provider>
       <View style={styles.container}>
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
@@ -86,5 +91,6 @@ export default function DrugInteraction() {
         </View>
       </View>
     </Provider>
+    </KeyboardAvoidingView>
   );
 }
