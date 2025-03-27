@@ -87,3 +87,9 @@ class Interaction(Base):
     inicio_interacao = Column(String, nullable=False)
     probabilidade_ocorrencia = Column(String, nullable=False)
     efeito = Column(String, nullable=False)
+
+class Pharma(Base):
+    __tablename__ = "pharma"
+    
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    pharma_name = Column(String, nullable=False)
