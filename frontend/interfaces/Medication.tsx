@@ -1,7 +1,7 @@
 export interface Medication {
   id: string;
-  name: string;
-  description: string;
-  dosage: string;
-  category: string;
+  medicamento: string;
+  data_inclusao: string;
+  concentracao: string;
+  farmaco: string;
 }

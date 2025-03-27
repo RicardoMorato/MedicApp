@@ -8,7 +8,7 @@ function MedicationList() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.get('/drugs')
+    api.get('/medicament/search/')
     .then(response => {
         setMedications(response.data)
         setLoading(false)
