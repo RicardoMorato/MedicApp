@@ -28,6 +28,7 @@ jobs:
           context: .
           file: ./backend/Dockerfile
           push: true
+          no-cache: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/medic-app-api:latest
 
       - name: Deploy to EC2 instance
