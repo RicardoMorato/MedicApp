@@ -8,22 +8,20 @@ async function getId() {
 }
 
 export function initializeMirage() {
-  createServer({
-    routes() {
-      const NativeXMLHttpRequest = window.XMLHttpRequest;
-      window.XMLHttpRequest = function () {
-        const request = new NativeXMLHttpRequest();
-        delete request.onloadend;
-        return request;
-      };
 
-      this.passthrough(`${API_URL}/users/login`)
-      this.passthrough(`${API_URL}/users/signup`)
-      getId().then((user_id) => {
-        this.passthrough(`${API_URL}/users/${user_id}/drugs/`);
-      });
-      this.passthrough(`${API_URL}/medicament/search/`)
-
-    },
-  });
-}
+createServer({
+  
+  routes() {
+  const NativeXMLHttpRequest = window.XMLHttpRequest;
+  window.XMLHttpRequest = function () {
+  const request = new NativeXMLHttpRequest();
+  delete request.onloadend;
+  return request;
+};
+    //permite a requisição passar pelo mirage, ou seja, ele não intercepta
+    const user_id = getId()
+    this.passthrough(`${API_URL}/users/login`)
+    this.passthrough(`${API_URL}/users/signup`)
+    this.passthrough(`${API_URL}/users/${user_id}/drugs/`)
+    this.passthrough(`${API_URL}/medicament/search/`)
+}})}
