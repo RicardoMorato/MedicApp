@@ -87,5 +87,5 @@ def authenticate_user(db: Session, username: str, password: str):
         return False
     return user
 
-def get_user(db: Session, username: str):
-    return db.query(User).filter(User.name == username).first()
+def get_user(db: Session, email: str):
+    return db.query(User).filter(User.email == email).first()
