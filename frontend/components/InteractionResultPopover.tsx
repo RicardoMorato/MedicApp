@@ -1,8 +1,7 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { Dimensions, StyleSheet, Pressable, View, Text, Image } from "react-native";
 import { Colors } from "@/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import { Portal } from "react-native-paper";
-import { View, Text, Image, TouchableOpacity } from "react-native";
 
 const { height, width } = Dimensions.get("window");
 
@@ -12,7 +11,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#EFEFEF",
     justifyContent: "center",
     alignItems: "center",
-    padding: 0,
   },
   backButton: {
     flexDirection: "row",
@@ -34,30 +32,26 @@ const styles = StyleSheet.create({
     right: 0,
     width: "100%",
     height: 2,
-    backgroundColor:"#000",
+    backgroundColor: "#000",
   },
   modalContainer: {
-    elevation: 8,
-    gap: 12,
-    backgroundColor: "#EFEFEF",
-    height: "100%",
-    borderRadius: 12,
-    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0)",
     position: "absolute",
-    top: 0,
+    height: "100%",
     width: "100%",
-    zIndex: 10,
     justifyContent: "center",
+    alignItems: "center",
+    zIndex: 10,
   },
   modalContent: {
-    padding: 50,
+    padding: 40,
     paddingHorizontal: 6,
     gap: 12,
     backgroundColor: "#477FAB",
     borderRadius: 25,
     alignItems: "center",
     width: "90%",
-    elevation: 4
+    elevation: 4,
   },
   resultText: {
     fontSize: 60,
@@ -82,7 +76,7 @@ const styles = StyleSheet.create({
   imageIcon: {
     width: 100,
     height: 100,
-    color: "#0BFF1B"
+    color: "#0BFF1B",
   },
 });
 
@@ -110,16 +104,16 @@ export default function InteractionResultPopover({
   return (
     <Portal>
       <View style={styles.container}>
-        <TouchableOpacity style={styles.backButton} onPress={() => closeCallback()}>
+        <Pressable style={styles.backButton} onPress={() => closeCallback()}>
           <Ionicons name="arrow-back" size={24} color="#000" />
           <Text style={styles.headerText}>Verificar interações</Text>
-        </TouchableOpacity>
+        </Pressable>
         <View style={styles.headerDivider}></View>
-        <TouchableOpacity
+        <Pressable
           onPress={(e: any) => closeModal(e, 1)}
           style={styles.modalContainer}
         >
-          <TouchableOpacity
+          <Pressable
             onPress={(e: any) => closeModal(e, 0)}
             style={styles.modalContent}
           >
@@ -135,7 +129,7 @@ export default function InteractionResultPopover({
             <View>
               {result ? (
                 <Text style={styles.resultDescription}>
-                  Os medicamentos{" "}
+                  Os fármacos{" "}
                   <Text style={styles.drugName}>{drugA} </Text> e{" "}
                   <Text style={styles.drugName}>{drugB}</Text> possuem interação
                   entre si. Consulte seu médico antes de cogitar usá-los juntos.
@@ -145,12 +139,12 @@ export default function InteractionResultPopover({
                   Não foram detectadas interações entre{" "}
                   <Text style={styles.drugNamePositive}>{drugA} </Text> e{" "}
                   <Text style={styles.drugNamePositive}>{drugB}</Text>. Esses
-                  medicamentos são compatíveis.
+                  fármacos são compatíveis.
                 </Text>
               )}
             </View>
-          </TouchableOpacity>
-        </TouchableOpacity>
+          </Pressable>
+        </Pressable>
       </View>
     </Portal>
   );
