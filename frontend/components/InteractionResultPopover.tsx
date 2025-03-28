@@ -3,7 +3,6 @@ import { Colors } from "@/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import { Portal } from "react-native-paper";
 
-const { height, width } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
@@ -60,6 +59,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     textAlign: "center",
     fontStyle: "italic",
+
   },
   resultDescription: {
     fontSize: 20,
@@ -91,7 +91,7 @@ export default function InteractionResultPopover({
   drugB: string;
   closeCallback: () => void;
 }) {
-  const greenIcon = "@/assets/icons/greenFlag.png";
+  const greenIcon = "@/assets/icons/checkIcon.png";
   const warningIcon = "@/assets/icons/warning.png";
   const icon = result ? require(warningIcon) : require(greenIcon);
 
