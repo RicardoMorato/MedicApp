@@ -104,25 +104,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 20,
   },
-  dropdownWrapper: {
-    backgroundColor: "#fff",
-    color: "#777777",
-    position: "relative",
-    width: "100%",
-    borderRadius: 5,
-    paddingVertical: 15,
-    boxShadow: '1px 2px 6px rgba(0, 0, 0, 0.25)'
-  },
-  dropdown: {
-    backgroundColor: "#fff",
-    maxHeight: height * 0.127,
-    overflow: "scroll",
-    position: "absolute",
-    top: 35,
-    width: "100%",
-    zIndex: 2,
-    borderRadius: 0,
-  },
+
   disclaimer: {
     marginTop: 20,
     fontSize: 12.5,
@@ -139,7 +121,47 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 5
-  }
+  },
+ 
+  dropdown: {
+    height: 50,
+    borderColor: 'gray',
+    borderWidth: 0.5,
+    borderRadius: 8,
+    paddingHorizontal: 8,
+    boxShadow: '1px 2px 6px rgba(0, 0, 0, 0.25)'
+  },
+  contentDropdown: {
+    backgroundColor: '#fff', 
+    width: '100%', 
+    borderRadius: 10
+  },
+  icon: {
+    marginRight: 5,
+  },
+  label: {
+    position: 'absolute',
+    left: 22,
+    top: 8,
+    zIndex: 999,
+    paddingHorizontal: 8,
+    fontSize: 14,
+  },
+  placeholderStyle: {
+    fontSize: 16,
+    color: 'black'
+  },
+  selectedTextStyle: {
+    fontSize: 16,
+  },
+  iconStyle: {
+    width: 20,
+    height: 20,
+  },
+  inputSearchStyle: {
+    height: 40,
+    fontSize: 16,
+  },
 });
 
 export default styles;
