@@ -4,14 +4,15 @@ import { Item } from '../Item/Item';
 import { useState } from 'react';
 import Header from '../Header';
 import { Medication } from '../../interfaces/Medication';
+import SplashLoading from '../SplashLoading';
 
 interface MedicamentsListedProps {
-    medications: Medication[];
-    setSkip?: (skip: number) => void;
-    setLimit?: (limit: number) => void;
+    medications: Medication[]
+    setSkip?: React.Dispatch<React.SetStateAction<number>>
+    setLimit?: React.Dispatch<React.SetStateAction<number>>
 }
 
-export const MedicamentsListed = ({ medications }: MedicamentsListedProps) => {
+export const MedicamentsListed = ({ medications, setLimit, setSkip }: MedicamentsListedProps) => {
     const [searchQuery, setSearchQuery] = useState("");
     const filteredData = medications
         .filter((medicament) =>
@@ -44,6 +45,17 @@ export const MedicamentsListed = ({ medications }: MedicamentsListedProps) => {
                             Nenhum medicamento encontrado para "{searchQuery}"
                         </Text>
                     </View>}
+                        onEndReached={() => {
+                            setLimit?.((prevLimit) => prevLimit + 30)
+                            setSkip?.((prevSkip) => prevSkip + 30)
+                        }}
+                        onEndReachedThreshold={0.4}
+                        ListFooterComponent={() => (
+                            <View style={{marginVertical: 20}}>
+                                <SplashLoading />
+                            </View>
+                        )}
+                        
                         renderSectionHeader={({ section: { titleLetter } }) => (
                             <View style={styles.containerSectionHeader}>
                                 <View style={styles.sectionHeader}>
