@@ -1,8 +1,9 @@
-import { StyleSheet, Pressable, View, Text, Image, Animated, Easing } from "react-native";
+import { StyleSheet, Pressable, View, Text, Image, Animated, Easing, Touchable, TouchableOpacity } from "react-native";
 import { Colors } from "@/constants/Colors";
 import { Portal } from "react-native-paper";
 import closeIcon from "@/assets/icons/closeIcon.png";
 import { useState } from "react";
+import { useNavigation } from "expo-router";
 
 const styles = StyleSheet.create({
   container: {
@@ -80,6 +81,13 @@ const styles = StyleSheet.create({
     height: 127,
     color: Colors.text.success,
   },
+  LearnMore: {
+    fontSize: 20,
+    color: Colors.text.warning,
+    textDecorationColor: Colors.text.warning,
+    textDecorationLine: "underline",
+    fontFamily: "Poppins_500Medium",
+  }
 });
 
 export default function InteractionResultPopover({
@@ -99,6 +107,8 @@ export default function InteractionResultPopover({
 
   const [fadeAnim] = useState(new Animated.Value(0))
   const [backgroundFadeAnim] = useState(new Animated.Value(0))
+  
+  const navigation = useNavigation<any>();
 
   Animated.timing(fadeAnim, {
     toValue: 1,
@@ -183,6 +193,12 @@ export default function InteractionResultPopover({
               )}
             </View>
           </View>
+          {result && (
+            <View style={{ marginTop: 20 }}>
+              <TouchableOpacity onPress={() => navigation.navigate('LearnMore')}>
+              <Text style={styles.LearnMore}>Saiba Mais</Text>
+              </TouchableOpacity>
+            </View>)}
         </View>
       </Animated.View>
     </Portal>
