@@ -93,3 +93,4 @@ class Pharma(Base):
     
     id = Column(Integer, primary_key=True, autoincrement=True)
     pharma_name = Column(String, nullable=False)
+

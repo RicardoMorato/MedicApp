@@ -6,7 +6,9 @@ import { SplashScreen, useNavigation } from "expo-router";
 import Signin from "@/pages/Signin";
 import Signup from "@/pages/Signup";
 import Home from "@/pages/Home";
+import DrugInteraction from "@/pages/DrugInteraction";
 import AddMedicine from "@/pages/AddMedicine";
+import LearnMore from "@/pages/LearnMore";
 import MedicationList from "@/pages/MedicationList";
 import MedicationDetails from "@/pages/MedicationDetails";
 
@@ -20,9 +22,19 @@ export const HomeNav = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen
+        name="DrugInteraction"
+        component={DrugInteraction}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
         name="SignOut"
         component={LoginNav}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="LearnMore"
+        component={LearnMore}
+        options={{ headerShown: true }}
       />
       <Stack.Screen
         name="AddMedicine"
