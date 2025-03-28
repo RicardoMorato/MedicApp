@@ -1,13 +1,15 @@
 import { checkDrugInteraction } from "@/services/drugs.service";
-import { useNavigation } from "expo-router";
+import { SplashScreen, useNavigation } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, Alert, KeyboardAvoidingView, Platform } from "react-native";
+import { View, Text, TouchableOpacity, Alert, KeyboardAvoidingView, Platform, Image } from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
 import styles from "./style";
 import InteractionResultPopover from "@/components/InteractionResultPopover";
 import { drugs } from "@/data";
 import { Provider } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
+import MedicationImage from '../../icons/images/medicaments.png';
+import arrowImage from '../../assets/icons/arrows-interaction.png';
 
 export default function DrugInteraction() {
   const navigation = useNavigation<any>();
@@ -23,11 +25,10 @@ export default function DrugInteraction() {
     return parsedDrugs;
   }
 
-  useEffect(() => {}, []);
 
   async function checkDrugsInteraction() {
     if (!drugA || !drugB) {
-      Alert.alert("Por favor, selecione ambos os medicamentos.");
+      Alert.alert("", "Por favor, selecione ambos os medicamentos.");
       return;
     }
     const result = await checkDrugInteraction([drugA, drugB]);
@@ -81,9 +82,17 @@ export default function DrugInteraction() {
               inputStyles={styles.dropdownText}
               dropdownStyles={styles.dropdown}
             />
+
+          <View style={styles.medicamentsImageContainer}>
+            <Image source={MedicationImage} resizeMode="contain" style={{height: 60, borderRadius: 50, width: 60}}></Image>
           </View>
+          </View>
+
           <TouchableOpacity onPress={checkDrugsInteraction} style={styles.button}>
+            <View style={styles.sectionButton}>
             <Text style={styles.buttonText}>Verificar Interação</Text>
+            <Image source={arrowImage} resizeMode="contain" style={{height: 32, width: 32}}></Image>
+            </View>
           </TouchableOpacity>
           <Text style={styles.disclaimer}>
             Este aplicativo avalia interações medicamentosas, mas não substitui a consulta médica. Sempre busque orientação de um profissional de saúde.
