@@ -7,6 +7,8 @@ import { Medication } from '../../interfaces/Medication';
 
 interface MedicamentsListedProps {
     medications: Medication[];
+    setSkip?: (skip: number) => void;
+    setLimit?: (limit: number) => void;
 }
 
 export const MedicamentsListed = ({ medications }: MedicamentsListedProps) => {
@@ -30,7 +32,7 @@ export const MedicamentsListed = ({ medications }: MedicamentsListedProps) => {
             <View style={styles.sectionMain}>                
                     <Animated.SectionList
                         sections={filteredData}
-                        keyExtractor={(item, index) => item.id + index}
+                        keyExtractor={(item) => item.id}
                         renderItem={({ item }) => <Item item={item} />}
                         ListHeaderComponent={
                         <Header 
