@@ -8,6 +8,7 @@ import Signup from "@/pages/Signup";
 import Home from "@/pages/Home";
 import DrugInteraction from "@/pages/DrugInteraction";
 import AddMedicine from "@/pages/AddMedicine";
+import LearnMore from "@/pages/LearnMore";
 
 
 export const HomeNav = () => {
@@ -28,6 +29,11 @@ export const HomeNav = () => {
         name="SignOut"
         component={LoginNav}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="LearnMore"
+        component={LearnMore}
+        options={{ headerShown: true }}
       />
     </Stack.Navigator>
   );
