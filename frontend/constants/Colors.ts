@@ -37,4 +37,23 @@ export const Colors = {
     warning: "#FFE311",
     green: "#14AE5C",
   },
+  text: {
+    primary: "#000",
+    white: "#FFFFFF",
+    warning: "#FFA50A",
+    success: "#0BFF1B",
+  },
+  divider: {
+    primary: "#000",
+  },
+  overlay: {
+    background: "rgba(0, 0, 0, 0.7)",
+    fade: "rgba(0, 0, 0, 0.8)",
+  },
+  modal: {
+    background: "#477FAB",
+  },
+  shadow: {
+    primary: "0px 5px 10px rgba(0, 0, 0, 0.25)",
+  },
 };
