@@ -8,7 +8,7 @@ import InteractionResultPopover from "@/components/InteractionResultPopover";
 import { drugs } from "@/data";
 import { Provider } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
-import MedicationImage from '../../icons/images/medicaments.png';
+import MedicationImage from '../../assets/icons/medicaments.png';
 import arrowImage from '../../assets/icons/arrows-interaction.png';
 import { useFonts, Poppins_300Light, Poppins_500Medium, Poppins_600SemiBold} from '@expo-google-fonts/poppins';
 
