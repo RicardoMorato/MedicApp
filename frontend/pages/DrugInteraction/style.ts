@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     left: 20,
   },
   headerText: {
-    color: colors.textPrimary,
+    color: "#595959",
     fontSize: 18,
     fontWeight: "bold",
     marginLeft: 10,
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     right: 0,
     width: "100%",
     height: 2,
-    backgroundColor: colors.textPrimary,
+    backgroundColor: "#595959",
   },
   navButton: {
     padding: 12,
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     width: "83%"
   },
   dropdownText: {
-    color: "#777777",
+    color: "#595959",
   },
   sectionButton: {
     display: 'flex',
