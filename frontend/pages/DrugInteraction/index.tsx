@@ -2,7 +2,6 @@ import { checkDrugInteraction } from "@/services/drugs.service";
 import { SplashScreen, useNavigation } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, Alert, KeyboardAvoidingView, Platform, Image } from "react-native";
-import { SelectList } from "react-native-dropdown-select-list";
 import styles from "./style";
 import InteractionResultPopover from "@/components/InteractionResultPopover";
 import { drugs } from "@/data";
@@ -14,7 +13,7 @@ import { useFonts, Poppins_300Light, Poppins_500Medium, Poppins_600SemiBold} fro
 import { Dropdown } from 'react-native-element-dropdown';
 
 
-export default function DrugInteraction() {
+export default function DrugInteractionScreen() {
   const navigation = useNavigation<any>();
   const [drugA, setDrugA] = useState<string | null>(null);
   const [drugB, setDrugB] = useState<string | null>(null);

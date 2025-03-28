@@ -3,7 +3,7 @@ import React from 'react'
 import { View, Text } from 'react-native'
 
 
-const index = () => {
+const LearnMore = () => {
   return (
     
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -13,4 +13,4 @@ const index = () => {
   )
 }
 
-export default index
+export default LearnMore
