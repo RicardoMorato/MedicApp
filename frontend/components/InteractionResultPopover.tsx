@@ -1,15 +1,21 @@
-import { Dimensions, StyleSheet, Pressable, View, Text, Image } from "react-native";
+import { StyleSheet, Pressable, View, Text, Image, Animated, Easing } from "react-native";
 import { Colors } from "@/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import { Portal } from "react-native-paper";
-
+import closeIcon from "@/assets/icons/closeIcon.png";
+import { useState } from "react";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#EFEFEF",
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
     justifyContent: "center",
     alignItems: "center",
+    zIndex: 999, 
   },
   backButton: {
     flexDirection: "row",
@@ -34,7 +40,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#000",
   },
   modalContainer: {
-    backgroundColor: "rgba(0, 0, 0, 0)",
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
     position: "absolute",
     height: "100%",
     width: "100%",
@@ -43,20 +49,18 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
   modalContent: {
-    padding: 40,
+    padding: 30,
     paddingHorizontal: 6,
-    gap: 12,
+    gap: 5,
     backgroundColor: "#477FAB",
     borderRadius: 25,
     alignItems: "center",
     width: "90%",
-    elevation: 4,
+    boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.25)",
   },
   resultText: {
     fontSize: 60,
-    fontFamily: "Poppins_300Light",
-    borderRadius: 4,
-    fontWeight: "600",
+    fontFamily: "Poppins_600SemiBold",
     textAlign: "center",
     fontStyle: "italic",
 
@@ -74,8 +78,8 @@ const styles = StyleSheet.create({
     color: "#0BFF1B",
   },
   imageIcon: {
-    width: 100,
-    height: 100,
+    width: 127,
+    height: 127,
     color: "#0BFF1B",
   },
 });
@@ -95,28 +99,66 @@ export default function InteractionResultPopover({
   const warningIcon = "@/assets/icons/warning.png";
   const icon = result ? require(warningIcon) : require(greenIcon);
 
-  function closeModal(e: any, i: number) {
-    if (i < 1) return;
-    e.stopPropagation();
-    closeCallback();
-  }
+  const [fadeAnim] = useState(new Animated.Value(0))
+  const [backgroundFadeAnim] = useState(new Animated.Value(0))
+
+
+  Animated.timing(fadeAnim, {
+    toValue: 1,
+    duration: 200,
+    useNativeDriver: true,
+    easing: Easing.inOut(Easing.ease),
+  }).start()
+
+  Animated.timing(backgroundFadeAnim, {
+    toValue: 0.2,
+    duration: 500,
+    useNativeDriver: true,
+    easing: Easing.inOut(Easing.ease),
+  }).start()
+
+
+  const handleClose = () => {
+    Animated.timing(fadeAnim, {
+      toValue: 0,
+      duration: 400,
+      useNativeDriver: true,
+      easing: Easing.inOut(Easing.ease),
+    }).start(() => closeCallback())
+
+    Animated.timing(backgroundFadeAnim, {
+      toValue: 0,
+      duration: 200,
+      useNativeDriver: true,
+      easing: Easing.ease,
+    }).start();
+  };
 
   return (
     <Portal>
-      <View style={styles.container}>
-        <Pressable style={styles.backButton} onPress={() => closeCallback()}>
-          <Ionicons name="arrow-back" size={24} color="#000" />
-          <Text style={styles.headerText}>Verificar interações</Text>
-        </Pressable>
-        <View style={styles.headerDivider}></View>
-        <Pressable
-          onPress={(e: any) => closeModal(e, 1)}
-          style={styles.modalContainer}
-        >
-          <Pressable
-            onPress={(e: any) => closeModal(e, 0)}
-            style={styles.modalContent}
-          >
+      <Animated.View
+        style={[
+          styles.modalContainer,
+          { backgroundColor: backgroundFadeAnim.interpolate({
+              inputRange: [0, 0.8],
+              outputRange: ["rgba(0, 0, 0, 0)", "rgba(0, 0, 0, 0.8)"],
+            }),
+          },
+        ]}
+      />
+      <Animated.View style={[styles.container, { opacity: fadeAnim }]}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Pressable
+              style={{
+                position: "absolute",
+                top: 10,
+                right: 10,
+              }}
+              onPress={handleClose}
+            >
+              <Image source={closeIcon} />
+            </Pressable>
             <Text
               style={[
                 styles.resultText,
@@ -129,7 +171,7 @@ export default function InteractionResultPopover({
             <View>
               {result ? (
                 <Text style={styles.resultDescription}>
-                  Os fármacos{" "}
+                  Os medicamentos{" "}
                   <Text style={styles.drugName}>{drugA} </Text> e{" "}
                   <Text style={styles.drugName}>{drugB}</Text> possuem interação
                   entre si. Consulte seu médico antes de cogitar usá-los juntos.
@@ -139,13 +181,13 @@ export default function InteractionResultPopover({
                   Não foram detectadas interações entre{" "}
                   <Text style={styles.drugNamePositive}>{drugA} </Text> e{" "}
                   <Text style={styles.drugNamePositive}>{drugB}</Text>. Esses
-                  fármacos são compatíveis.
+                  medicamentos são compatíveis.
                 </Text>
               )}
             </View>
-          </Pressable>
-        </Pressable>
-      </View>
+          </View>
+        </View>
+      </Animated.View>
     </Portal>
   );
 }

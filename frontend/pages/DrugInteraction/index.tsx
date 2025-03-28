@@ -60,7 +60,7 @@ export default function DrugInteraction() {
     <Provider>
       <View style={styles.container}>
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-          <Ionicons name="arrow-back" size={24} color="#000" />
+          <Ionicons name="arrow-back" size={24} color="#595959" />
           <Text style={styles.headerText}>Verificar interações</Text>
         </TouchableOpacity>
         <View style={styles.headerDivider}></View>
