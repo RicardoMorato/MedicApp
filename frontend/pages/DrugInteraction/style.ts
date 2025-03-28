@@ -2,7 +2,7 @@ import { Dimensions, StyleSheet } from "react-native";
 import colors from "@/global/colors";
 import { Colors } from "@/constants/Colors";
 
-const { height, width } = Dimensions.get("window");
+const { height } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     alignItems: "center",
     width: "90%",
-    elevation: 3,
+    boxShadow: '1px 2px 6px rgba(0, 0, 0, 0.25)'
   },
   buttonText: {
     color: "#419DFF",
@@ -27,21 +27,25 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   content: {
-    width: "90%",
+    width: "95%",
     display: "flex",
     alignItems: "center",
     justifyContent: "space-around",
-    gap: 12,
+    gap: 15,
   },
   subtitle: {
-    fontSize: 20,
+    fontSize: 18,
     marginBottom: 20,
     color: "#595959",
     textAlign: "center",
+    fontFamily: "Poppins_500Medium",
+    paddingHorizontal: 20,
+
+    
   },
   highlight: {
     color: "#477FAB",
-    fontWeight: "bold",
+    fontFamily: "Poppins_600SemiBold",
   },
   backButton: {
     flexDirection: "row",
@@ -77,14 +81,22 @@ const styles = StyleSheet.create({
 
   interactionContainer: {
     backgroundColor: "#477FAB",
-    padding: 20,
+    paddingHorizontal: 30,
     borderRadius: 3,
     alignSelf: "center",
+    justifyContent: "center",
     width: "90%",
-    minHeight: height * 0.3,
+    minHeight: height * 0.28,
     elevation: 3,
     gap: 12,
+    alignItems: "center",
+    
   },
+  medicamentsImageContainer: {
+    marginTop: 5,
+    alignItems: 'center',
+  },
+  
   title: {
     fontFamily: "Poppins_700Bold",
     fontSize: 16,
@@ -97,11 +109,13 @@ const styles = StyleSheet.create({
     color: "#777777",
     position: "relative",
     width: "100%",
-    borderRadius: 0,
+    borderRadius: 5,
+    paddingVertical: 15,
+    boxShadow: '1px 2px 6px rgba(0, 0, 0, 0.25)'
   },
   dropdown: {
     backgroundColor: "#fff",
-    maxHeight: height * 0.15,
+    maxHeight: height * 0.127,
     overflow: "scroll",
     position: "absolute",
     top: 35,
@@ -111,13 +125,21 @@ const styles = StyleSheet.create({
   },
   disclaimer: {
     marginTop: 20,
-    fontSize: 16,
+    fontSize: 12.5,
     color: "#595959",
-    textAlign: "center",
+    textAlign: "justify",
+    fontFamily: "Poppins_500Medium",
+    width: "83%"
   },
   dropdownText: {
     color: "#777777",
   },
+  sectionButton: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5
+  }
 });
 
 export default styles;
