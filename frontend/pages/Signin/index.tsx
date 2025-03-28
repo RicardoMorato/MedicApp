@@ -118,9 +118,7 @@ export default function Signin() {
                     </TouchableOpacity>
                     <Text onPress={() => navigation.navigate('Signup')} style={{color: colors.secondary, textDecorationLine: 'underline', fontFamily: 'Poppins_300Light'}}>Criar nova conta</Text>
                 </View>
-                <View style={{top: 20, display: 'flex', gap: 20, width: '100%', alignItems: 'center' }}>
-                    <Text onPress={() => navigation.navigate('AddMedicine')} style={{color: colors.secondary, textDecorationLine: 'underline', fontFamily: 'Poppins_300Light'}}>Adicionar medicamento</Text>
-                </View>
+               
             </View>
             
         </View>

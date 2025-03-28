@@ -26,13 +26,17 @@ export const onSubmit = async (
       password: data.Senha,
     });
 
-    if (response.status === 201) {
+    if (response.status === 200 || response.status === 201) {
       Alert.alert(
         "Cadastro realizado com sucesso",
         "\nVocê será redirecionado para a tela inicial."
       );
+      const userLogged = await AsyncStorage.getItem("userToken")
+      if ( userLogged === null) {
+        await AsyncStorage.setItem("userToken", response.data.access_token);
+      } 
 
-      AsyncStorage.setItem("isLoggedIn", JSON.stringify(true));
+      await AsyncStorage.setItem("isLoggedIn", JSON.stringify(true));
       setTimeout(() => {
         setLoading(false);
         navigation.replace("HomeNav");
@@ -58,10 +62,11 @@ export const login = async (
       email: data.Email,
       password: data.Senha,
     });
+    
 
     if (response.status === 201) {
-      AsyncStorage.setItem("userToken", response.data.token);
-      AsyncStorage.setItem("isLoggedIn", JSON.stringify(true));
+      await AsyncStorage.setItem("userToken", response.data.access_token);
+      await AsyncStorage.setItem("isLoggedIn", JSON.stringify(true));
       setTimeout(() => {
         setLoading(false);
         Alert.alert("Sucesso", "Login realizado com sucesso!");
