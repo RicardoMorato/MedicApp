@@ -25,8 +25,6 @@ function MedicationList() {
           farmaco: item.farmaco,
         }));
         setMedications(medicationsData);
-        console.log('medicamentos', medicationsData);
-        console.log('tamanho', medicationsData.length);
         setLoading(false);
     })
     .catch(error => console.error('Erro ao buscar medicamentos:', error));
