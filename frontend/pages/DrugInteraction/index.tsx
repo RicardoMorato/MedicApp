@@ -11,6 +11,7 @@ import { Ionicons } from "@expo/vector-icons";
 import MedicationImage from '../../assets/icons/medicaments.png';
 import arrowImage from '../../assets/icons/arrows-interaction.png';
 import { useFonts, Poppins_300Light, Poppins_500Medium, Poppins_600SemiBold} from '@expo-google-fonts/poppins';
+import { Dropdown } from 'react-native-element-dropdown';
 
 
 export default function DrugInteraction() {
@@ -18,6 +19,7 @@ export default function DrugInteraction() {
   const [drugA, setDrugA] = useState<string | null>(null);
   const [drugB, setDrugB] = useState<string | null>(null);
   const [interactionResult, setInteractionResult] = useState<boolean | null>(null);
+  const [isFocus, setIsFocus] = useState(false);
   const [loaded, error] = useFonts({
           'Poppins_300Light': Poppins_300Light,
           'Poppins_600SemiBold': Poppins_600SemiBold,
@@ -77,31 +79,58 @@ export default function DrugInteraction() {
             Verifique se você pode tomar dois medicamentos <Text style={styles.highlight}>simultaneamente</Text>.
           </Text>
           <View style={styles.interactionContainer}>
-            <SelectList
-              placeholder="Selecione o primeiro medicamento"
-              searchPlaceholder="Buscar"
-              setSelected={setDrugA}
-              data={parseDrugsToSelect(drugs)}
-              save="value"
-              boxStyles={styles.dropdownWrapper}
-              inputStyles={styles.dropdownText}
-              dropdownStyles={styles.dropdown}
-            />
+            <View style={styles.contentDropdown}>
+              <Dropdown
+                style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
+                placeholderStyle={styles.placeholderStyle}
+                selectedTextStyle={styles.selectedTextStyle}
+                inputSearchStyle={styles.inputSearchStyle}
+                iconStyle={styles.iconStyle}
+                data={parseDrugsToSelect(drugs)}
+                search
+                maxHeight={300}
+                labelField="value"
+                valueField="value" 
+                placeholder={!isFocus ? 'Selecione o primeiro medicamento' : '...'}
+                searchPlaceholder="Pesquisar medicamento..."
+                value={drugA}
+                onFocus={() => setIsFocus(true)}
+                onBlur={() => setIsFocus(false)}
+                onChange={item => {
+                  setDrugA(item.value);
+                  setIsFocus(false);
+                }}
+              />
+            </View>
 
-            <SelectList
-              placeholder="Selecione o segundo medicamento"
-              searchPlaceholder="Buscar"
-              setSelected={setDrugB}
-              data={parseDrugsToSelect(drugs)}
-              save="value"
-              boxStyles={styles.dropdownWrapper}
-              inputStyles={styles.dropdownText}
-              dropdownStyles={styles.dropdown}
-            />
+            <View style={{backgroundColor: '#fff', width: '100%', borderRadius: 10}}>
+              <Dropdown
+                style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
+                placeholderStyle={styles.placeholderStyle}
+                selectedTextStyle={styles.selectedTextStyle}
+                inputSearchStyle={styles.inputSearchStyle}
+                iconStyle={styles.iconStyle}
+                data={parseDrugsToSelect(drugs)}
+                search
+                maxHeight={300}
+                labelField="value"
+                valueField="value" 
+                placeholder={!isFocus ? 'Selecione o segundo medicamento' : '...'}
+                searchPlaceholder="Pesquisar medicamento..."
+                value={drugB}
+                onFocus={() => setIsFocus(true)}
+                onBlur={() => setIsFocus(false)}
+                onChange={item => {
+                  setDrugB(item.value);
+                  setIsFocus(false);
+                }}
+                
+              />
+            </View>
 
-          <View style={styles.medicamentsImageContainer}>
-            <Image source={MedicationImage} resizeMode="contain" style={{height: 60, borderRadius: 50, width: 60}}></Image>
-          </View>
+            <View style={styles.medicamentsImageContainer}>
+              <Image source={MedicationImage} resizeMode="contain" style={{height: 60, borderRadius: 50, width: 60}}></Image>
+            </View>
           </View>
 
           <TouchableOpacity onPress={checkDrugsInteraction} style={styles.button}>
