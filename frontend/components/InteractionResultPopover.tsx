@@ -1,6 +1,5 @@
 import { StyleSheet, Pressable, View, Text, Image, Animated, Easing } from "react-native";
 import { Colors } from "@/constants/Colors";
-import { Ionicons } from "@expo/vector-icons";
 import { Portal } from "react-native-paper";
 import closeIcon from "@/assets/icons/closeIcon.png";
 import { useState } from "react";
@@ -25,7 +24,7 @@ const styles = StyleSheet.create({
     left: 20,
   },
   headerText: {
-    color: "#000",
+    color: Colors.text.primary,
     fontSize: 18,
     fontWeight: "bold",
     marginLeft: 10,
@@ -37,10 +36,10 @@ const styles = StyleSheet.create({
     right: 0,
     width: "100%",
     height: 2,
-    backgroundColor: "#000",
+    backgroundColor: Colors.divider.primary,
   },
   modalContainer: {
-    backgroundColor: "rgba(0, 0, 0, 0.7)",
+    backgroundColor: Colors.overlay.background,
     position: "absolute",
     height: "100%",
     width: "100%",
@@ -52,35 +51,34 @@ const styles = StyleSheet.create({
     padding: 30,
     paddingHorizontal: 6,
     gap: 5,
-    backgroundColor: "#477FAB",
+    backgroundColor: Colors.modal.background,
     borderRadius: 25,
     alignItems: "center",
     width: "90%",
-    boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.25)",
+    boxShadow: Colors.shadow.primary,
   },
   resultText: {
     fontSize: 60,
     fontFamily: "Poppins_600SemiBold",
     textAlign: "center",
     fontStyle: "italic",
-
   },
   resultDescription: {
     fontSize: 20,
     fontFamily: "Poppins_300Light",
     textAlign: "center",
-    color: Colors.light.whiteText,
+    color: Colors.text.white,
   },
   drugName: {
-    color: "#FFA50A",
+    color: Colors.text.warning,
   },
   drugNamePositive: {
-    color: "#0BFF1B",
+    color: Colors.text.success,
   },
   imageIcon: {
     width: 127,
     height: 127,
-    color: "#0BFF1B",
+    color: Colors.text.success,
   },
 });
 
@@ -101,7 +99,6 @@ export default function InteractionResultPopover({
 
   const [fadeAnim] = useState(new Animated.Value(0))
   const [backgroundFadeAnim] = useState(new Animated.Value(0))
-
 
   Animated.timing(fadeAnim, {
     toValue: 1,
@@ -141,7 +138,7 @@ export default function InteractionResultPopover({
           styles.modalContainer,
           { backgroundColor: backgroundFadeAnim.interpolate({
               inputRange: [0, 0.8],
-              outputRange: ["rgba(0, 0, 0, 0)", "rgba(0, 0, 0, 0.8)"],
+              outputRange: ["rgba(0, 0, 0, 0)", Colors.overlay.fade],
             }),
           },
         ]}
@@ -162,7 +159,7 @@ export default function InteractionResultPopover({
             <Text
               style={[
                 styles.resultText,
-                { color: result ? "#FFA50A" : "#0BFF1B" },
+                { color: result ? Colors.text.warning : Colors.text.success },
               ]}
             >
               {!result ? "Tudo certo!" : "Atenção!"}
