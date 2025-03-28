@@ -10,13 +10,29 @@ import { Provider } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
 import MedicationImage from '../../icons/images/medicaments.png';
 import arrowImage from '../../assets/icons/arrows-interaction.png';
+import { useFonts, Poppins_300Light, Poppins_500Medium, Poppins_600SemiBold} from '@expo-google-fonts/poppins';
+
 
 export default function DrugInteraction() {
   const navigation = useNavigation<any>();
   const [drugA, setDrugA] = useState<string | null>(null);
   const [drugB, setDrugB] = useState<string | null>(null);
   const [interactionResult, setInteractionResult] = useState<boolean | null>(null);
-
+  const [loaded, error] = useFonts({
+          'Poppins_300Light': Poppins_300Light,
+          'Poppins_600SemiBold': Poppins_600SemiBold,
+          'Poppins_500Medium': Poppins_500Medium
+        });
+      
+        useEffect(() => {
+          if (loaded || error) {
+            SplashScreen.hideAsync();
+          }
+        }, [loaded, error]);
+      
+        if (!loaded && !error) {
+          return null;
+        }
   function parseDrugsToSelect(drugs: any[]) {
     const parsedDrugs: { key: number; value: string }[] = [];
     drugs.forEach((drug) =>
