@@ -2,3 +2,4 @@
 .env
 __pycache__
 enviroment.py
+test_db.db

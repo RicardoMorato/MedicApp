@@ -17,9 +17,26 @@ cd backend
 
 Esse será nosso diretório de trabalho padrão nessa seção.
 
-### Criando um ambiente virtual
+### Rodando com docker compose (recomendado)
 
-Antes de instalar as dependências, é recomendado iniciar um ambiente virtual Python localmente. Para isso, rode o seguinte comando no terminal:
+#### Pré-requisitos
+
+- docker >= 24
+- docker compose >= 2
+
+#### Subindo os contêineres
+
+Agora, basta rodar o comando abaixo em seu terminal:
+
+```bash
+docker compose up
+```
+
+Após poucos minutos, você terá uma instância da API de pé e já conectada ao banco de dados local.
+
+### Rodando localmente em um ambiente virtual
+
+Inicie um ambiente virtual Python localmente. Para isso, rode o seguinte comando no terminal:
 
 ```bash
 python -m venv .venv

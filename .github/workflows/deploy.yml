@@ -25,9 +25,10 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
-          context: .
+          context: ./backend
           file: ./backend/Dockerfile
           push: true
+          no-cache: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/medic-app-api:latest
 
       - name: Deploy to EC2 instance

@@ -9,7 +9,8 @@ import Home from "@/pages/Home";
 import DrugInteraction from "@/pages/DrugInteraction";
 import AddMedicine from "@/pages/AddMedicine";
 import LearnMore from "@/pages/LearnMore";
-
+import MedicationList from "@/pages/MedicationList";
+import MedicationDetails from "@/pages/MedicationDetails";
 
 export const HomeNav = () => {
   const Stack = createNativeStackNavigator();
@@ -35,6 +36,21 @@ export const HomeNav = () => {
         component={LearnMore}
         options={{ headerShown: true }}
       />
+      <Stack.Screen
+        name="AddMedicine"
+        component={AddMedicine}
+        options={{ headerShown: false }}
+      />
+        <Stack.Screen
+        name="MedicationList"
+        component={MedicationList}
+        options={{ headerShown: true }}
+      />
+      <Stack.Screen
+        name="MedicationDetails"
+        component={MedicationDetails}
+        options={{ headerShown: true }}
+      />
     </Stack.Navigator>
   );
 };
@@ -58,11 +74,7 @@ export const LoginNav = () => {
         component={HomeNav}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name="AddMedicine"
-        component={AddMedicine}
-        options={{ headerShown: false }}
-      />
+     
     </Stack.Navigator>
   );
 };
