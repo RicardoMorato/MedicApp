@@ -8,7 +8,7 @@ import Signup from "@/pages/Signup";
 import Home from "@/pages/Home";
 import DrugInteraction from "@/pages/DrugInteraction";
 import AddMedicine from "@/pages/AddMedicine";
-import DrugInteraction from "@/pages/DrugInteraction";
+
 
 export const HomeNav = () => {
   const Stack = createNativeStackNavigator();
