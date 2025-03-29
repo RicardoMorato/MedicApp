@@ -44,8 +44,7 @@ const ItemComponent: React.FC<ItemProps> = ({ item }) => {
           <Text style={styles.itemDescription}>{item.data_inclusao}</Text>
           <TouchableOpacity
             style={styles.linkToDetails}
-            onPress={() => navigation.navigate('MedicationDetails')}
-          >
+            onPress={() => navigation.navigate('MedicationDetails')}>
             <Text style={styles.details}>Ver detalhes</Text>
           </TouchableOpacity>
         </Animated.View>

@@ -46,7 +46,7 @@ function MedicationList() {
         setLimit={setLimit} 
       />
     )
-  );
+  )
 }
 
 export default MedicationList;

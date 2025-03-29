@@ -12,6 +12,7 @@ interface MedicamentsListedProps {
     setLimit?: React.Dispatch<React.SetStateAction<number>>
 }
 
+
 export const MedicamentsListed = ({ medications, setLimit, setSkip}: MedicamentsListedProps) => {
     const [searchQuery, setSearchQuery] = useState("");
 
@@ -40,6 +41,7 @@ export const MedicamentsListed = ({ medications, setLimit, setSkip}: Medicaments
                     <Animated.SectionList
                         sections={filteredData}
                         keyExtractor={(item, index) => `${item.id}-${index}`} 
+
                         renderItem={({ item }) => <Item item={item} />}
                         ListHeaderComponent={
                         <Header 
@@ -52,6 +54,7 @@ export const MedicamentsListed = ({ medications, setLimit, setSkip}: Medicaments
                         </Text>
                     </View>}
                         onEndReached={handleEndReached}
+
                         onEndReachedThreshold={0.4}
                         ListFooterComponent={() => (
                             <View style={{marginVertical: 20}}>
