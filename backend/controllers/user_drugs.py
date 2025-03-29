@@ -9,6 +9,7 @@ def add_medicament_to_user(db: Session, user, drug_data: DrugCreate):
     existing_drug = db.query(UserDrugs).filter(
         UserDrugs.name == drug_data.name,
         UserDrugs.principio_ativo == drug_data.principio_ativo,
+        UserDrugs.concentracao == drug_data.concentracao,
         UserDrugs.user_id == user_id
     ).first()
 
@@ -22,8 +23,7 @@ def add_medicament_to_user(db: Session, user, drug_data: DrugCreate):
         user_id=user_id,
         name=drug_data.name,
         principio_ativo=drug_data.principio_ativo,
-        is_generic=drug_data.is_generic,
-        brand=drug_data.brand
+        concentracao=drug_data.concentracao,
     )
 
     db.add(new_drug)
