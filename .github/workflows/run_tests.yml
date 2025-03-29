@@ -13,10 +13,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Remove Compose images
-        run: |
-          docker compose rm -f
-
       - name: Build Images
         run: |
           docker compose -f backend/docker-compose.test.yml build --no-cache
