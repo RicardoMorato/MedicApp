@@ -35,20 +35,27 @@ def db_session():
     transaction = connection.begin()  # Start a transaction
     session = TestingSessionLocal(bind=connection)
     try:
+        # Drop all tables to ensure a clean state
+        LOGGER.info("[Setup] Dropping all tables...")
+        Base.metadata.drop_all(bind=engine)
+
+        # Create all tables before applying migrations
+        LOGGER.info("[Setup] Creating all tables...")
+        Base.metadata.create_all(bind=engine)
+
+        # Apply migrations
         alembic_cfg = Config("alembic.ini")  # Path to Alembic configuration file
         alembic_cfg.set_main_option("sqlalchemy.url", SQLITE_DATABASE_URL)
+        LOGGER.info("[Setup] Applying migrations...")
         command.upgrade(alembic_cfg, "head")  # Apply all migrations
-
-        LOGGER.info(
-            "[Setup] Database session created, tables metadata below. %(payload)s",
-            {"payload": {Base.metadata.tables.values()}},
-        )
+        LOGGER.info("[Setup] Migrations applied successfully.")
 
         yield session
     finally:
         session.close()
         transaction.rollback()  # Rollback the transaction
         connection.close()
+        LOGGER.info("[Teardown] Database session closed and transaction rolled back.")
 
 
 @pytest.fixture(scope="function")
