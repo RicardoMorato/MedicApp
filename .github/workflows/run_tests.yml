@@ -20,7 +20,7 @@ jobs:
         run: docker build -t medicapp-backend ./backend
 
       - name: Setup SQLite
-        uses: actions/setup-sqlite@v1
+        uses: ccorsi/setup-sqlite@v1.2.1
         with:
           sqlite-version: 3.49.1
           sqlite-year: 2025
