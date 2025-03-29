@@ -1,5 +1,8 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions} from "react-native";
 import colors from "@/global/colors";
+
+
+const { height } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
@@ -7,6 +10,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     padding: 0,
     justifyContent: "center",
+    alignItems: "center",
+    gap: 26,
   }, 
   backButton: {
     flexDirection: "row",
@@ -37,18 +42,29 @@ const styles = StyleSheet.create({
     height: 2,
     backgroundColor: colors.textPrimary,
   },
+  subtitle: {
+    fontSize: 18,
+    color: "#595959",
+    marginBottom: 30,
+    paddingHorizontal: 20,
+    fontFamily: "Poppins_500Medium",
+    textAlign: "justify",
+  },
   form: {
-    backgroundColor: "#3F6684",
-    padding: 20,
-    borderRadius: 10,
+    backgroundColor: "#477FAB",
+    paddingTop: 40,
+    paddingLeft: 25,
+    paddingRight: 25,
+    paddingBottom: 40,
+    borderRadius: 15,
     alignSelf: "center",
-    width: "90%",
+    width: "80%",
+    gap: 16,
   },
   input: {
     backgroundColor: colors.background,
     padding: 12,
     borderRadius: 5,
-    marginBottom: 15,
     color: colors.textPrimary,
   },
   label: {
@@ -87,15 +103,20 @@ const styles = StyleSheet.create({
     color: colors.background,
   },
   button: {
-    backgroundColor: colors.primary,
-    padding: 15,
-    borderRadius: 10,
-    alignItems: "center",
+    backgroundColor: "#FFFFFF",
+    padding: 12,
+    borderRadius: 5,
+    boxShadow: '2px 3px 4px 2px rgba(0, 0, 0, 0.2)',
+    width: "85%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center"
   },
   buttonText: {
     fontSize: 16,
     fontWeight: "bold",
-    color: colors.background,
+    color: "#419DFF",
   },
 });
 
