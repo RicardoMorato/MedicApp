@@ -21,4 +21,4 @@ jobs:
 
       - name: Run tests with pytest
         run: |
-          docker run --env DB_USER=${{ DB_USER }} --env DB_PASSWORD=${{ DB_PASSWORD }} --env DB_NAME=${{ DB_NAME }} --env DB_HOST=${{ DB_HOST }} --env DB_PORT=${{ DB_PORT }} --rm medic-app-api-prod pytest -vvv --disable-pytest-warnings
+          docker run --env DB_USER=${{ secrets.DB_USER }} --env DB_PASSWORD=${{ secrets.DB_PASSWORD }} --env DB_NAME=${{ secrets.DB_NAME }} --env DB_HOST=${{ secrets.DB_HOST }} --env DB_PORT=${{ secrets.DB_PORT }} --rm medic-app-api-prod pytest -vvv --disable-pytest-warnings
