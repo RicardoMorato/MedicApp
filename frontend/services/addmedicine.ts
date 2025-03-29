@@ -16,8 +16,7 @@ export const addMedicine = async (
       {
         name: data.name,
         principio_ativo: data.activeIngredient,
-        is_generic: data.isGeneric,
-        brand: data.brand || ""
+        concentration: data.concentration
       },
       {
         headers: {
