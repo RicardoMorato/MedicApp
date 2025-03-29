@@ -22,7 +22,7 @@ services:
     volumes:
       - .:/app
     command: >
-      sh -c "pip install --no-cache-dir -r requirements.txt && alembic upgrade head && uvicorn main:app --host 0.0.0.0 --port 8200 --reload"
+      sh -c "alembic upgrade head && uvicorn main:app --host 0.0.0.0 --port 8200 --reload"
     environment:
       DB_NAME: test_db
       DB_HOST: host.docker.internal
