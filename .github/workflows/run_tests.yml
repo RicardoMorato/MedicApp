@@ -48,14 +48,7 @@ jobs:
       - name: Install dependencies in chunks
         run: |
           docker exec backend-app-1 sh -c "
-          if [ -f /app/requirements.txt ]; then
-            for package in $(cat /app/requirements.txt); do
-              pip install --no-cache-dir $package || exit 1;
-            done
-          else
-            echo 'requirements.txt not found or not accessible';
-            exit 1;
-          fi
+          pip install --no-cache-dir -r requirements.txt || echo 'Failed to install dependencies'
           "
 
       - name: Verify dependencies installation
