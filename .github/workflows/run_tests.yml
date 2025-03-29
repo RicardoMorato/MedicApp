@@ -37,6 +37,18 @@ jobs:
             sleep 5
           done
 
+      - name: Install dependencies with logs
+        run: |
+          docker exec backend-app-1 sh -c "pip install --no-cache-dir -r requirements.txt --verbose"
+
+      - name: Verify dependencies installation
+        run: |
+          docker exec backend-app-1 sh -c "
+          pip show pytest || echo 'pytest is not installed';
+          pip show fastapi || echo 'fastapi is not installed';
+          pip show sqlalchemy || echo 'sqlalchemy is not installed';
+          "
+
       - name: Run Tests
         run: |
           docker exec backend-app-1 sh -c "pytest -vvv --disable-pytest-warnings --log-cli-level=INFO"
