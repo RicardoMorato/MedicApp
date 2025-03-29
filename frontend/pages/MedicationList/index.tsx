@@ -7,10 +7,10 @@ function MedicationList() {
   const [medications, setMedications] = useState<Medication[]>([]);
   const [loading, setLoading] = useState(true);
   const [skip, setSkip] = useState(0);
-  const [limit, setLimit] = useState(30);
+  const [limit, setLimit] = useState(50);
 
-  function fetchMedications() {
-    api.get('/medicament/search/', {
+  async function fetchMedications() {
+    await api.get('/medicament/search/', {
       params: {
         skip: skip,
         limit: limit,
@@ -24,10 +24,13 @@ function MedicationList() {
           concentracao: item.concentracao,
           farmaco: item.farmaco,
         }));
-        setMedications(medicationsData);
+        setMedications((prev) => [...prev, ...medicationsData])
         setLoading(false);
     })
-    .catch(error => console.error('Erro ao buscar medicamentos:', error));
+    .catch(error => {
+        console.error('Erro ao buscar medicamentos:', error);
+        setLoading(false);
+    });
   }
 
   useEffect(() => {
@@ -35,8 +38,15 @@ function MedicationList() {
   }, [skip, limit]);
 
   return (
-    (loading ? <SplashLoading/> : <MedicamentsListed medications={medications} setSkip={setSkip} setLimit={setLimit} />)
-  )
+    (loading && medications.length === 0 
+      ? <SplashLoading /> 
+      : <MedicamentsListed 
+        medications={medications} 
+        setSkip={setSkip} 
+        setLimit={setLimit} 
+      />
+    )
+  );
 }
 
-export default MedicationList
+export default MedicationList;

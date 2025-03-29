@@ -1,7 +1,7 @@
 import { View, Text, Animated } from 'react-native';
 import { styles } from '../styles/style';
 import { Item } from '../Item/Item';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '../Header';
 import { Medication } from '../../interfaces/Medication';
 import SplashLoading from '../SplashLoading';
@@ -12,39 +12,34 @@ interface MedicamentsListedProps {
     setLimit?: React.Dispatch<React.SetStateAction<number>>
 }
 
-export const MedicamentsListed = ({ medications, setLimit, setSkip }: MedicamentsListedProps) => {
+export const MedicamentsListed = ({ medications, setLimit, setSkip}: MedicamentsListedProps) => {
     const [searchQuery, setSearchQuery] = useState("");
-    const [filteredData, setFilteredData] = useState<{ titleLetter: string; data: Medication[] }[]>([]);
 
-    const handleSearch = debounce((query: string) => {
-        const filtered = medications
-            .filter((medicament) =>
-                medicament.medicamento.toLowerCase().includes(query.toLowerCase())
-            )
-            .reduce((sections: { titleLetter: string, data: Medication[] }[], medicament) => {
-                const firstLetter = medicament.medicamento[0].toUpperCase();
-                const section = sections.find(section => section.titleLetter === firstLetter);
-                if (section) {
-                    section.data.push(medicament);
-                } else {
-                    sections.push({ titleLetter: firstLetter, data: [medicament] });
-                }
-                return sections;
-            }, []);
-        setFilteredData(filtered);
-    }, 300);
+    const handleEndReached = () => {
+        setLimit?.((prevLimit) => prevLimit + 30)
+        setSkip?.((prevSkip) => prevSkip + 30)
+    }
 
-    useEffect(() => {
-        handleSearch(searchQuery);
-        return () => handleSearch.cancel();
-    }, [searchQuery]);
-
+    const filteredData = medications
+        .filter((medicament) =>
+            medicament.medicamento.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+        .reduce((sections: { titleLetter: string, data: Medication[] }[], medicament) => {
+            const firstLetter = medicament.medicamento[0].toUpperCase();
+            const section = sections.find(section => section.titleLetter === firstLetter);
+            if (section) {
+                section.data.push(medicament);
+            } else {
+                sections.push({ titleLetter: firstLetter, data: [medicament] });
+            }
+            return sections;
+        }, []);
     return (
         <View style={styles.container}>
             <View style={styles.sectionMain}>                
                     <Animated.SectionList
                         sections={filteredData}
-                        keyExtractor={(item) => item.id}
+                        keyExtractor={(item, index) => `${item.id}-${index}`} 
                         renderItem={({ item }) => <Item item={item} />}
                         ListHeaderComponent={
                         <Header 
@@ -56,10 +51,7 @@ export const MedicamentsListed = ({ medications, setLimit, setSkip }: Medicament
                             Nenhum medicamento encontrado para "{searchQuery}"
                         </Text>
                     </View>}
-                        onEndReached={() => {
-                            setLimit?.((prevLimit) => prevLimit + 30)
-                            setSkip?.((prevSkip) => prevSkip + 30)
-                        }}
+                        onEndReached={handleEndReached}
                         onEndReachedThreshold={0.4}
                         ListFooterComponent={() => (
                             <View style={{marginVertical: 20}}>
