@@ -27,14 +27,4 @@ jobs:
             --env DB_NAME=${{ secrets.DB_NAME }} \
             --env DB_HOST=${{ secrets.DB_HOST }} \
             --env DB_PORT=${{ secrets.DB_PORT }} \
-            --rm medicapp-backend sh -c "
-              sqlite3 /app/test_db.db \
-              'CREATE TABLE IF NOT EXISTS interactions (
-                id INTEGER PRIMARY KEY,
-                gravidade_interacao TEXT,
-                inicio_interacao TEXT,
-                probabilidade_ocorrencia TEXT,
-                efeito TEXT,
-                principio_ativo1 TEXT,
-                principio_ativo2 TEXT
-              );' && pytest -vvv --disable-pytest-warnings --log-cli-level=INFO"
+            --rm medicapp-backend pytest -vvv --disable-pytest-warnings --log-cli-level=INFO
