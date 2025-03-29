@@ -13,58 +13,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Build Images
-        run: |
-          docker compose -f backend/docker-compose.test.yml build --no-cache
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-      - name: Start API and DB Containers
-        run: |
-          docker compose -f backend/docker-compose.test.yml up --build -d
-          sleep 5
+      - name: Build Docker image
+        run: docker build -t medicapp-backend ./backend
 
-      - name: Check Containers Status
+      - name: Run tests with pytest
         run: |
-          docker ps -a
-
-      - name: Check Container Files
-        run: |
-          docker exec backend-app-1 sh -c "ls -la /app"
-
-      - name: Wait for DB to be ready
-        run: |
-          for i in {1..10}; do
-            if docker exec backend-database-1 pg_isready -U test_container_user -d test_db; then
-              echo "DB is ready"
-              break
-            fi
-            echo "Waiting for DB to be ready..."
-            sleep 5
-          done
-
-      - name: Install dependencies in chunks
-        run: |
-          docker exec backend-app-1 sh -c "
-          for package in $(cat requirements.txt); do
-            pip install --no-cache-dir $package || exit 1;
-          done
-          "
-
-      - name: Verify dependencies installation
-        run: |
-          docker exec backend-app-1 sh -c "
-          pip show pytest || echo 'pytest is not installed';
-          pip show fastapi || echo 'fastapi is not installed';
-          pip show sqlalchemy || echo 'sqlalchemy is not installed';
-          "
-
-      - name: Run Tests
-        run: |
-          docker exec backend-app-1 sh -c "pytest -vvv --disable-pytest-warnings --log-cli-level=INFO"
-
-      - name: Stop API and DB Containers
-        run: |
-          docker compose -f backend/docker-compose.test.yml down
-
-      - name: Remove Docker Volumes
-        run: |
-          docker volume rm backend_data-postgres-test
+          docker run \
+            --env DB_USER=${{ secrets.DB_USER }} \
+            --env DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
+            --env DB_NAME=${{ secrets.DB_NAME }} \
+            --env DB_HOST=${{ secrets.DB_HOST }} \
+            --env DB_PORT=${{ secrets.DB_PORT }} \
+            --rm medicapp-backend sh -c "pytest -vvv --disable-pytest-warnings --log-cli-level=INFO"
