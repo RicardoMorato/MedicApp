@@ -34,11 +34,11 @@ export const Item: React.FC<ItemProps> = ({ item }) => {
       <View style={styles.card}>
         <View style={styles.TitleDosageSectionRow}>
           <Text style={styles.itemName}>{item.medicamento}</Text>
-          <View style={styles.dosageBg}>
-            <Text style={styles.itemDosage}>{item.concentracao.split(' ')[0]}</Text>
+          <View style={item.concentracao.length < 15 ? styles.dosageBg : styles.itemDosageOverflow}>
+            <Text style={styles.itemDosage}>{item.concentracao.length > 20 ? " - " : item.concentracao}</Text>
           </View>
         </View>
-        <Text style={styles.itemDosage}>{item.farmaco}</Text>
+        <Text style={styles.farmaco}>{item.farmaco}</Text>
         <Animated.View style={{ height, overflow: 'hidden' }}>
           <View style={styles.dividerCard} />
           <Text style={styles.itemDescription}>{item.data_inclusao}</Text>
