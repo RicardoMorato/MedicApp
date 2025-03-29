@@ -37,6 +37,10 @@ jobs:
         run: |
           docker exec backend-app-1 sh -c "pip install pytest && export PATH=$PATH:/root/.local/bin"
 
+      - name: Install sqlalchemy
+        run: |
+          docker exec backend-app-1 sh -c "pip install sqlalchemy"
+
       - name: Run Tests
         run: |
           docker exec backend-app-1 sh -c "pytest -vvv --disable-pytest-warnings --log-cli-level=INFO"
