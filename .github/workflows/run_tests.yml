@@ -13,9 +13,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Remove Compose images
+        run: |
+          docker compose rm -f
+
+      - name: Build Images
+        run: |
+          docker compose -f backend/docker-compose.test.yml build --no-cache
+
       - name: Start API and DB Containers
         run: |
-          docker compose -f backend/docker-compose.test.yml up --build --no-cache -d
+          docker compose -f backend/docker-compose.test.yml up --build -d
           sleep 5
 
       - name: Wait for DB to be ready
