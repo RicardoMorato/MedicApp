@@ -29,10 +29,6 @@ jobs:
             sleep 5
           done
 
-      - name: Install dependencies
-        run: |
-          docker exec backend-app-1 sh -c "pip install --no-cache-dir -r requirements.txt"
-
       - name: Run Tests
         run: |
           docker exec backend-app-1 sh -c "pytest -vvv --disable-pytest-warnings --log-cli-level=INFO"
