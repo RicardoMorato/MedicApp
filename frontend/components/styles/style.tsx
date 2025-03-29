@@ -82,14 +82,21 @@ export const styles = StyleSheet.create({
     },
     dosageBg: {
       backgroundColor: Colors.light.backgroundDosage,
+      paddingHorizontal: 10,
       borderRadius: 50,
-      width:60,
+      minWidth: 50,
+      maxWidth:100,
       alignItems: 'center',
     },
     itemName: {
       fontSize: 20,
       fontWeight: 'bold',
       alignItems: "center"
+    },
+    farmaco:{
+      fontSize: 15,
+      marginTop: 5,
+      color: Colors.light.primary,
     },
     itemDescription: {
       marginTop: 15,
@@ -104,8 +111,16 @@ export const styles = StyleSheet.create({
     },
     itemDosage: {
       marginTop: 5,
-      fontSize: 15,
+      fontSize: 12,
       color: Colors.light.primary,
+    },
+    itemDosageOverflow:{
+      backgroundColor: Colors.light.backgroundDosage,
+      paddingHorizontal: 10,
+      borderRadius: 50,
+      minWidth: 50,
+      maxWidth:150,
+      alignItems: 'center',
     },
     linkToDetails: {
         marginTop: 5,
