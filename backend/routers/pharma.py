@@ -6,8 +6,8 @@ from models import Pharma as Pharma_Models
 
 router = APIRouter()
 
-@router.get("/search/pharma/", status_code=status.HTTP_200_OK)
-async def search_pharma(db: Session = Depends(get_db), name: str = Query(None)):
+@router.get("/pharma", status_code=status.HTTP_200_OK)
+async def pharma(db: Session = Depends(get_db), name: str = Query(None)):
 
     query = db.query(Pharma_Models)
 
