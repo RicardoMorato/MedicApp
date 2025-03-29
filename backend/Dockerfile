@@ -8,6 +8,10 @@ COPY requirements.txt /app/
 # Instala as dependências
 RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 
+# Instala o SQLite
+RUN apt-get update && apt-get install -y sqlite3 && rm -rf /var/lib/apt/lists/* \
+    && sqlite3 --version
+
 # Copia o restante dos arquivos
 COPY . .
 
