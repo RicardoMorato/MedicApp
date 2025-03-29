@@ -1,7 +1,7 @@
 import { View, Text, Animated } from 'react-native';
 import { styles } from '../styles/style';
 import { Item } from '../Item/Item';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '../Header';
 import { Medication } from '../../interfaces/Medication';
 import SplashLoading from '../SplashLoading';
@@ -12,8 +12,14 @@ interface MedicamentsListedProps {
     setLimit?: React.Dispatch<React.SetStateAction<number>>
 }
 
-export const MedicamentsListed = ({ medications, setLimit, setSkip }: MedicamentsListedProps) => {
+export const MedicamentsListed = ({ medications, setLimit, setSkip}: MedicamentsListedProps) => {
     const [searchQuery, setSearchQuery] = useState("");
+
+    const handleEndReached = () => {
+        setLimit?.((prevLimit) => prevLimit + 30)
+        setSkip?.((prevSkip) => prevSkip + 30)
+    }
+
     const filteredData = medications
         .filter((medicament) =>
             medicament.medicamento.toLowerCase().includes(searchQuery.toLowerCase())
@@ -33,7 +39,7 @@ export const MedicamentsListed = ({ medications, setLimit, setSkip }: Medicament
             <View style={styles.sectionMain}>                
                     <Animated.SectionList
                         sections={filteredData}
-                        keyExtractor={(item) => item.id}
+                        keyExtractor={(item, index) => `${item.id}-${index}`} 
                         renderItem={({ item }) => <Item item={item} />}
                         ListHeaderComponent={
                         <Header 
@@ -45,10 +51,7 @@ export const MedicamentsListed = ({ medications, setLimit, setSkip }: Medicament
                             Nenhum medicamento encontrado para "{searchQuery}"
                         </Text>
                     </View>}
-                        onEndReached={() => {
-                            setLimit?.((prevLimit) => prevLimit + 30)
-                            setSkip?.((prevSkip) => prevSkip + 30)
-                        }}
+                        onEndReached={handleEndReached}
                         onEndReachedThreshold={0.4}
                         ListFooterComponent={() => (
                             <View style={{marginVertical: 20}}>
