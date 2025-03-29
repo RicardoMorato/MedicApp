@@ -15,7 +15,7 @@ jobs:
 
       - name: Start API and DB Containers
         run: |
-          docker compose -f backend/docker compose.test.yml up -d
+          docker compose -f backend/docker-compose.test.yml up -d
           sleep 5
 
       - name: Wait for DB to be ready
@@ -35,7 +35,7 @@ jobs:
 
       - name: Stop API and DB Containers
         run: |
-          docker compose -f backend/docker compose.test.yml down
+          docker compose -f backend/docker-compose.test.yml down
           docker volume rm medicapp_network_data-postgres-test
 
       - name: Remove Docker containers
