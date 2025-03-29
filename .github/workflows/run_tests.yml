@@ -31,7 +31,7 @@ jobs:
 
       - name: Verify pytest installation
         run: |
-          docker exec backend-app-1 sh -c "pip show pytest || echo 'pytest is not installed'"
+          docker exec backend-app-1 sh -c "pip show pytest || echo 'pytest is not installed. Will install it now.' && pip install pytest"
 
       - name: Run Tests
         run: |
