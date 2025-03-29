@@ -8,12 +8,14 @@ function MedicationList() {
   const [loading, setLoading] = useState(true);
   const [skip, setSkip] = useState(0);
   const [limit, setLimit] = useState(50);
+  const [searchQuery, setSearchQuery] = useState("");
 
   async function fetchMedications() {
     await api.get('/medicament/search/', {
       params: {
         skip: skip,
         limit: limit,
+        name: searchQuery,
       },
     })
     .then(response => {
@@ -44,6 +46,8 @@ function MedicationList() {
         medications={medications} 
         setSkip={setSkip} 
         setLimit={setLimit} 
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
       />
     )
   );

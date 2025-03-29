@@ -1,7 +1,6 @@
 import { View, Text, Animated } from 'react-native';
 import { styles } from '../styles/style';
 import { Item } from '../Item/Item';
-import { useState, useEffect } from 'react';
 import Header from '../Header';
 import { Medication } from '../../interfaces/Medication';
 import SplashLoading from '../SplashLoading';
@@ -10,35 +9,40 @@ interface MedicamentsListedProps {
     medications: Medication[]
     setSkip?: React.Dispatch<React.SetStateAction<number>>
     setLimit?: React.Dispatch<React.SetStateAction<number>>
+    setSearchQuery: React.Dispatch<React.SetStateAction<string>>
+    searchQuery: string
 }
 
-export const MedicamentsListed = ({ medications, setLimit, setSkip}: MedicamentsListedProps) => {
-    const [searchQuery, setSearchQuery] = useState("");
-    const [filteredData, setFilteredData] = useState<{ titleLetter: string; data: Medication[] }[]>([]);
 
-    const handleSearch = debounce((query: string) => {
-        const filtered = medications
-            .filter((medicament) =>
-                medicament.medicamento.toLowerCase().includes(query.toLowerCase())
-            )
-            .reduce((sections: { titleLetter: string, data: Medication[] }[], medicament) => {
-                const firstLetter = medicament.medicamento[0].toUpperCase();
-                const section = sections.find(section => section.titleLetter === firstLetter);
-                if (section) {
-                    section.data.push(medicament);
-                } else {
-                    sections.push({ titleLetter: firstLetter, data: [medicament] });
-                }
-                return sections;
-            }, []);
-        setFilteredData(filtered);
-    }, 300);
+export const MedicamentsListed = ({ medications, setLimit, setSkip, searchQuery, setSearchQuery}: MedicamentsListedProps) => {
+    
 
-    useEffect(() => {
-        handleSearch(searchQuery);
-        return () => handleSearch.cancel();
-    }, [searchQuery]);
+    const handleEndReached = () => {
+        setLimit?.((prevLimit) => prevLimit + 50)
+        setSkip?.((prevSkip) => prevSkip + 50)
+    }
 
+    const filteredData = medications
+        .filter((medicament) =>
+            medicament.medicamento.toLowerCase().includes(searchQuery.toLowerCase()) || medicament.farmaco.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+        .sort((a, b) => {
+            const startsWithA = a.medicamento.toLowerCase().startsWith(searchQuery.toLowerCase());
+            const startsWithB = b.medicamento.toLowerCase().startsWith(searchQuery.toLowerCase());
+            if (startsWithA && !startsWithB) return -1
+            if (!startsWithA && startsWithB) return 1
+            return 0
+        })
+        .reduce((sections: { titleLetter: string, data: Medication[] }[], medicament) => {
+            const firstLetter = medicament.medicamento[0].toUpperCase();
+            const section = sections.find(section => section.titleLetter === firstLetter);
+            if (section) {
+                section.data.push(medicament);
+            } else {
+                sections.push({ titleLetter: firstLetter, data: [medicament] });
+            }
+            return sections;
+        }, []);
     return (
         <View style={styles.container}>
             <View style={styles.sectionMain}>                
