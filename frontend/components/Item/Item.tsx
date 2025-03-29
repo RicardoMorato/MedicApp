@@ -8,7 +8,7 @@ export interface ItemProps {
   item: Medication;
 }
 
-export const Item: React.FC<ItemProps> = ({ item }) => {
+const ItemComponent: React.FC<ItemProps> = ({ item }) => {
   const [expanded, setExpanded] = useState(false);
   const [animation] = useState(new Animated.Value(0));
   const navigation = useNavigation<any>();
@@ -53,3 +53,5 @@ export const Item: React.FC<ItemProps> = ({ item }) => {
     </TouchableOpacity>
   );
 };
+
+export const Item = React.memo(ItemComponent)
