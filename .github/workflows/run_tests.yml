@@ -29,9 +29,9 @@ jobs:
             sleep 5
           done
 
-      - name: Verify pytest installation
+      - name: Install dependencies
         run: |
-          docker exec backend-app-1 sh -c "pip show pytest || echo 'pytest is not installed. Will install it now.' && pip install pytest"
+          docker exec backend-app-1 sh -c "pip install --no-cache-dir -r requirements.txt"
 
       - name: Run Tests
         run: |
