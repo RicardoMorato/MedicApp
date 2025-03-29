@@ -37,9 +37,13 @@ jobs:
             sleep 5
           done
 
-      - name: Install dependencies with logs
+      - name: Install dependencies in chunks
         run: |
-          docker exec backend-app-1 sh -c "pip install --no-cache-dir -r requirements.txt --verbose"
+          docker exec backend-app-1 sh -c "
+          for package in $(cat requirements.txt); do
+            pip install --no-cache-dir $package || exit 1;
+          done
+          "
 
       - name: Verify dependencies installation
         run: |
