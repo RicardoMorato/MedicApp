@@ -35,7 +35,7 @@ jobs:
 
       - name: Run Tests
         run: |
-          docker exec backend-app-1 sh -c "pytest -vvv --disable-pytest-warnings --log-cli-level=INFO || echo 'Tests failed'"
+          docker exec backend-app-1 sh -c "pytest -vvv --disable-pytest-warnings --log-cli-level=INFO"
 
       - name: Stop API and DB Containers
         run: |
