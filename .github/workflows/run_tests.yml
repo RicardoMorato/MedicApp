@@ -21,4 +21,4 @@ jobs:
 
       - name: Run tests with pytest
         run: |
-          docker run --env DB_USER=$DB_USER --env DB_PASSWORD=$DB_PASSWORD --env DB_NAME=$DB_NAME --env DB_HOST=$DB_HOST --env DB_PORT=$DB_PORT --rm medicapp-backend pytest
+          docker run --env DB_USER=${{ secrets.TEST_DB_USER }} --env DB_PASSWORD=${{ secrets.TEST_DB_PASSWORD }} --env DB_NAME=${{ secrets.TEST_DB_NAME }} --env DB_HOST=${{ secrets.TEST_DB_HOST }} --env DB_PORT=${{ secrets.TEST_DB_PORT }} --rm medicapp-backend pytest
