@@ -27,4 +27,4 @@ jobs:
             --env DB_NAME=${{ secrets.DB_NAME }} \
             --env DB_HOST=${{ secrets.DB_HOST }} \
             --env DB_PORT=${{ secrets.DB_PORT }} \
-            --rm medicapp-backend pytest -vvv --disable-pytest-warnings --log-cli-level=INFO
+            --rm medicapp-backend sh run_tests.sh
