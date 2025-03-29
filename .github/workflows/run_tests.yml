@@ -41,14 +41,12 @@ jobs:
             sleep 5
           done
 
-      - name: Verify requirements.txt content
-        run: |
-          docker exec backend-app-1 sh -c "ls -la /app && cat /app/requirements.txt || echo 'requirements.txt not accessible'"
-
       - name: Install dependencies in chunks
         run: |
           docker exec backend-app-1 sh -c "
-          pip install --no-cache-dir -r requirements.txt || echo 'Failed to install dependencies'
+          for package in $(cat requirements.txt); do
+            pip install --no-cache-dir $package || exit 1;
+          done
           "
 
       - name: Verify dependencies installation
