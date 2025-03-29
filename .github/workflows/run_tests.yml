@@ -26,6 +26,10 @@ jobs:
         run: |
           docker ps -a
 
+      - name: Check Container Files
+        run: |
+          docker exec backend-app-1 sh -c "ls -la /app"
+
       - name: Wait for DB to be ready
         run: |
           for i in {1..10}; do
@@ -40,7 +44,7 @@ jobs:
       - name: Install dependencies in chunks
         run: |
           docker exec backend-app-1 sh -c "
-          for package in $(cat requirements.txt); do
+          for package in $(cat /app/requirements.txt); do
             pip install --no-cache-dir $package || exit 1;
           done
           "
