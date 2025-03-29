@@ -19,6 +19,22 @@ jobs:
       - name: Build Docker image
         run: docker build -t medicapp-backend ./backend
 
+      - name: Apply database migrations
+        run: |
+          docker run \
+            --env DB_USER=${{ secrets.DB_USER }} \
+            --env DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
+            --env DB_NAME=${{ secrets.DB_NAME }} \
+            --env DB_HOST=${{ secrets.DB_HOST }} \
+            --env DB_PORT=${{ secrets.DB_PORT }} \
+            --rm medicapp-backend alembic upgrade head
+
       - name: Run tests with pytest
         run: |
-          docker run --env DB_USER=${{ secrets.DB_USER }} --env DB_PASSWORD=${{ secrets.DB_PASSWORD }} --env DB_NAME=${{ secrets.DB_NAME }} --env DB_HOST=${{ secrets.DB_HOST }} --env DB_PORT=${{ secrets.DB_PORT }} --rm medicapp-backend pytest -vvv --disable-pytest-warnings
+          docker run \
+            --env DB_USER=${{ secrets.DB_USER }} \
+            --env DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
+            --env DB_NAME=${{ secrets.DB_NAME }} \
+            --env DB_HOST=${{ secrets.DB_HOST }} \
+            --env DB_PORT=${{ secrets.DB_PORT }} \
+            --rm medicapp-backend pytest -vvv --disable-pytest-warnings
