@@ -19,6 +19,24 @@ jobs:
       - name: Build Docker image
         run: docker build -t medicapp-backend ./backend
 
+      - name: Setup SQLite
+        uses: actions/setup-sqlite@v1
+        with:
+          sqlite-version: 3.47.2
+          sqlite-year: 2024
+
+      - name: Create Test database
+        run: |
+          sqlite3 test_db.db \
+          "CREATE TABLE IF NOT EXISTS interactions \
+          (id INTEGER PRIMARY KEY, \
+          gravidade_interacao TEXT, \
+          inicio_interacao TEXT, \
+          probabilidade_ocorrencia TEXT, \
+          efeito TEXT, \
+          principio_ativo1 TEXT, \
+          principio_ativo2 TEXT);"
+
       - name: Run tests with pytest
         run: |
           docker run \
