@@ -21,7 +21,7 @@ jobs:
       - name: Wait for DB to be ready
         run: |
           for i in {1..10}; do
-            if docker exec medicapp-backend-db pg_isready -U test_container_user -d test_db; then
+            if docker exec backend-database-1 pg_isready -U test_container_user -d test_db; then
               echo "DB is ready"
               break
             fi
@@ -31,15 +31,12 @@ jobs:
 
       - name: Run Tests
         run: |
-          docker exec app sh -c "pytest -vvv --disable-pytest-warnings --log-cli-level=INFO"
+          docker exec backend-app-1 sh -c "pytest -vvv --disable-pytest-warnings --log-cli-level=INFO"
 
       - name: Stop API and DB Containers
         run: |
           docker compose -f backend/docker-compose.test.yml down
-          docker volume rm medicapp_network_data-postgres-test
 
-      - name: Remove Docker containers
+      - name: Remove Docker Volumes
         run: |
-          docker rm -f medicapp-backend medicapp-backend-db
-          docker network rm medicapp_network
-          docker volume rm medicapp_network_data-postgres-test
+          docker volume rm backend_data-postgres-test
