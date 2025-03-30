@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 from schemas import users as schema
 from dependencies.auth_dependency import get_current_user
 
-router = APIRouter(prefix="/users")
+router = APIRouter(prefix="/users", tags=["User"])
 
 
 @router.post("/signup", status_code=status.HTTP_201_CREATED)

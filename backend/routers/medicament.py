@@ -6,7 +6,7 @@ from schemas.medicament import MedicamentResponse
 from models import Drug
 import re
 
-router = APIRouter()
+router = APIRouter(tags=["Medicaments"])
 
 @router.get("/medicament/search/", status_code=status.HTTP_200_OK)
 async def search_medicamentos_route(
