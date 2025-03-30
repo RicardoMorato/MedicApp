@@ -5,3 +5,7 @@ class DrugCreate(BaseModel):
     principio_ativo: str
     concentracao: str 
 
+    class Config:
+        orm_mode = True 
+        from_attributes = True 
+
