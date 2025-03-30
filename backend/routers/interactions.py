@@ -4,7 +4,7 @@ from database import get_db
 from schemas.interactions import InteractionCall
 from controllers.interactions import check_interactions
 
-router = APIRouter()
+router = APIRouter(tags=["Interactions"])
 
 
 @router.post("/interactions", status_code=status.HTTP_200_OK)

@@ -4,7 +4,7 @@ from database import get_db
 from schemas.pharma import Pharma as Pharma_Schemas
 from models import Pharma as Pharma_Models
 
-router = APIRouter()
+router = APIRouter(tags=["Pharmaceuticals"])
 
 @router.get("/pharma", status_code=status.HTTP_200_OK)
 async def pharma(db: Session = Depends(get_db), name: str = Query(None)):

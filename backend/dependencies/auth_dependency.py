@@ -15,7 +15,7 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 ACCESS_TOKEN_EXPIRE_MINUTES = 100
 
-router = APIRouter()
+router = APIRouter(tags=["Token"])
 
 class Token(BaseModel):
     access_token: str

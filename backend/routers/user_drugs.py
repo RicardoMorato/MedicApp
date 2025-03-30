@@ -8,7 +8,7 @@ from models import UserDrugs
 import re
 from sqlalchemy import or_
 
-router = APIRouter()
+router = APIRouter(tags=["User Drugs"])
 
 @router.post("/users/{user_id}/drugs/add", status_code=status.HTTP_201_CREATED)
 def add_drug(drug: DrugCreate, db: Session = Depends(get_db), current_user=Depends(get_current_user)):
