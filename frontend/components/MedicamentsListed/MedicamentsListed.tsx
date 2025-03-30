@@ -18,8 +18,9 @@ export const MedicamentsListed = ({ medications, setLimit, setSkip, searchQuery,
     
 
     const handleEndReached = () => {
-        setLimit?.((prevLimit) => prevLimit + 50)
-        setSkip?.((prevSkip) => prevSkip + 50)
+        filteredData.length > 0 &&
+        (setLimit?.((prevLimit) => prevLimit + 50),
+        setSkip?.((prevSkip) => prevSkip + 50))
     }
 
     const filteredData = medications
@@ -46,26 +47,28 @@ export const MedicamentsListed = ({ medications, setLimit, setSkip, searchQuery,
     return (
         <View style={styles.container}>
             <View style={styles.sectionMain}>                
+                <Header 
+                    searchQuery={searchQuery}
+                    setSearchQuery={setSearchQuery} 
+                />
                     <Animated.SectionList
                         sections={filteredData}
                         keyExtractor={(item, index) => `${item.id}-${index}`} 
                         renderItem={({ item }) => <Item item={item} />}
-                        ListHeaderComponent={
-                        <Header 
-                            searchQuery={searchQuery}
-                            setSearchQuery={setSearchQuery} 
-                        />}
-                        ListEmptyComponent={<View style={styles.emptyState}>
+                        ListEmptyComponent={
+                        <View style={styles.emptyState}>
                         <Text style={styles.emptyStateText}>
                             Nenhum medicamento encontrado para "{searchQuery}"
                         </Text>
-                    </View>}
+                        </View>}
                         onEndReached={handleEndReached}
                         onEndReachedThreshold={0.4}
                         ListFooterComponent={() => (
-                            <View style={{marginVertical: 20}}>
-                                <SplashLoading />
-                            </View>
+                            filteredData.length > 0 && (
+                                <View style={{ marginVertical: 20 }}>
+                                    <SplashLoading />
+                                </View>
+                            )
                         )}
                         
                         renderSectionHeader={({ section: { titleLetter } }) => (

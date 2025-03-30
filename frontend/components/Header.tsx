@@ -11,7 +11,6 @@ interface HeaderProps {
 function Header({ searchQuery, setSearchQuery }: HeaderProps) {
   return (
       <View style={styles.header}>
-          <View style={styles.separator}></View>
           <SearchBar search={searchQuery} setSearch={(text) => setSearchQuery(text)} />
       </View>
   )
