@@ -1,5 +1,5 @@
 import { Colors } from '../../constants/Colors';
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
     scrollContainer: {
       flex: 1,
@@ -7,22 +7,17 @@ export const styles = StyleSheet.create({
     },
     container: {
       flex: 1,
-      backgroundColor: Colors.light.backgroundGrey,
       borderRadius: 10,
   
     },
     sectionMain: {
       flexDirection: 'column',
       flex: 1,
-      paddingRight: 5
     },
     header: {
       alignItems: 'center',
-      backgroundColor: Colors.light.background,
-      justifyContent: 'center',
-      paddingBottom: 20,
-      boxShadow: Colors.light.boxShadow,
-  
+      justifyContent: 'center',  
+      height: Dimensions.get('window').height / 17,
     },
     title: {
       fontSize: 20,
