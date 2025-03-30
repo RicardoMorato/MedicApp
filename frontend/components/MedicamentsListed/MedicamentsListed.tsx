@@ -35,7 +35,8 @@ export const MedicamentsListed = ({ medications, setLimit, setSkip, searchQuery,
             return 0
         })
         .reduce((sections: { titleLetter: string, data: Medication[] }[], medicament) => {
-            const firstLetter = medicament.medicamento[0].toUpperCase();
+            const normalizeLetter = (letter: string) => letter.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+            const firstLetter = normalizeLetter(medicament.medicamento[0].toUpperCase());
             const section = sections.find(section => section.titleLetter === firstLetter);
             if (section) {
                 section.data.push(medicament);
