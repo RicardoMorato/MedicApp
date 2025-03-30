@@ -45,9 +45,6 @@ function Home() {
         <Text onPress={() => navigation.navigate('AddMedicine')} style={{color: colors.secondary, textDecorationLine: 'underline', fontFamily: 'Poppins_300Light'}}>Adicionar medicamento</Text>
         <Text onPress={() => navigation.navigate('MedicationList')} style={{color: colors.secondary, textDecorationLine: 'underline', fontFamily: 'Poppins_300Light'}}>ir para lista de medicamentos</Text>
       </View>
-
-      <View style={styles.horizontalLine} />
-
     </>
   );
 }
