@@ -19,8 +19,8 @@ export const MedicamentsListed = ({ medications, setLimit, setSkip, searchQuery,
 
     const handleEndReached = () => {
         filteredData.length > 0 &&
-        (setLimit?.((prevLimit) => prevLimit + 50),
-        setSkip?.((prevSkip) => prevSkip + 50))
+        (setLimit?.((prevLimit) => prevLimit + 20),
+        setSkip?.((prevSkip) => prevSkip + 20))
     }
 
     const filteredData = medications
