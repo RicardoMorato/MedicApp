@@ -1,9 +1,4 @@
-from fastapi.testclient import TestClient
-from models import Interaction, Base  # Certifique-se de importar o modelo correto
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy import create_engine
-
-from controllers.interactions import check_interactions
+from models import Interaction # Certifique-se de importar o modelo correto
 
 
 def test_check_interactions_without_medicaments_stored_should_return_404(
