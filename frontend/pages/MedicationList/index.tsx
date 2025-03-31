@@ -11,6 +11,7 @@ function MedicationList() {
   const [skip, setSkip] = useState(0);
   const [limit, setLimit] = useState(20);
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchUsed, setSearchUsed] = useState(false);
 
   const fetchMedications = useCallback(
     debounce(() => {
@@ -43,7 +44,7 @@ function MedicationList() {
           console.error('Erro ao buscar medicamentos:', error);
           setLoading(false);
       });
-    }, 1000), 
+    }, 500), 
     [skip, limit, searchQuery]
   );
 
@@ -51,6 +52,21 @@ function MedicationList() {
     fetchMedications();
     return fetchMedications.cancel; // Cancela chamadas pendentes ao desmontar
   }, [fetchMedications]);
+
+  useEffect(() => {
+    if (searchUsed && searchQuery === "") {
+      setSkip(0)
+      setLimit(20)
+      setMedications([])
+      fetchMedications()
+      setSearchUsed(false)
+    }
+  }, [searchQuery, searchUsed, fetchMedications])
+
+  const handleSearchQueryChange = (query: string) => {
+    setSearchQuery(query)
+    if (!searchUsed) setSearchUsed(true)
+  }
 
   return (
     (loading && medications.length === 0 
@@ -60,7 +76,7 @@ function MedicationList() {
         setSkip={setSkip} 
         setLimit={setLimit} 
         searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
+        setSearchQuery={(value) => handleSearchQueryChange(value as string)}
       />
     )
   );
