@@ -79,14 +79,16 @@ export const styles = StyleSheet.create({
       backgroundColor: Colors.light.backgroundDosage,
       paddingHorizontal: 10,
       borderRadius: 50,
-      minWidth: 50,
-      maxWidth:100,
+      minWidth: 20,
+      maxWidth:120,
+      maxHeight: 30,
       alignItems: 'center',
+      justifyContent: 'center',
     },
     itemName: {
       fontSize: 20,
       fontWeight: 'bold',
-      alignItems: "center"
+      alignItems: "center",
     },
     farmaco:{
       fontSize: 15,
@@ -105,9 +107,12 @@ export const styles = StyleSheet.create({
       marginTop: 15,
     },
     itemDosage: {
-      marginTop: 5,
       fontSize: 12,
       color: Colors.light.primary,
+      flexShrink: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      
     },
     itemDosageOverflow:{
       backgroundColor: Colors.light.backgroundDosage,
