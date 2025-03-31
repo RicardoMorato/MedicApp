@@ -33,9 +33,11 @@ const ItemComponent: React.FC<ItemProps> = ({ item }) => {
     <TouchableOpacity onPress={toggleExpand}>
       <View style={styles.card}>
         <View style={styles.TitleDosageSectionRow}>
-          <Text style={styles.itemName}>{item.medicamento}</Text>
-          <View style={item.concentracao.length < 15 ? styles.dosageBg : styles.itemDosageOverflow}>
-            <Text style={styles.itemDosage}>{item.concentracao.length > 20 ? " - " : item.concentracao}</Text>
+          <Text style={[styles.itemName, { flexShrink: 1 }]} >
+            {item.medicamento}
+          </Text>
+          <View style={styles.dosageBg}>
+            <Text style={styles.itemDosage} numberOfLines={1}>{item.concentracao}</Text>
           </View>
         </View>
         <Text style={styles.farmaco}>{item.farmaco}</Text>
