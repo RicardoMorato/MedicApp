@@ -41,12 +41,9 @@ class UserDrugs(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String)  
     principio_ativo = Column(String)  
-    is_generic = Column(Boolean)  
-    brand = Column(String, nullable=True)  
+    concentracao = Column(String)  
     user_id = Column(String, ForeignKey("users.id"), nullable=False)
     active = Column(Boolean, default=True)
-    total = Column(Integer)
-    taked = Column(Integer)
     created_at = Column(DateTime, server_default=func.now())
 
     user = relationship("User", back_populates="user_drugs")

@@ -1,14 +1,16 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
-import { SplashScreen, useNavigation } from "expo-router";
-
+import { SplashScreen } from "expo-router";
 import Signin from "@/pages/Signin";
 import Signup from "@/pages/Signup";
 import Home from "@/pages/Home";
 import AddMedicine from "@/pages/AddMedicine";
 import MedicationList from "@/pages/MedicationList";
 import MedicationDetails from "@/pages/MedicationDetails";
+import DrugInteraction from "@/pages/DrugInteraction";
+import LearnMore from "@/pages/LearnMore";
+
 
 export const HomeNav = () => {
   const Stack = createNativeStackNavigator();
@@ -17,6 +19,11 @@ export const HomeNav = () => {
       <Stack.Screen
         name="MainHome"
         component={Home}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="DrugInteraction"
+        component={DrugInteraction}
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -37,6 +44,11 @@ export const HomeNav = () => {
       <Stack.Screen
         name="MedicationDetails"
         component={MedicationDetails}
+        options={{ headerShown: true }}
+        />
+        <Stack.Screen
+        name="LearnMore"
+        component={LearnMore}
         options={{ headerShown: true }}
       />
     </Stack.Navigator>

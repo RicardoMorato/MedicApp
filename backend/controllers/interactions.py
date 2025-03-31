@@ -20,7 +20,6 @@ def check_interactions(db: Session, interaction_data: InteractionCall):
             status_code=status.HTTP_404_NOT_FOUND, detail="Esta interação não existe."
         )
 
-
 def existing_interaction(db: Session, drug1, drug2):
     return (
         db.query(Interaction)
