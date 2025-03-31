@@ -16,8 +16,3 @@ def create_user(user: schema.UserCreate, db: Session = Depends(get_db)):
 @router.post("/login", status_code=status.HTTP_201_CREATED)
 def login_user(login: schema.UserLogin, db: Session = Depends(get_db)):
     return controller.login_user(db, login)
-
-
-@router.get("/me")
-def get_user(current_user=Depends(get_current_user)):
-    return current_user
