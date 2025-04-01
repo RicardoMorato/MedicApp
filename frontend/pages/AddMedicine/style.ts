@@ -1,9 +1,8 @@
-import { StyleSheet, Dimensions} from "react-native";
+import { StyleSheet} from "react-native";
 import colors from "@/global/colors";
 import { Colors } from "@/constants/Colors";
 
 
-const { height } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
@@ -45,10 +44,12 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 18,
-    color: "#595959",
+    color: Colors.light.backgroundGreyBlack,
+    letterSpacing: 1,
+    minWidth: "65%",
+    maxWidth: "80%",
     marginBottom: 30,
-    paddingHorizontal: 20,
-    fontFamily: "Poppins_300Light",
+    fontFamily: "Poppins_500Medium",
     textAlign: "justify",
   },
   form: {

@@ -4,9 +4,8 @@ import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import styles from "./style";
 import { addMedicine } from "@/services/addmedicine";
-import { utilDecodeToken } from "@/utils/utilDecodeToken";
+import { utilDecodeToken, utilDecodeTokenName } from "@/utils/utilDecodeToken";
 import { MedicineData } from "../../interfaces/MedicineData";
-import arrow from "../../assets/images/stash--arrows-switch-duotone.png";
 import { Colors } from "@/constants/Colors";
 import { SplashScreen } from "expo-router";
 import { Poppins_300Light, useFonts } from "@expo-google-fonts/poppins";
@@ -19,6 +18,7 @@ const AddMedicine = () => {
   const [activeIngredient, setActiveIngredient] = useState("");
   const [concentration, setConcentration] = useState("");
   const [loading, setLoading] = useState(false);
+  const [username, setusername] = useState("");
   const [loaded, error] = useFonts({
     'Poppins_300Light': Poppins_300Light
   });
@@ -32,6 +32,12 @@ const AddMedicine = () => {
   if (!loaded && !error) {
     return null;
   }
+
+    const fetchusername = async () => {
+      const user = await utilDecodeTokenName()
+      return user
+    };
+  
   const handleAddMedicine = async () => {
     if (!medicineName || !activeIngredient || !concentration) {
       Alert.alert("Por favor, preencha todos os campos.");
@@ -49,7 +55,14 @@ const AddMedicine = () => {
       }      
       addMedicine(data, user_id, setLoading);
     }
-  };
+  };  
+    fetchusername().then((user) => {
+          if (user) {
+            setusername(user);
+          } else {
+            setusername("Usuário");
+          }
+        })
 
   return (
     <KeyboardAvoidingView
@@ -58,13 +71,15 @@ const AddMedicine = () => {
       keyboardVerticalOffset={Platform.OS === "ios" ? 0 : -130}
     >
       <View style={styles.container}>
-        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+        <View style={styles.backButton}>
+        <TouchableOpacity  onPress={() => navigation.goBack()}>
           <Ionicons name="arrow-back" size={24} color="#595959" />
-          <Text style={styles.headerText}>Adicionar medicamento</Text>
         </TouchableOpacity>
+        <Text style={styles.headerText}>Adicionar medicamento</Text>
+        </View>
         <View style={styles.headerDivider}></View>
 
-        <Text style={styles.subtitle}>Olá (nome do usuário), aqui você pode adicionar os seus próprios medicamentos!</Text>
+        <Text style={styles.subtitle}>Olá {username}, aqui você pode adicionar os seus próprios medicamentos!</Text>
 
         <View style={styles.form}>
           <View style={styles.headerForm}>
