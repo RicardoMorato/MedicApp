@@ -1,5 +1,6 @@
 import { StyleSheet, Dimensions} from "react-native";
 import colors from "@/global/colors";
+import { Colors } from "@/constants/Colors";
 
 
 const { height } = Dimensions.get("window");
@@ -11,7 +12,7 @@ const styles = StyleSheet.create({
     padding: 0,
     justifyContent: "center",
     alignItems: "center",
-    gap: 26,
+    gap: 20,
   }, 
   backButton: {
     flexDirection: "row",
@@ -21,7 +22,7 @@ const styles = StyleSheet.create({
     left: 20,
   },
   headerText: {
-    color: colors.textPrimary,
+    color: Colors.light.backgroundGreyBlack,
     fontSize: 18,
     fontWeight: "bold",
     marginLeft: 10,
@@ -40,26 +41,38 @@ const styles = StyleSheet.create({
     right: 0,
     width: "100%",
     height: 2,
-    backgroundColor: colors.textPrimary,
+    backgroundColor: Colors.light.backgroundGreyBlack,
   },
   subtitle: {
     fontSize: 18,
     color: "#595959",
     marginBottom: 30,
     paddingHorizontal: 20,
-    fontFamily: "Poppins_500Medium",
+    fontFamily: "Poppins_300Light",
     textAlign: "justify",
   },
   form: {
     backgroundColor: "#477FAB",
-    paddingTop: 40,
+    paddingTop: 20,
     paddingLeft: 25,
     paddingRight: 25,
     paddingBottom: 40,
-    borderRadius: 15,
+    borderRadius: 5,
     alignSelf: "center",
     width: "80%",
     gap: 16,
+  },
+  headerForm: {
+    flexDirection: "row",
+    justifyContent: "center",
+    paddingVertical: 8,
+    alignItems: "center",
+    gap: 5,
+  },
+  titleForm: {
+    color: Colors.light.whiteText, 
+    fontSize: 18,
+    fontFamily: 'Poppins_500Medium',
   },
   input: {
     backgroundColor: colors.background,
@@ -106,17 +119,19 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     padding: 12,
     borderRadius: 5,
-    boxShadow: '2px 3px 4px 2px rgba(0, 0, 0, 0.2)',
-    width: "85%",
+    boxShadow: Colors.light.boxShadow,
+    width: "80%",
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    borderWidth: .5,
+    borderColor: "#419DFF",
   },
   buttonText: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "#419DFF",
+    color: "#477FAB",
   },
 });
 

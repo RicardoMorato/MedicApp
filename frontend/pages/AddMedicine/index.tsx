@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Alert, ActivityIndicator, KeyboardAvoidingView, Platform, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
@@ -7,6 +7,11 @@ import { addMedicine } from "@/services/addmedicine";
 import { utilDecodeToken } from "@/utils/utilDecodeToken";
 import { MedicineData } from "../../interfaces/MedicineData";
 import arrow from "../../assets/images/stash--arrows-switch-duotone.png";
+import { Colors } from "@/constants/Colors";
+import { SplashScreen } from "expo-router";
+import { Poppins_300Light, useFonts } from "@expo-google-fonts/poppins";
+import iconButton from "../../assets/icons/iconAdd.png";
+
 
 const AddMedicine = () => {
   const navigation = useNavigation();
@@ -14,7 +19,19 @@ const AddMedicine = () => {
   const [activeIngredient, setActiveIngredient] = useState("");
   const [concentration, setConcentration] = useState("");
   const [loading, setLoading] = useState(false);
+  const [loaded, error] = useFonts({
+    'Poppins_300Light': Poppins_300Light
+  });
 
+  useEffect(() => {
+    if (loaded || error) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded, error]);
+
+  if (!loaded && !error) {
+    return null;
+  }
   const handleAddMedicine = async () => {
     if (!medicineName || !activeIngredient || !concentration) {
       Alert.alert("Por favor, preencha todos os campos.");
@@ -38,18 +55,21 @@ const AddMedicine = () => {
     <KeyboardAvoidingView
       style={{ flex: 1 }}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : -150}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : -130}
     >
       <View style={styles.container}>
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-          <Ionicons name="arrow-back" size={24} color="#000" />
+          <Ionicons name="arrow-back" size={24} color="#595959" />
           <Text style={styles.headerText}>Adicionar medicamento</Text>
         </TouchableOpacity>
         <View style={styles.headerDivider}></View>
 
-        <Text style={styles.subtitle}>Olá (nome do usuário), aqui você pode adicionar os seus próprios medicamentos</Text>
+        <Text style={styles.subtitle}>Olá (nome do usuário), aqui você pode adicionar os seus próprios medicamentos!</Text>
 
         <View style={styles.form}>
+          <View style={styles.headerForm}>
+            <Text style={styles.titleForm}>Adicionar medicamento</Text>
+          </View>
           <TextInput
             style={styles.input}
             placeholder="Nome do medicamento"
@@ -75,11 +95,13 @@ const AddMedicine = () => {
         
         <TouchableOpacity style={styles.button} onPress={handleAddMedicine}>
           {loading ? (
-            <ActivityIndicator color="#fff" />
+            <ActivityIndicator color={Colors.light.primary} />
           ) : (
-            <Text style={styles.buttonText}>Adicionar medicamento</Text>
+            <View style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>
+              <Text style={styles.buttonText}>Adicionar</Text>
+              <Image source={iconButton} resizeMode="contain" style={{ width: 25, height: 25 }} />
+            </View>
           )}
-          <Image source={arrow} resizeMode="contain" style={{ width: 30, height: 30 }} />
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
