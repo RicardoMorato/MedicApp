@@ -9,26 +9,34 @@ import re
 router = APIRouter()
 
 @router.get("/medicament/search/", status_code=status.HTTP_200_OK)
-async def search_medicamentos_route(db: Session = Depends(get_db), name: str = Query(None), skip: int = Query(0, ge=0), limit: int = Query(100, ge=1, le=17000)):
-    query = db.query(Drug).order_by(Drug.medicamento)
+async def search_medicamentos_route(
+    db: Session = Depends(get_db),
+    name: str = Query(None),
+    skip: int = Query(0, ge=0),
+    limit: int = Query(100, ge=1, le=17000)
+):
+    base_query = db.query(Drug).order_by(Drug.medicamento)
 
     if name:
-        query = query.filter(
+        base_query = base_query.filter(
             or_(
                 Drug.medicamento.ilike(f"%{name}%"),
                 Drug.farmaco.ilike(f"%{name}%")
-               )
             )
-    else:
-        query = query.offset(skip).limit(limit)
+        )
 
-    medicamentos = query.all()
+    total_count = base_query.count()
+
+    paginated_query = base_query.offset(skip).limit(limit)
+    medicamentos = paginated_query.all()
 
     for med in medicamentos:
         med.medicamento = to_pascal_case(med.medicamento)
 
-    return [MedicamentResponse.from_orm(med) for med in medicamentos]
-
+    return {
+        "total": total_count,
+        "items": [MedicamentResponse.from_orm(med) for med in medicamentos]
+    }
 
 def to_pascal_case(text: str) -> str:
     words = re.sub(r'[-_]', ' ', text).split()
