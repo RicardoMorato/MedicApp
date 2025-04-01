@@ -12,6 +12,8 @@ function MedicationList() {
   const [limit, setLimit] = useState(20);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchUsed, setSearchUsed] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const [total, setTotal] = useState(0)
 
   const fetchMedications = useCallback(
     debounce(() => {
@@ -24,32 +26,44 @@ function MedicationList() {
         },
       })
       .then(response => {
-          const medicationsData = response.data.map((item: any) => ({
+          const { items, total: totalCount } = response.data
+          setTotal(totalCount)
+          const medicationsData = items.map((item: any) => ({
             id: item.id,
             medicamento: item.medicamento,
             data_inclusao: item.data_inclusao,
             concentracao: item.concentracao,
             farmaco: item.farmaco,
           }));
-
+          
           setMedications((prev) => {
             const existingIds = new Set(prev.map(med => med.id))
             const uniqueMedications = medicationsData.filter((med: Medication) => !existingIds.has(med.id))
             return [...prev, ...uniqueMedications]
           })
-
+          
           setLoading(false);
-      })
-      .catch(error => {
+        })
+        .catch(error => {
           console.error('Erro ao buscar medicamentos:', error);
           setLoading(false);
-      });
-    }, 500), 
-    [skip, limit, searchQuery]
-  );
-
+        });
+      }, 500), 
+      [skip, limit, searchQuery]
+    );
+    
+    console.log('Total de medicamentos:', total)
+    function handleEndReached() {
+      medications.length < total ? setHasMore(true) : setHasMore(false);
+      
+      if (hasMore && !loading) {
+        setSkip(prevSkip => prevSkip + 20);
+        setLimit(prevLimit => prevLimit + 20);
+      }
+    }
   useEffect(() => {
     fetchMedications();
+
     return fetchMedications.cancel; // Cancela chamadas pendentes ao desmontar
   }, [fetchMedications]);
 
@@ -61,7 +75,7 @@ function MedicationList() {
       fetchMedications()
       setSearchUsed(false)
     }
-  }, [searchQuery, searchUsed, fetchMedications])
+  }, [ fetchMedications])
 
   const handleSearchQueryChange = (query: string) => {
     setSearchQuery(query)
@@ -77,6 +91,8 @@ function MedicationList() {
         setLimit={setLimit} 
         searchQuery={searchQuery}
         setSearchQuery={(value) => handleSearchQueryChange(value as string)}
+        handleEndReached={handleEndReached}
+        hasMore={hasMore}
       />
     )
   );

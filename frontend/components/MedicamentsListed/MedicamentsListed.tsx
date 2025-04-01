@@ -4,6 +4,7 @@ import { Item } from '../Item/Item';
 import Header from '../Header';
 import { Medication } from '../../interfaces/Medication';
 import SplashLoading from '../SplashLoading';
+import { Colors } from '@/constants/Colors';
 
 interface MedicamentsListedProps {
     medications: Medication[]
@@ -11,17 +12,15 @@ interface MedicamentsListedProps {
     setLimit?: React.Dispatch<React.SetStateAction<number>>
     setSearchQuery: React.Dispatch<React.SetStateAction<string>>
     searchQuery: string
+    handleEndReached?: () => void
+    hasMore?: boolean
 }
 
 
-export const MedicamentsListed = ({ medications, setLimit, setSkip, searchQuery, setSearchQuery}: MedicamentsListedProps) => {
+export const MedicamentsListed = ({ medications, setLimit, setSkip, searchQuery, setSearchQuery, handleEndReached, hasMore}: MedicamentsListedProps) => {
     
 
-    const handleEndReached = () => {
-        filteredData.length > 0 &&
-        (setLimit?.((prevLimit) => prevLimit + 20),
-        setSkip?.((prevSkip) => prevSkip + 20))
-    }
+ 
     const normalizeLetter = (letter: string) => letter.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
     const filteredData = medications
         .filter((medicament) => 
@@ -70,11 +69,15 @@ export const MedicamentsListed = ({ medications, setLimit, setSkip, searchQuery,
                         onEndReached={handleEndReached}
                         onEndReachedThreshold={0.4}
                         ListFooterComponent={() => (
-                            filteredData.length > 0 && (
+                            hasMore ? (
                                 <View style={{ marginVertical: 20 }}>
                                     <SplashLoading />
                                 </View>
                             )
+                            :
+                            <View style={{ marginVertical: 20, alignItems: 'center' }}>
+                                    <Text style={{color: Colors.light.backgroundGreyBlack}}>Sem mais resultados</Text>
+                                </View>
                         )}
                         
                         renderSectionHeader={({ section: { titleLetter } }) => (
