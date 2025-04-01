@@ -11,12 +11,13 @@ export const addMedicine = async (
   try {
     setLoading(true);
     const token = await AsyncStorage.getItem("userToken");
+    
     const response = await api.post(
       `/users/${userId}/drugs/`,
       {
         name: data.name,
         principio_ativo: data.activeIngredient,
-        concentration: data.concentration
+        concentracao: data.concentration,
       },
       {
         headers: {
@@ -26,14 +27,18 @@ export const addMedicine = async (
     );
 
     if (response.status === 201) { 
+      setTimeout(() => {
+        setLoading(false);
+      }, 500)
       Alert.alert("Sucesso", "Medicamento cadastrado com sucesso!");
     }
   } catch (error: any) {
+    setTimeout(() => {
+      setLoading(false);
+    }, 500)
     Alert.alert(
       "Erro",
       error.response?.data?.detail || "Erro ao adicionar medicamento. Tente novamente."
     );
-  } finally {
-    setLoading(false);
-  }
+  } 
 };
