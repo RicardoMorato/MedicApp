@@ -22,10 +22,16 @@ export const MedicamentsListed = ({ medications, setLimit, setSkip, searchQuery,
         (setLimit?.((prevLimit) => prevLimit + 20),
         setSkip?.((prevSkip) => prevSkip + 20))
     }
-
+    const normalizeLetter = (letter: string) => letter.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
     const filteredData = medications
-        .filter((medicament) =>
-            medicament.medicamento.toLowerCase().includes(searchQuery.toLowerCase()) || medicament.farmaco.toLowerCase().includes(searchQuery.toLowerCase())
+        .filter((medicament) => 
+            normalizeLetter(medicament.medicamento.toLowerCase()).includes(searchQuery.toLowerCase()) 
+            || 
+            normalizeLetter(medicament.farmaco.toLowerCase()).includes(searchQuery.toLowerCase())   
+            || 
+            medicament.medicamento.toLowerCase().includes(searchQuery.toLowerCase()) 
+            ||
+            medicament.farmaco.toLowerCase().includes(searchQuery.toLowerCase())
         )
         .sort((a, b) => {
             const startsWithA = a.medicamento.toLowerCase().startsWith(searchQuery.toLowerCase());
@@ -35,7 +41,6 @@ export const MedicamentsListed = ({ medications, setLimit, setSkip, searchQuery,
             return 0
         })
         .reduce((sections: { titleLetter: string, data: Medication[] }[], medicament) => {
-            const normalizeLetter = (letter: string) => letter.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
             const firstLetter = normalizeLetter(medicament.medicamento[0].toUpperCase());
             const section = sections.find(section => section.titleLetter === firstLetter);
             if (section) {
