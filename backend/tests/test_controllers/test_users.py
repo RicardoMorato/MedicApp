@@ -3,7 +3,7 @@ from models import User
 from dependencies.auth_dependency import hash_password
 
 
-def test_register_user_should_return_201(test_client, db_session):
+def test_register_user_with_valid_body_should_return_201(test_client, db_session):
     assert db_session.query(User).count() == 0
 
     teste_case = {"name": "teste", "email": "teste@gmail.com", "password": "Senha123!"}
@@ -19,7 +19,7 @@ def test_register_user_should_return_201(test_client, db_session):
     assert response_data["token_type"] == "Bearer"
 
 
-def test_register_user_should_return_401(test_client, db_session):
+def test_register_user_with_user_already_created_should_return_401(test_client, db_session):
     assert db_session.query(User).count() == 0
 
     db_session.add(User(name="teste", email="teste@gmail.com", password="Senha123!"))
@@ -39,7 +39,7 @@ def test_register_user_should_return_401(test_client, db_session):
     assert response_data["detail"] == "User already created"
 
 
-def test_register_user_should_return_400(test_client, db_session):
+def test_register_user_with_invalid_password_should_return_400(test_client, db_session):
     assert db_session.query(User).count() == 0
 
     teste_case = {"name": "teste", "email": "teste@gmail.com", "password": "Senha123"}
@@ -56,7 +56,7 @@ def test_register_user_should_return_400(test_client, db_session):
     assert response_data["detail"] == "A senha deve conter pelo menos 8 caracteres, uma letra maiúscula, uma letra minúscula e um caractere especial."
 
 
-def test_user_login_should_return_201(test_client, db_session):
+def test_user_login_with_account_created_should_return_201(test_client, db_session):
     assert db_session.query(User).count() == 0
 
     hashed_password = hash_password("Senha123!")
@@ -78,7 +78,7 @@ def test_user_login_should_return_201(test_client, db_session):
     assert response_data["token_type"] == "Bearer"
 
 
-def test_user_login_should_return_401(test_client, db_session):
+def test_user_login_with_account_not_created_should_return_401(test_client, db_session):
     assert db_session.query(User).count() == 0
 
     teste_case = {"email": "teste@gmail.com", "password": "Senha123!"}
