@@ -15,7 +15,6 @@ import {
 } from "react-native";
 import styles from "./style";
 import InteractionResultPopover from "@/components/InteractionResultPopover";
-import { drugs } from "@/data";
 import { Provider } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
 import MedicationImage from "../../assets/icons/medicaments.png";
@@ -27,7 +26,6 @@ import {
   Poppins_600SemiBold,
 } from "@expo-google-fonts/poppins";
 import { Dropdown } from "react-native-element-dropdown";
-import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
 
 export default function DrugInteractionScreen() {
   const navigation = useNavigation<any>();
