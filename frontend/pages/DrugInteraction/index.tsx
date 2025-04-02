@@ -45,19 +45,19 @@ export default function DrugInteractionScreen() {
   });
 
   useEffect(() => {
-    getInteractionDrugsList().then((result) => setDrugsList(result));
     if (loaded || error) {
       SplashScreen.hideAsync();
     }
   }, [loaded, error]);
 
+  useEffect(() => {
+    getInteractionDrugsList().then((result) => setDrugsList(result));
+  }, []);
+
   if (!loaded && !error) {
     return null;
   }
 
-  // useEffect(() => {
-  //   getInteractionDrugsList().then((result) => console.log(result));
-  // }, []);
   function parseDrugsToSelect(drugs: any[]) {
     const parsedDrugs: { key: number; value: string }[] = [];
     drugs.forEach((drug) =>
