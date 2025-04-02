@@ -1,10 +1,10 @@
 from models import Pharma
 
-def test_list_pharma_should_retun_200(test_client, db_session):
+def test_list_pharma_with_different_parameters_should_retun_200(test_client, db_session):
     assert db_session.query(Pharma).count() == 0
 
     pharma = Pharma(
-        pharma_name="Dipirona",
+        pharma_name="Dipirona"
     )
 
     db_session.add(pharma)
