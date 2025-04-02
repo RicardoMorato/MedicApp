@@ -1,4 +1,5 @@
 import { View, Text, Animated } from 'react-native';
+import { useState, useEffect } from 'react';
 import { styles } from '../styles/style';
 import { Item } from '../Item/Item';
 import Header from '../Header';
@@ -8,8 +9,6 @@ import { Colors } from '@/constants/Colors';
 
 interface MedicamentsListedProps {
     medications: Medication[]
-    setSkip?: React.Dispatch<React.SetStateAction<number>>
-    setLimit?: React.Dispatch<React.SetStateAction<number>>
     setSearchQuery: React.Dispatch<React.SetStateAction<string>>
     searchQuery: string
     handleEndReached?: () => void
@@ -17,10 +16,15 @@ interface MedicamentsListedProps {
 }
 
 
-export const MedicamentsListed = ({ medications, setLimit, setSkip, searchQuery, setSearchQuery, handleEndReached, hasMore}: MedicamentsListedProps) => {
-    
+export const MedicamentsListed = ({ medications, searchQuery, setSearchQuery, handleEndReached, hasMore}: MedicamentsListedProps) => {
+    const [isFetching, setIsFetching] = useState(false);
 
- 
+    useEffect(() => {
+        setIsFetching(true);
+        const timeout = setTimeout(() => setIsFetching(false), 1200)
+        return () => clearTimeout(timeout);
+    }, [searchQuery]);
+
     const normalizeLetter = (letter: string) => letter.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
     const filteredData = medications
         .filter((medicament) => 
@@ -32,13 +36,6 @@ export const MedicamentsListed = ({ medications, setLimit, setSkip, searchQuery,
             ||
             medicament.farmaco.toLowerCase().includes(searchQuery.toLowerCase())
         )
-        .sort((a, b) => {
-            const startsWithA = a.medicamento.toLowerCase().startsWith(searchQuery.toLowerCase());
-            const startsWithB = b.medicamento.toLowerCase().startsWith(searchQuery.toLowerCase());
-            if (startsWithA && !startsWithB) return -1
-            if (!startsWithA && startsWithB) return 1
-            return 0
-        })
         .reduce((sections: { titleLetter: string, data: Medication[] }[], medicament) => {
             const firstLetter = normalizeLetter(medicament.medicamento[0].toUpperCase());
             const section = sections.find(section => section.titleLetter === firstLetter);
@@ -61,23 +58,30 @@ export const MedicamentsListed = ({ medications, setLimit, setSkip, searchQuery,
                         keyExtractor={(item, index) => `${item.id}-${index}`} 
                         renderItem={({ item }) => <Item item={item} />}
                         ListEmptyComponent={
-                        <View style={styles.emptyState}>
-                        <Text style={styles.emptyStateText}>
-                            Nenhum medicamento encontrado para "{searchQuery}"
-                        </Text>
-                        </View>}
+                            isFetching ? (
+                                <View style={{ alignItems: 'center', top: 300 }}>
+                                    <SplashLoading />
+                                </View>
+                            ) : (
+                                <View style={styles.emptyState}>
+                                    <Text style={styles.emptyStateText}>
+                                        Nenhum medicamento encontrado para "{searchQuery}"
+                                    </Text>
+                                </View>
+                            )
+                        }
                         onEndReached={handleEndReached}
                         onEndReachedThreshold={0.4}
                         ListFooterComponent={() => (
-                            hasMore ? (
+                            (hasMore && filteredData.length > 0) ? (
                                 <View style={{ marginVertical: 20 }}>
                                     <SplashLoading />
                                 </View>
                             )
-                            :
+                            : filteredData.length > 0 &&(
                             <View style={{ marginVertical: 20, alignItems: 'center' }}>
                                     <Text style={{color: Colors.light.backgroundGreyBlack}}>Sem mais resultados</Text>
-                                </View>
+                                </View>)
                         )}
                         
                         renderSectionHeader={({ section: { titleLetter } }) => (

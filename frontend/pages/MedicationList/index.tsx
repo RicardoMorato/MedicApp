@@ -3,7 +3,7 @@ import React, { useEffect, useState, useCallback } from 'react'
 import api from '../../services/api'
 import SplashLoading from '@/components/SplashLoading'
 import { Medication } from '@/interfaces/Medication'
-import { debounce, set } from 'lodash';
+import { debounce } from 'lodash';
 
 function MedicationList() {
   const [medications, setMedications] = useState<Medication[]>([]);
@@ -13,7 +13,7 @@ function MedicationList() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchUsed, setSearchUsed] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const [total, setTotal] = useState(0)
+  const [total, setTotal] = useState(1)
 
   const fetchMedications = useCallback(
     debounce(() => {
@@ -50,7 +50,7 @@ function MedicationList() {
           setLoading(false);
         });
     }, 500),
-    [skip, limit, searchQuery]
+    [skip, limit , searchQuery]
   );
 
   function handleEndReached() {
@@ -99,8 +99,6 @@ function MedicationList() {
       ? <SplashLoading /> 
       : <MedicamentsListed 
         medications={medications} 
-        setSkip={setSkip} 
-        setLimit={setLimit} 
         searchQuery={searchQuery}
         setSearchQuery={(value) => handleSearchQueryChange(value as string)}
         handleEndReached={handleEndReached}
