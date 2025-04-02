@@ -66,10 +66,7 @@ function MedicationList() {
       return
     }
   }
-  
-  console.log('Total de medicamentos:', total)
-  console.log(hasMore)
-  console.log('Medicamentos renderizados:', medications.length)
+
   useEffect(() => {
     fetchMedications();
 
