@@ -2,7 +2,6 @@ import { drugs, drugsInteractions } from "@/data";
 import api from "./api";
 
 export async function checkDrugInteraction(drugs: string[]) {
-  // alert(drugs);
   try {
     const response = await api.post("/interactions/", {
       name_1: drugs[0],
