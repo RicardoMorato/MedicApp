@@ -26,6 +26,7 @@ import {
   Poppins_600SemiBold,
 } from "@expo-google-fonts/poppins";
 import { Dropdown } from "react-native-element-dropdown";
+import { Colors } from "@/constants/Colors";
 
 export default function DrugInteractionScreen() {
   const navigation = useNavigation<any>();
@@ -35,7 +36,8 @@ export default function DrugInteractionScreen() {
     null
   );
   const [drugsList, setDrugsList] = useState<any[]>([]);
-  const [isFocus, setIsFocus] = useState(false);
+  const [isFocusDrugA, setIsFocusDrugA] = useState(false);
+  const [isFocusDrugB, setIsFocusDrugB] = useState(false);
   const [loaded, error] = useFonts({
     Poppins_300Light: Poppins_300Light,
     Poppins_600SemiBold: Poppins_600SemiBold,
@@ -80,15 +82,14 @@ export default function DrugInteractionScreen() {
       keyboardVerticalOffset={Platform.OS == "ios" ? 0 : -150}
     >
       <Provider>
-        <View style={styles.container}>
-          <TouchableOpacity
-            style={styles.backButton}
-            onPress={() => navigation.goBack()}
-          >
-            <Ionicons name="arrow-back" size={24} color="#595959" />
-            <Text style={styles.headerText}>Verificar interações</Text>
-          </TouchableOpacity>
-          <View style={styles.headerDivider}></View>
+      <View style={styles.container}>
+        <View style={styles.backButton}>
+        <TouchableOpacity  onPress={() => navigation.goBack()}>
+          <Ionicons name="arrow-back" size={24} color="#595959" />
+        </TouchableOpacity>
+        <Text style={styles.headerText}>Verificar interações</Text>
+        </View>
+        <View style={styles.headerDivider}></View>
           <View style={styles.content}>
             {interactionResult != null && drugA !== null && drugB !== null && (
               <InteractionResultPopover
@@ -105,26 +106,30 @@ export default function DrugInteractionScreen() {
             <View style={styles.interactionContainer}>
               <View style={styles.contentDropdown}>
                 <Dropdown
-                  style={[styles.dropdown, isFocus && { borderColor: "blue" }]}
+                  style={[
+                    styles.dropdown,
+                    isFocusDrugA && { borderColor: Colors.light.primary, borderWidth: 1 },
+                  ]}
                   placeholderStyle={styles.placeholderStyle}
                   selectedTextStyle={styles.selectedTextStyle}
                   inputSearchStyle={styles.inputSearchStyle}
                   iconStyle={styles.iconStyle}
                   data={parseDrugsToSelect(drugsList)}
                   search
+                  autoScroll={false}
                   maxHeight={300}
                   labelField="value"
                   valueField="value"
                   placeholder={
-                    !isFocus ? "Selecione o primeiro medicamento" : "..."
+                    !isFocusDrugA ? "Selecione o primeiro medicamento" : "..."
                   }
                   searchPlaceholder="Pesquisar medicamento..."
                   value={drugA}
-                  onFocus={() => setIsFocus(true)}
-                  onBlur={() => setIsFocus(false)}
+                  onFocus={() => setIsFocusDrugA(true)}
+                  onBlur={() => setIsFocusDrugA(false)}
                   onChange={(item) => {
                     setDrugA(item.value);
-                    setIsFocus(false);
+                    setIsFocusDrugA(false)
                   }}
                 />
               </View>
@@ -136,26 +141,30 @@ export default function DrugInteractionScreen() {
                 }}
               >
                 <Dropdown
-                  style={[styles.dropdown, isFocus && { borderColor: "blue" }]}
+                  style={[
+                    styles.dropdown,
+                    isFocusDrugB && { borderColor: Colors.light.primary, borderWidth: 1 },
+                  ]}
                   placeholderStyle={styles.placeholderStyle}
                   selectedTextStyle={styles.selectedTextStyle}
                   inputSearchStyle={styles.inputSearchStyle}
                   iconStyle={styles.iconStyle}
                   data={parseDrugsToSelect(drugsList)}
                   search
+                  autoScroll={false}
                   maxHeight={300}
                   labelField="value"
                   valueField="value"
                   placeholder={
-                    !isFocus ? "Selecione o segundo medicamento" : "..."
+                    !isFocusDrugB ? "Selecione o segundo medicamento" : "..."
                   }
                   searchPlaceholder="Pesquisar medicamento..."
                   value={drugB}
-                  onFocus={() => setIsFocus(true)}
-                  onBlur={() => setIsFocus(false)}
+                  onFocus={() => setIsFocusDrugB(true)}
+                  onBlur={() => setIsFocusDrugB(false)}
                   onChange={(item) => {
                     setDrugB(item.value);
-                    setIsFocus(false);
+                    setIsFocusDrugB(false)
                   }}
                 />
               </View>

@@ -179,14 +179,14 @@ export default function InteractionResultPopover({
               {result ? (
                 <Text style={styles.resultDescription}>
                   Os medicamentos{" "}
-                  <Text style={styles.drugName}>{drugA} </Text> e{" "}
+                  <Text style={styles.drugName}>{drugA} </Text>e{" "}
                   <Text style={styles.drugName}>{drugB}</Text> possuem interação
                   entre si. Consulte seu médico antes de cogitar usá-los juntos.
                 </Text>
               ) : (
                 <Text style={styles.resultDescription}>
                   Não foram detectadas interações entre{" "}
-                  <Text style={styles.drugNamePositive}>{drugA} </Text> e{" "}
+                  <Text style={styles.drugNamePositive}>{drugA} </Text>e{" "}
                   <Text style={styles.drugNamePositive}>{drugB}</Text>. Esses
                   medicamentos são compatíveis.
                 </Text>

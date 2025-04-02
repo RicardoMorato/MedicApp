@@ -147,11 +147,13 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   placeholderStyle: {
-    fontSize: 16,
-    color: 'black'
+    paddingLeft: 10,
+    fontSize: 14,
+    color: 'gray'
   },
   selectedTextStyle: {
-    fontSize: 16,
+    fontSize: 14,
+    color: Colors.light.text,
   },
   iconStyle: {
     width: 20,
