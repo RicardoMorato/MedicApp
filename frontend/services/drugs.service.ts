@@ -1,20 +1,23 @@
 import { drugs, drugsInteractions } from "@/data";
+import api from "./api";
 
 export async function checkDrugInteraction(drugs: string[]) {
-  const hasInteraction = hasDrugInteraction(drugs[0], drugs[1]);
-  return hasInteraction;
+  // alert(drugs);
+  try {
+    const response = await api.post("/interactions/", {
+      name_1: drugs[0],
+      name_2: drugs[1],
+    });
+  } catch (error) {
+    return false;
+  }
+  return true;
 }
 
-function hasDrugInteraction(drugA: any, drugB: any) {
-  const idA = drugs.filter((drug) => drug.name === drugA)[0].id;
-  const idB = drugs.filter((drug) => drug.name === drugB)[0].id;
-
-  for (const drug of drugsInteractions) {
-    if (
-      (drug.drugId == idA && drug.interactedId == idB) ||
-      (drug.drugId == idB && drug.interactedId == idA)
-    )
-      return true;
-  }
-  return false;
+export async function getInteractionDrugsList() {
+  const drugs = await api.get("/pharma/");
+  return drugs.data.map((drug: any, i: number) => ({
+    id: i,
+    name: drug.pharma_name,
+  }));
 }
