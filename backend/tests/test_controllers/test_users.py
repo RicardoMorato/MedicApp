@@ -1,4 +1,3 @@
-# Mexer aqui depois que adicionar o regex de email no back
 from models import User
 from dependencies.auth_dependency import hash_password
 
