@@ -1,4 +1,3 @@
-import { drugs, drugsInteractions } from "@/data";
 import api from "./api";
 
 export async function checkDrugInteraction(drugs: string[]) {
