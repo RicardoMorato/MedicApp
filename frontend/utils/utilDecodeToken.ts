@@ -12,3 +12,9 @@ export async function utilDecodeTokenName() {
   const name = jwtDecode<CustomJwtPayload>(token).name
   return name
 }
+
+export async function utilDecodeTokenEmail() {
+  const token = await AsyncStorage.getItem("userToken") || ""
+  const email = jwtDecode<CustomJwtPayload>(token).email
+  return email
+}
