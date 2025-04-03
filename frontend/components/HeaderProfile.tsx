@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     content: {
         paddingVertical: 20,
         paddingHorizontal: 20,
-        backgroundColor: "#E6F4FF",
+        backgroundColor: Colors.light.backgroundBoxProfile,
         marginHorizontal: 20,
         borderRadius: 20,
         marginTop: 20,
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
         width: 70,
         height: 70,
         borderRadius: 999,
-        backgroundColor: '#fff',
+        backgroundColor: Colors.light.background,
         justifyContent: 'center',
         alignItems: 'center',
         marginRight: 10

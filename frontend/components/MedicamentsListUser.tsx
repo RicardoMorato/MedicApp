@@ -11,7 +11,6 @@ interface MedicamentsListedProps {
 export const MedicamentsListedUser = ({ medications}: MedicamentsListedProps) => {
     const fakeMedications: MedicationUser[] = [
         {
-          
             name: 'Paracetamol',
             concentracao: '500mg',
             principio_ativo: 'Paracetamol',

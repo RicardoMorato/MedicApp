@@ -16,7 +16,7 @@ function Profile() {
     <>
       <FontLoader>
         <View style={styles.container}>
-        <HeaderTittle title="Perfil"/>
+        <HeaderTittle title="Meu perfil"/>
         <HeaderProfile />
         <AddedDrugsList/>
         </View>
