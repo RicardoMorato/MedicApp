@@ -24,6 +24,7 @@ export const Colors = {
     separatorCard: '#E0E0E0',
     atention: "#FFE311",
     green: "#14AE5C",
+    backgroundBoxProfile: "#E6F4FF"
   },
   dark: {
     text: "#ECEDEE",

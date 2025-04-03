@@ -2,11 +2,7 @@ import { Text, View, TouchableOpacity, Animated, Easing } from 'react-native';
 import React, { useState } from 'react';
 import { styles } from '../styles/style';
 import { useNavigation } from '@react-navigation/native';
-import { Medication } from '@/interfaces/Medication';
-
-export interface ItemProps {
-  item: Medication;
-}
+import { ItemProps } from '../../interfaces/ItemProps';
 
 const ItemComponent: React.FC<ItemProps> = ({ item }) => {
   const [expanded, setExpanded] = useState(false);

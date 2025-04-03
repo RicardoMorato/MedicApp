@@ -10,6 +10,7 @@ import MedicationList from "@/pages/MedicationList";
 import MedicationDetails from "@/pages/MedicationDetails";
 import DrugInteraction from "@/pages/DrugInteraction";
 import LearnMore from "@/pages/LearnMore";
+import Profile from "@/pages/Profile";
 
 
 export const HomeNav = () => {
@@ -49,6 +50,11 @@ export const HomeNav = () => {
         <Stack.Screen
         name="LearnMore"
         component={LearnMore}
+        options={{ headerShown: false }}
+      />
+        <Stack.Screen
+        name="Profile"
+        component={Profile}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

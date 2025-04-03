@@ -71,6 +71,14 @@ export const styles = StyleSheet.create({
       marginHorizontal: 35,
       boxShadow: Colors.light.boxShadow,
     },
+    cardUser: {
+      backgroundColor: Colors.light.background,
+      padding: 20,
+      marginVertical: 10,
+      borderRadius: 10,
+      marginHorizontal: 10,
+      boxShadow: Colors.light.boxShadow,
+    },
     TitleDosageSectionRow: {
       flexDirection: 'row',
       justifyContent: 'space-between',
@@ -132,16 +140,21 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     emptyState: {
-        flex: 1,
-        justifyContent: 'center',
         alignItems: 'center',
         padding: 20,
         marginTop: 50,
     },
-    emptyStateText: {
-        fontSize: 18,
+    emptyStateTitle: {
+        fontFamily: 'Poppins_600SemiBold',
+        fontSize: 17,
+        color: Colors.light.backgroundGreyBlack,
+        textAlign: 'center',
+    },
+    emptyStateSubtitle:{
+        fontFamily: 'Poppins_300Light',
+        top: 20,
+        fontSize: 15,
         color: Colors.light.backgroundGreyBlack,
         textAlign: 'center',
     }
-  
   });

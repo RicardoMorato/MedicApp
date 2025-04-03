@@ -40,6 +40,10 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "assets": [
+      "./assets/fonts/Poppins-Bold.ttf",
+      "./assets/fonts/Poppins-Light.ttf"
+    ]
   }
 }
