@@ -9,3 +9,12 @@ class DrugCreate(BaseModel):
         orm_mode = True 
         from_attributes = True 
 
+class DrugResponse(BaseModel):
+    id:int
+    name: str
+    principio_ativo: str
+    concentracao: str 
+
+    class Config:
+        orm_mode = True 
+        from_attributes = True 
