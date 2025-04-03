@@ -6,6 +6,7 @@ export interface Medication {
   farmaco: string;
 }
 export interface MedicationUser {
+  id: number;
   name: string;
   principio_ativo: string;
   concentracao: string;

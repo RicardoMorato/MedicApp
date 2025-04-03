@@ -9,32 +9,12 @@ interface MedicamentsListedProps {
 }
 
 export const MedicamentsListedUser = ({ medications}: MedicamentsListedProps) => {
-    const fakeMedications: MedicationUser[] = [
-        {
-            name: 'Paracetamol',
-            concentracao: '500mg',
-            principio_ativo: 'Paracetamol',
-        },
-        { name: 'Paracetamol',
-          concentracao: '500mg',
-          principio_ativo: 'Paracetamol',
-        },
-        {
-          name: 'Paracetamol',
-          concentracao: '500mg',
-          principio_ativo: 'Paracetamol',
-        },{
-          name: 'Paracetamol',
-          concentracao: '500mg',
-          principio_ativo: 'Paracetamol',
-        }
-      ];
     return (
         <View style={styles.container}>
             <View style={styles.sectionMain}>                
                     <FlatList
-                        data={fakeMedications}
-                        keyExtractor={(item, index) => `${index}`} 
+                        data={medications}
+                        keyExtractor={(item, index) => `${item.id}-${index}`} 
                         renderItem={({ item }) => <UserDrugsList item={item} />}
                         ListEmptyComponent={
                                 <View style={styles.emptyState}>
