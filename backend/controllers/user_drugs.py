@@ -33,15 +33,17 @@ def add_medicament_to_user(db: Session, user, drug_data: DrugCreate):
     return {"message": "Medicamento cadastrado com sucesso e associado ao usuário!", "drug": new_drug,"user_drug_association": user_id}
 
 
-def delete_user_drug(db: Session, user_id: int, drug_id: int):
+def delete_user_drug(db: Session, user: int, drug_id: int):
+    user_id = user.id
     medicamento = db.query(UserDrugs).filter(
         UserDrugs.user_id == user_id,
         UserDrugs.id == drug_id
     ).first()
 
     if not medicamento:
-        return False
+        raise HTTPException(status_code=404, detail="Medicamento não encontrado")
 
     db.delete(medicamento)
     db.commit()
-    return True
+    
+    raise HTTPException(status_code=200, detail="Medicamento deletado com sucesso")
