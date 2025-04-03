@@ -10,6 +10,7 @@ import { Colors } from "@/constants/Colors";
 import { SplashScreen } from "expo-router";
 import { Poppins_300Light, useFonts } from "@expo-google-fonts/poppins";
 import iconButton from "../../assets/icons/iconAdd.png";
+import { fetchusername } from "@/utils/fetchUserData";
 
 
 const AddMedicine = () => {
@@ -33,10 +34,6 @@ const AddMedicine = () => {
     return null;
   }
 
-    const fetchusername = async () => {
-      const user = await utilDecodeTokenName()
-      return user
-    };
   
   const handleAddMedicine = async () => {
     if (!medicineName || !activeIngredient || !concentration) {
