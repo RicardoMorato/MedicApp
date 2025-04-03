@@ -5,37 +5,33 @@ import userIcon from '@/assets/icons/userIcon2.png'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'; 
 import { useNavigation } from 'expo-router';
 import { logOut } from '@/services/auth';
-import FontLoader from './FontLoader';
 function HeaderProfile() {
     const navigation = useNavigation<any>();
-    <FontLoader>
-        <>
-        </>
-    </FontLoader>
     return (
-        <View style={styles.content}>
-            <View style={styles.headerContent}>
-                <View style={styles.imageUser}>
-                    <Image source={userIcon} resizeMode="contain" style={{height: 50}}/>
-                </View>
-                <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start' }}>
-                <Text style={{ fontSize: 15, fontFamily: 'Poppins_500Medium'}}>Francisco Pereira Motors</Text>
-                <Text style={{ fontSize: 12, color: '#555', fontFamily: 'Poppins_200ExtraLight' }}>francisquito@example.com</Text>
-                </View>
-            </View>
-            <TouchableOpacity style={styles.exitContent} onPress={() => logOut(navigation)}>
-            <MaterialIcons name="exit-to-app" size={24} color="red" />
-                <Text style={styles.exitText}>Sair</Text>
-            </TouchableOpacity>
-            <View style={styles.dividerCard}/>
-            <View style={styles.countMedicaments}>
-                <Text style={{ fontSize: 16, fontWeight: 'bold' }}>4</Text>
-                <Text style={{ fontSize: 16, color: '#555' }}>Medicamentos</Text>
-            </View>
-        </View>
-    )
-}
 
+            <View style={styles.content}>
+                <View style={styles.headerContent}>
+                    <View style={styles.imageUser}>
+                        <Image source={userIcon} resizeMode="contain" style={{height: 50}}/>
+                    </View>
+                    <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start' }}>
+                        <Text style={{ fontSize: 15, fontFamily: 'Poppins_500Medium'}}>Francisco Pereira Motors</Text>
+                        <Text style={{ fontSize: 12, color: '#555', fontFamily: 'Poppins_200ExtraLight' }}>francisquito@example.com</Text>
+                    </View>
+                </View>
+                <TouchableOpacity style={styles.exitContent} onPress={() => logOut(navigation)}>
+                    <MaterialIcons name="exit-to-app" size={24} color="red" />
+                    <Text style={styles.exitText}>Sair</Text>
+                </TouchableOpacity>
+                <View style={styles.dividerCard}/>
+                <View style={styles.countMedicaments}>
+                    <Text style={{ fontSize: 16, fontWeight: 'bold' }}>4</Text>
+                    <Text style={{ fontSize: 16, color: '#555' }}>Medicamentos</Text>
+                </View>
+            </View>
+
+    );
+}
 
 export default HeaderProfile
 const styles = StyleSheet.create({
