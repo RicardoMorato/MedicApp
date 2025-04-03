@@ -35,7 +35,7 @@ def test_register_user_with_user_already_created_should_return_401(test_client, 
     assert response.status_code == 401
 
     response_data = response.json()
-    assert response_data["detail"] == "User already created"
+    assert response_data["detail"] == "Um usuário com esse email já foi cadastrado"
 
 
 def test_register_user_with_invalid_password_should_return_400(test_client, db_session):
@@ -91,4 +91,4 @@ def test_user_login_with_account_not_created_should_return_401(test_client, db_s
     assert response.status_code == 401
 
     response_data = response.json()
-    assert response_data["detail"] == "Incorrect username or password"
+    assert response_data["detail"] == "Usuário ou senha inválido"
