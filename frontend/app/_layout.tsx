@@ -49,7 +49,7 @@ export const HomeNav = () => {
         <Stack.Screen
         name="LearnMore"
         component={LearnMore}
-        options={{ headerShown: true }}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
