@@ -38,17 +38,8 @@ async def search_medicamentos_route(db: Session = Depends(get_db), current_user=
 
 
 @router.delete("/users/{user_id}/drugs/{drug_id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_drug(user_id: str, drug_id: int, db: Session = Depends(get_db), current_user=Depends(get_current_user)):
-    if current_user.id != user_id:
-        raise HTTPException(status_code=403, detail="Você não tem permissão para deletar este medicamento")
-
-    deleted = controller.delete_user_drug(db, user_id, drug_id)
-
-    if not deleted:
-        raise HTTPException(status_code=404, detail="Medicamento não encontrado")
-
-
-    raise HTTPException(status_code=200, detail="Medicamento deletado com sucesso")
+def delete_drug(drug_id: int, db: Session = Depends(get_db), current_user=Depends(get_current_user)):
+    return controller.delete_user_drug(db, current_user, drug_id)
 
 
 def to_pascal_case(text: str) -> str:
