@@ -1,12 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { Colors } from '@/constants/Colors'
 import userIcon from '@/assets/icons/userIcon2.png'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'; 
 import { useNavigation } from 'expo-router';
 import { logOut } from '@/services/auth';
-function HeaderProfile() {
+import { fetchUserEmail, fetchusername } from '@/utils/fetchUserData';
+
+function HeaderProfile({ ammount }: { ammount: number }) {
     const navigation = useNavigation<any>();
+    const [username, setUsername] = useState<string>("");
+    const [userEmail, setUserEmail] = useState<string>("");
+    fetchusername().then((user) => {
+        if (user) {
+            setUsername(user);  
+        }})
+    fetchUserEmail().then((email) => {
+        if (email) {
+            setUserEmail(email);
+        }})
+    
+
     return (
 
             <View style={styles.content}>
@@ -15,8 +29,8 @@ function HeaderProfile() {
                         <Image source={userIcon} resizeMode="contain" style={{height: 50}}/>
                     </View>
                     <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start' }}>
-                        <Text style={{ fontSize: 15, fontFamily: 'Poppins_500Medium'}}>Francisco Pereira Motors</Text>
-                        <Text style={{ fontSize: 12, color: '#555', fontFamily: 'Poppins_200ExtraLight' }}>francisquito@example.com</Text>
+                        <Text style={{ fontSize: 15, fontFamily: 'Poppins_500Medium'}}>{username}</Text>
+                        <Text style={{ fontSize: 12, color: '#555', fontFamily: 'Poppins_200ExtraLight' }}>{userEmail}</Text>
                     </View>
                 </View>
                 <TouchableOpacity style={styles.exitContent} onPress={() => logOut(navigation)}>
@@ -25,7 +39,7 @@ function HeaderProfile() {
                 </TouchableOpacity>
                 <View style={styles.dividerCard}/>
                 <View style={styles.countMedicaments}>
-                    <Text style={{ fontSize: 16, fontWeight: 'bold' }}>4</Text>
+                    <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{ammount}</Text>
                     <Text style={{ fontSize: 16, color: '#555' }}>Medicamentos</Text>
                 </View>
             </View>
