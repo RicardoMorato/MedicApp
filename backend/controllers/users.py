@@ -13,7 +13,7 @@ def create_new_user(db: Session, user: schema.UserCreate):
     if user_exists:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="User already created",
+            detail="Um usuário com esse email já foi cadastrado",
             headers={"WWW-Authenticate": "Bearer"},
         )
 
@@ -34,7 +34,7 @@ def login_user(db: Session, login: schema.UserLogin):
     if not user or not verify_password(login.password, user.password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect username or password",
+            detail="Usuário ou senha inválido",
             headers={"WWW-Authenticate": "Bearer"},
         )
     
