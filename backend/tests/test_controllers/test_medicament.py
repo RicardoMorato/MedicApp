@@ -1,8 +1,6 @@
 from models import Drug
 
-def test_list_medicaments_should_retun_200(test_client, db_session):
-    assert db_session.query(Drug).count() == 0
-
+def create_new_drug(db_session):
     drug1 = Drug(
         farmaco = 'Dipirona',
         detentor = 'H1',
@@ -29,19 +27,134 @@ def test_list_medicaments_should_retun_200(test_client, db_session):
     db_session.add(drug2)
     db_session.commit()
 
+    drug3 = Drug(
+        farmaco = 'Cafeina',
+        detentor = 'H3',
+        medicamento = 'Dorflex',
+        registro = '1935344',
+        concentracao = '2ml',
+        forma_farmaceutica = 'dor flex',
+        data_inclusao = '01/01/2002'
+    )
+
+    db_session.add(drug3)
+    db_session.commit()
+
+
+def test_list_medicaments_should_retun_all_medicaments(test_client, db_session):
+    assert db_session.query(Drug).count() == 0
+
+    create_new_drug(db_session)
 
     response = test_client.get("/medicament/search")
     assert response.status_code == 200
-    assert len(response.json()) == 2
+    assert len(response.json()["items"]) == 3
 
-    response_filtered = test_client.get("/medicament/search?name=Dipirona")
-    assert response_filtered.status_code == 200
-    assert len(response_filtered.json()) == 1
 
-    response_filtered = test_client.get("/medicament/search?name=Novalgina")
-    assert response_filtered.status_code == 200
-    assert len(response_filtered.json()) == 1
+def test_list_medicaments_search_per_name_should_return_medicament(test_client, db_session):
+    assert db_session.query(Drug).count() == 0
 
-    response_filtered = test_client.get("/medicament/search?name=Dorflex")
-    assert response_filtered.status_code == 200
-    assert len(response_filtered.json()) == 0
+    create_new_drug(db_session)
+
+    response = test_client.get("/medicament/search/?name=Novalgina")
+
+    data = response.json()
+
+    assert response.status_code == 200
+    assert len(data["items"]) == 1
+    assert data["items"][0]["medicamento"] == "Novalgina"
+
+
+def test_list_medicaments_search_per_half_name_should_return_medicament(test_client, db_session):
+    assert db_session.query(Drug).count() == 0
+
+    create_new_drug(db_session)
+
+    response = test_client.get("/medicament/search/?name=noval")
+
+    data = response.json()
+
+    assert response.status_code == 200
+    assert len(data["items"]) == 1
+    assert data["items"][0]["medicamento"] == "Novalgina"
+
+
+def test_list_medicaments_search_per_pharma_should_return_medicament(test_client, db_session):
+    assert db_session.query(Drug).count() == 0
+
+    create_new_drug(db_session)
+
+    response = test_client.get("/medicament/search/?name=Dipirona")
+
+    data = response.json()
+
+    assert response.status_code == 200
+    assert len(data["items"]) == 1
+    assert data["items"][0]["medicamento"] == "Novalgina"
+
+
+def test_list_medicaments_search_per_half_pharma_should_return_medicament(test_client, db_session):
+    assert db_session.query(Drug).count() == 0
+
+    create_new_drug(db_session)
+
+    response = test_client.get("/medicament/search/?name=dipi")
+
+    data = response.json()
+
+    assert response.status_code == 200
+    assert len(data["items"]) == 1
+    assert data["items"][0]["medicamento"] == "Novalgina"
+
+
+def test_list_medicaments_skip_limit(test_client, db_session):
+    assert db_session.query(Drug).count() == 0
+
+    create_new_drug(db_session)
+
+    response = test_client.get("/medicament/search/?skip=1&limit=1")
+
+    data = response.json()
+
+    assert response.status_code == 200
+    assert len(data["items"]) == 1
+    assert data["items"][0]["medicamento"] == "Dorflex"
+
+
+def test_list_medicaments_should_return_a_empty_list(test_client, db_session):
+    assert db_session.query(Drug).count() == 0
+
+    create_new_drug(db_session)
+
+    response = test_client.get("/medicament/search/?name=Zolpidem")
+
+    data = response.json()
+
+    assert response.status_code == 200
+    assert data["items"] == []
+
+def test_list_medicaments_limit_max_value_should_return_200(test_client, db_session):
+    assert db_session.query(Drug).count() == 0
+
+    create_new_drug(db_session)
+
+    response = test_client.get("/medicament/search/?limit=17000")
+
+    data = response.json()
+
+    assert response.status_code == 200
+    assert len(data["items"]) == 3
+
+
+def test_list_medicaments_skip_min_value_should_return_200(test_client, db_session):
+    assert db_session.query(Drug).count() == 0
+
+    create_new_drug(db_session)
+
+    response = test_client.get("/medicament/search/?skip=0")
+
+    data = response.json()
+
+    assert response.status_code == 200
+    assert len(data["items"]) == 3
+    
