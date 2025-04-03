@@ -3,20 +3,21 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     headerText: {
       position: "absolute",
-      top: 45,
+      top: 65,
       color: "#595959",
-      fontSize: 22,
-      fontWeight: "800",
+      fontSize: 20,
       marginLeft: 10,
+      fontFamily: "Poppins_800ExtraBold"
     },
     headerDivider: {
       position: "absolute",
-      top: 75,
+      top: 95,
       left: 0,
       right: 0,
       width: "100%",
-      height: 2,
+      height: 1,
       backgroundColor: "#595959",
+      boxShadow: '2px 3px 4px rgba(0, 0, 0, 0.35)',
     },
     container: {
       flex: 1,
@@ -39,22 +40,24 @@ const styles = StyleSheet.create({
     },
     title: {
       fontSize: 16,
-      fontWeight: 'bold',
       marginBottom: 5,
+      fontFamily: "Poppins_700Bold"
     },
     severity: {
       fontSize: 14,
       marginBottom: 10,
-      color: "#6C788E"
+      color: "#6C788E",
+      fontFamily: "Poppins_500Medium"
     },
     effectTitle: {
       fontSize: 16,
-      fontWeight: 'bold',
       lineHeight: 25,
       textAlign: "justify",
+      fontFamily: "Poppins_700Bold",
     },
     effectText: {
       fontWeight: "normal",
+      fontFamily: "Poppins_300Light"
     },
     infoRow: {
       flexDirection: 'row',
@@ -63,11 +66,12 @@ const styles = StyleSheet.create({
     },
     infoTitle: {
       fontSize: 16,
-      color: "#6C788E"
+      color: "#6C788E",
+      fontFamily: "Poly_400Regular"
     },
     infoText: {
       fontSize: 14,
-      fontWeight: "bold"
+      fontFamily: "Poppins_600SemiBold"
     },
     buttonContainer: {
       marginTop: 20,
@@ -85,7 +89,8 @@ const styles = StyleSheet.create({
       borderColor: "#FFA50A",
       borderWidth: 1,
       alignSelf: "center",
-      marginTop: 32
+      marginTop: 32,
+      fontFamily: "Poppins_500Medium"
     },
     buttonText: {
       fontSize: 16,
