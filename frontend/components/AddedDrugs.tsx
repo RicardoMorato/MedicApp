@@ -7,10 +7,11 @@ import { MedicationUser } from '@/interfaces/Medication'
 import api from '@/services/api';
 import { utilDecodeToken } from '@/utils/utilDecodeToken';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import HeaderProfile from '@/components/HeaderProfile';
 
-
-function AddedDrugsList() {
+function PageContent() {
     const [medications, setMedications] = useState<MedicationUser[]>([]);
+    const [ammount, setAmount] = useState<number>(0);
     async function fetchMedications() {
         const userId = await utilDecodeToken()
         const token = await AsyncStorage.getItem("userToken") || ""
@@ -20,6 +21,7 @@ function AddedDrugsList() {
             }
         }).then((Response) => {
             setMedications(Response.data)
+            setAmount(Response.data.length)
         }).catch((error) => {
             console.log(error)
         }
@@ -31,6 +33,7 @@ function AddedDrugsList() {
     
     return (
         <>
+    <HeaderProfile ammount={ammount} />
     <View style={styles.contentTitle}>
         <MaterialCommunityIcons name="pill" size={28} color={Colors.light.primary} />
         <Text style={styles.title}>Meus medicamentos adicionados</Text>
@@ -42,7 +45,7 @@ function AddedDrugsList() {
     )
 }
 
-export default AddedDrugsList
+export default PageContent
 
 const styles = StyleSheet.create({
     content: {

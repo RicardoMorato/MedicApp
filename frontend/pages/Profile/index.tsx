@@ -1,10 +1,10 @@
 import HeaderProfile from '@/components/HeaderProfile'
 import React from 'react'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 import { styles } from './style'
 import FontLoader from '../../components/FontLoader';
 import HeaderTittle from '@/components/HeaderTittle'
-import AddedDrugsList from '@/components/AddedDrugs'
+import PageContent from '@/components/AddedDrugs';
 
 function Profile() {
 
@@ -12,9 +12,8 @@ function Profile() {
     <>
       <FontLoader>
         <View style={styles.container}>
-        <HeaderTittle title="Meu perfil"/>
-        <HeaderProfile />
-        <AddedDrugsList/>
+          <HeaderTittle title="Meu perfil"/>
+          <PageContent/>
         </View>
       </FontLoader>
     </>
