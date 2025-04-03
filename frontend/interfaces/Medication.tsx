@@ -5,3 +5,8 @@ export interface Medication {
   concentracao: string;
   farmaco: string;
 }
+export interface MedicationUser {
+  name: string;
+  principio_ativo: string;
+  concentracao: string;
+}
