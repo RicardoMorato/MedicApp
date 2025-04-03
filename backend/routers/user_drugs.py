@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, status, Query
+from fastapi import APIRouter, Depends, status, Query, HTTPException
 from sqlalchemy.orm import Session
 from controllers import user_drugs as controller  
 from database import get_db
@@ -35,6 +35,20 @@ async def search_medicamentos_route(db: Session = Depends(get_db), current_user=
         med.medicamento = to_pascal_case(med.name)
 
     return [DrugResponse.from_orm(med) for med in medicamentos]
+
+
+@router.delete("/users/{user_id}/drugs/{drug_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_drug(user_id: str, drug_id: int, db: Session = Depends(get_db), current_user=Depends(get_current_user)):
+    if current_user.id != user_id:
+        raise HTTPException(status_code=403, detail="Você não tem permissão para deletar este medicamento")
+
+    deleted = controller.delete_user_drug(db, user_id, drug_id)
+
+    if not deleted:
+        raise HTTPException(status_code=404, detail="Medicamento não encontrado")
+
+
+    raise HTTPException(status_code=200, detail="Medicamento deletado com sucesso")
 
 
 def to_pascal_case(text: str) -> str:
