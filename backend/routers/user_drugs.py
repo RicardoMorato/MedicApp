@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, status, Query
 from sqlalchemy.orm import Session
 from controllers import user_drugs as controller  
 from database import get_db
-from schemas.user_drugs import DrugCreate 
+from schemas.user_drugs import DrugCreate, DrugResponse
 from dependencies.auth_dependency import get_current_user
 from models import UserDrugs
 import re
@@ -34,7 +34,7 @@ async def search_medicamentos_route(db: Session = Depends(get_db), current_user=
     for med in medicamentos:
         med.medicamento = to_pascal_case(med.name)
 
-    return [DrugCreate.from_orm(med) for med in medicamentos]
+    return [DrugResponse.from_orm(med) for med in medicamentos]
 
 
 def to_pascal_case(text: str) -> str:
