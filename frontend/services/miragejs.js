@@ -27,6 +27,10 @@ createServer({
       this.passthrough(`${API_URL}/medicament/search/`);
       this.passthrough(`${API_URL}/pharma/`);
       this.passthrough(`${API_URL}/interactions/`);
+      
+      getId().then((userId) => {
+        this.passthrough(`${API_URL}/user/${userId}/medications/`);
+      });
     },
   });
 }

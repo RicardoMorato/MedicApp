@@ -156,5 +156,10 @@ export const styles = StyleSheet.create({
         fontSize: 15,
         color: Colors.light.backgroundGreyBlack,
         textAlign: 'center',
-    }
+    },
+    emptyStateText: {
+      fontSize: 18,
+      color: Colors.light.backgroundGreyBlack,
+      textAlign: 'center',
+  }
   });
