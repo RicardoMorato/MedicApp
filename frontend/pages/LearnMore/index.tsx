@@ -1,14 +1,45 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image} from 'react-native';
+import { SplashScreen } from 'expo-router';
 import alerticon from "@/assets/icons/Group.png"
 import styles from './style';
-import backicon from "@/assets/icons/famicons_arrow-back-outline.png"
+import backicon from "@/assets/icons/famicons_arrow-back-outline.png";
+import { useNavigation } from '@react-navigation/native';
+import {
+  useFonts,
+  Poppins_300Light,
+  Poppins_500Medium,
+  Poppins_600SemiBold,
+  Poppins_700Bold,
+  Poppins_800ExtraBold
+} from "@expo-google-fonts/poppins";
+import { Poly_400Regular } from '@expo-google-fonts/poly';
+import { useEffect } from 'react';
 
 const LearnMore = () => {
+  const navigation = useNavigation<any>();
+   const [loaded, error] = useFonts({
+      Poppins_300Light: Poppins_300Light,
+      Poppins_600SemiBold: Poppins_600SemiBold,
+      Poppins_500Medium: Poppins_500Medium,
+      Poppins_700Bold: Poppins_700Bold,
+      Poppins_800ExtraBold: Poppins_800ExtraBold,
+      Poly_400Regular: Poly_400Regular
+    });
+    useEffect(() => {
+        if (loaded || error) {
+          SplashScreen.hideAsync();
+        }
+      }, [loaded, error]);
+    
+      if (!loaded && !error) {
+        return null;
+      }
+
   return (
     <View style={styles.container}>
 
-      <Text style={styles.headerText}>Saiba mais sobre as interações</Text>
+      <Text style={styles.headerText}> Saiba mais sobre as interações</Text>
       <View style={styles.headerDivider}></View>
 
       <View style={styles.content}>
@@ -37,7 +68,7 @@ const LearnMore = () => {
           </View>
         </View>
 
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('DrugInteraction')}>
           <View style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>
             <Image source={backicon}></Image>
             <Text style={styles.buttonText}>Voltar</Text>
