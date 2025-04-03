@@ -15,6 +15,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@expo-google-fonts/poly": "^0.3.0",
     "@expo-google-fonts/poppins": "^0.2.3",
     "@expo/vector-icons": "^14.0.2",
     "@react-native-async-storage/async-storage": "^2.1.2",
@@ -36,10 +37,10 @@
     "expo-web-browser": "~14.0.2",
     "jwt-decode": "^4.0.0",
     "lodash": "^4.17.21",
-    "react": "18.3.1",
+    "react": "^18.3.1",
     "react-dom": "18.3.1",
     "react-hook-form": "^7.54.2",
-    "react-native": "0.76.7",
+    "react-native": "^0.76.7",
     "react-native-dropdown-select-list": "^2.0.5",
     "react-native-element-dropdown": "^2.12.4",
     "react-native-gesture-handler": "~2.20.2",
