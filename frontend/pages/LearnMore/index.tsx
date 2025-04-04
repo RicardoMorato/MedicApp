@@ -68,7 +68,7 @@ const LearnMore = () => {
           </View>
         </View>
 
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('DrugInteraction')}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.goBack()}>
           <View style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>
             <Image source={backicon}></Image>
             <Text style={styles.buttonText}>Voltar</Text>

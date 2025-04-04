@@ -11,6 +11,8 @@ import { SplashScreen } from "expo-router";
 import { Poppins_300Light, useFonts } from "@expo-google-fonts/poppins";
 import iconButton from "../../assets/icons/iconAdd.png";
 import { fetchusername } from "@/utils/fetchUserData";
+import HeaderTittle from "@/components/HeaderTittle";
+import colors from "@/global/colors";
 
 
 const AddMedicine = () => {
@@ -62,19 +64,11 @@ const AddMedicine = () => {
         })
 
   return (
-    <KeyboardAvoidingView
-      style={{ flex: 1 }}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : -130}
-    >
+<>
+<View style={{backgroundColor: Colors.light.backgroundGrey, flex: 1, gap: 90}}>
+      <HeaderTittle title="Verificar Interações"/>
       <View style={styles.container}>
-        <View style={styles.backButton}>
-        <TouchableOpacity  onPress={() => navigation.goBack()}>
-          <Ionicons name="arrow-back" size={24} color="#595959" />
-        </TouchableOpacity>
-        <Text style={styles.headerText}>Adicionar medicamento</Text>
-        </View>
-        <View style={styles.headerDivider}></View>
+        
 
         <Text style={styles.subtitle}>Olá {username}, aqui você pode adicionar os seus próprios medicamentos!</Text>
 
@@ -116,7 +110,8 @@ const AddMedicine = () => {
           )}
         </TouchableOpacity>
       </View>
-    </KeyboardAvoidingView>
+      </View>
+      </>
   );
 };
 
