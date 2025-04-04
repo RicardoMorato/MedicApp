@@ -3,7 +3,6 @@ from controllers import users as controller
 from database import get_db
 from sqlalchemy.orm import Session
 from schemas import users as schema
-from dependencies.auth_dependency import get_current_user
 
 router = APIRouter(prefix="/users", tags=["User"])
 
