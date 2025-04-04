@@ -14,3 +14,7 @@ def add_drug(drug: DrugCreate, db: Session = Depends(get_db), current_user=Depen
 @router.get("/user/{user_id}/medications/", status_code=status.HTTP_200_OK)
 async def search_medicamentos_route(db: Session = Depends(get_db), current_user=Depends(get_current_user), name: str = Query(None), skip: int = Query(0, ge=0), limit: int = Query(100, ge=1, le=17000)):
     return controller.search_medicament_user(db, current_user, name, skip, limit)
+
+@router.delete("/users/{user_id}/drugs/{drug_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_drug(drug_id: int, db: Session = Depends(get_db), current_user=Depends(get_current_user)):
+    return controller.delete_user_drug(db, current_user, drug_id)
