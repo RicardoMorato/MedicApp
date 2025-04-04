@@ -1,10 +1,7 @@
 from fastapi import APIRouter, Depends, status, Query
 from sqlalchemy.orm import Session
-from sqlalchemy import or_
 from database import get_db
-from schemas.medicament import MedicamentResponse
-from models import Drug
-import re
+from controllers import medicament as controller
 
 router = APIRouter(tags=["Medicaments"])
 
@@ -15,30 +12,4 @@ async def search_medicamentos_route(
     skip: int = Query(0, ge=0),
     limit: int = Query(100, ge=1, le=17000)
 ):
-    base_query = db.query(Drug).order_by(Drug.medicamento)
-
-    if name:
-        base_query = base_query.filter(
-            or_(
-                Drug.medicamento.ilike(f"%{name}%"),
-                Drug.farmaco.ilike(f"%{name}%")
-            )
-        )
-
-    total_count = base_query.count()
-
-    paginated_query = base_query.offset(skip).limit(limit)
-    medicamentos = paginated_query.all()
-
-    for med in medicamentos:
-        med.medicamento = to_pascal_case(med.medicamento)
-
-    return {
-        "total": total_count,
-        "items": [MedicamentResponse.from_orm(med) for med in medicamentos]
-    }
-
-def to_pascal_case(text: str) -> str:
-    words = re.sub(r'[-_]', ' ', text).split()
-    pascal_case_text = ' '.join(word.capitalize() for word in words)
-    return pascal_case_text
+    return controller.search_medicaments(db, name, skip, limit)
