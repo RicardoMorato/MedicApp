@@ -4,10 +4,12 @@ import { StyleSheet, Text, View } from 'react-native'
 
 function HeaderTittle({title}: {title: string}) {
   return (
-    <>
+
+    <View>
     <Text style={styles.headerText}> {title}</Text>
       <View style={styles.headerDivider}></View>
-      </>
+      </View>
+
 
   )
 }

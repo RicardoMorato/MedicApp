@@ -27,6 +27,7 @@ import {
 } from "@expo-google-fonts/poppins";
 import { Dropdown } from "react-native-element-dropdown";
 import { Colors } from "@/constants/Colors";
+import HeaderTittle from "@/components/HeaderTittle";
 
 export default function DrugInteractionScreen() {
   const navigation = useNavigation<any>();
@@ -81,15 +82,10 @@ export default function DrugInteractionScreen() {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       keyboardVerticalOffset={Platform.OS == "ios" ? 0 : -150}
     >
+      <HeaderTittle title="Verificar Interações"/>
       <Provider>
       <View style={styles.container}>
-        <View style={styles.backButton}>
-        <TouchableOpacity  onPress={() => navigation.goBack()}>
-          <Ionicons name="arrow-back" size={24} color="#595959" />
-        </TouchableOpacity>
-        <Text style={styles.headerText}>Verificar interações</Text>
-        </View>
-        <View style={styles.headerDivider}></View>
+        
           <View style={styles.content}>
             {interactionResult != null && drugA !== null && drugB !== null && (
               <InteractionResultPopover

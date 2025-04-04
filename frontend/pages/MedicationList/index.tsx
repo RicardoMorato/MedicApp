@@ -4,6 +4,7 @@ import api from '../../services/api'
 import SplashLoading from '@/components/SplashLoading'
 import { Medication } from '@/interfaces/Medication'
 import { debounce } from 'lodash';
+import HeaderTittle from '@/components/HeaderTittle'
 
 function MedicationList() {
   const [medications, setMedications] = useState<Medication[]>([]);
@@ -94,13 +95,16 @@ function MedicationList() {
   return (
     (loading
       ? <SplashLoading /> 
-      : <MedicamentsListed 
+      : 
+      <><HeaderTittle title="Lista de Medicamentos"/>
+      <MedicamentsListed 
         medications={medications} 
         searchQuery={searchQuery}
         setSearchQuery={(value) => handleSearchQueryChange(value as string)}
         handleEndReached={handleEndReached}
         hasMore={hasMore}
       />
+      </>
     )
   );
 }

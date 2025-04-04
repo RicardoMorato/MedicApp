@@ -7,19 +7,11 @@ import { Colors } from "@/constants/Colors";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background,
     padding: 0,
-    justifyContent: "center",
     alignItems: "center",
     gap: 20,
   }, 
-  backButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    position: "absolute",
-    top: 40,
-    left: 20,
-  },
+
   headerText: {
     color: Colors.light.backgroundGreyBlack,
     fontSize: 18,
@@ -33,15 +25,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     marginBottom: 8,
   },
-  headerDivider: {
-    position: "absolute",
-    top: 75,
-    left: 0,
-    right: 0,
-    width: "100%",
-    height: 2,
-    backgroundColor: Colors.light.backgroundGreyBlack,
-  },
+
   subtitle: {
     fontSize: 18,
     color: Colors.light.backgroundGreyBlack,
