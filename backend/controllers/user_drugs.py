@@ -46,4 +46,4 @@ def delete_user_drug(db: Session, user: int, drug_id: int):
     db.delete(medicamento)
     db.commit()
     
-    raise HTTPException(status_code=200, detail="Medicamento deletado com sucesso")
+    return
