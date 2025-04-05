@@ -17,16 +17,9 @@ router = APIRouter(tags=["User Drugs"])
 **Descrição da rota:**
 Esta rota permite cadastrar um novo medicamento no sistema e associá-lo a um usuário específico identificado pelo `user_id`.
 
-**Requisitos para o cadastro**:
+**Regras de autorização:**
 
-- O usuário deve estar autenticado via token JWT válido.
-- O `user_id` deve ser válido.
-- O corpo da requisição deve conter todos os campos obrigatórios corretamente preenchidos.
-
-**Campos obrigatórios no corpo da requisição:**
-- **name**: Nome comercial do medicamento. Exemplo: `"Tylenol"`
-- **principio_ativo**: Substância ativa do medicamento. Exemplo: `"Paracetamol"`
-- **concentracao**: Dosagem da substância ativa. Exemplo: `"500mg"`
+- A operação só pode ser realizada pelo **próprio usuário autenticado**..
 """
 )
 def add_drug(drug: DrugCreate, db: Session = Depends(get_db), current_user=Depends(get_current_user)):
@@ -43,16 +36,10 @@ def add_drug(drug: DrugCreate, db: Session = Depends(get_db), current_user=Depen
 
 Retorna os medicamentos cadastrados pelo usuário autenticado, com possibilidade de filtragem por nome ou fármaco.
 
-**Regras de acesso:**
+**Regras de autorização:**
 
-- Apenas usuários autenticados podem acessar esta rota.
-- O `user_id` deve corresponder ao usuário autenticado. Caso contrário, o acesso será negado.
-
-**Parâmetros da consulta:**
-
-- `name` (opcional): Filtro pelo nome (ou parte do nome) do medicamento.
-- `skip`: Quantidade de registros a serem ignorados (paginação). Mínimo: 0.
-- `limit`: Número máximo de registros a retornar. Mínimo: 0, Máximo: 17.000.
+- A operação só pode ser realizada pelo **próprio usuário autenticado**.
+- O `user_id` deve corresponder ao usuário autenticado. Caso contrário, o acesso a lista será negado.
 """
 )
 async def search_user_medications_route(

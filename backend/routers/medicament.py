@@ -14,28 +14,11 @@ router = APIRouter(tags=["Medicaments"])
     description="""
 **Descrição da rota:**
 
-Busca medicamentos ou fármacos pelo nome informado (total ou parcial) e retorna os dados principais relacionados ao produto.
+Busca pelos medicamentos ou fármacos via nome informado (total ou parcial) e retorna os dados principais relacionados ao produto.
 
 **Fonte dos dados:**  
 
-A lista de medicamentos tipo A é retirada diretamente do site oficial da ANVISA.
-
-**Parâmetros da consulta:**
-
-- `name` (opcional): Nome ou parte do nome do medicamento a ser pesquisado.
-- `skip`: Quantidade de registros a serem pulados (para paginação). Mínimo 0.
-- `limit`: Número máximo de registros a retornar. Mínimo 1, máximo 17.000.
-
-**Campos retornados:**
-
-- `id`: Identificador único do medicamento.
-- `farmaco`: Nome do princípio ativo.
-- `detentor`: Empresa detentora do registro.
-- `medicamento`: Nome comercial.
-- `registro`: Registro na Anvisa.
-- `concentracao`: Dosagem do princípio ativo.
-- `forma_farmaceutica`: Forma de apresentação.
-- `data_inclusao`: Data de entrada no sistema.
+A lista de medicamentos do tipo A é retirada diretamente do site oficial da ANVISA.
 """
 )
 async def search_medicamentos_route(

@@ -16,19 +16,6 @@ router = APIRouter(prefix="/users", tags=["User"])
 **Descrição da rota:**
 
 Cria um novo usuário a partir dos dados fornecidos: `nome`, `e-mail` e `senha`.
-
-**Regras de validação da senha:**
-
-- Mínimo de **8 caracteres**
-- Pelo menos **1 letra maiúscula**
-- Pelo menos **1 letra minúscula**
-- Pelo menos **1 caractere especial** (ex: `@!#%`)
-
-**Campos obrigatórios:**
-
-- `name`: Nome do usuário
-- `email`: E-mail válido e único
-- `password`: Senha que obedeça às regras acima
 """
 )
 def create_user(user: schema.UserCreate, db: Session = Depends(get_db)):
@@ -48,17 +35,6 @@ Realiza o login de um usuário previamente cadastrado utilizando `e-mail` e `sen
 
 - O e-mail deve estar cadastrado no sistema.
 - A senha deve corresponder à senha cadastrada para o usuário.
-
-**Campos obrigatórios:**
-
-- `email`: E-mail válido de um usuário existente
-- `password`: Senha correta associada ao e-mail informado
-
-**Respostas de erro possíveis:**
-
-- `400 Bad Request` — E-mail ou senha não informados corretamente.
-- `401 Unauthorized` — E-mail ou senha incorretos.
-- `422 Unprocessable Entity` — Campos ausentes ou com formato inválido.
 """
 )
 def login_user(login: schema.UserLogin, db: Session = Depends(get_db)):
