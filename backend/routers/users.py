@@ -29,12 +29,6 @@ Cria um novo usuário a partir dos dados fornecidos: `nome`, `e-mail` e `senha`.
 - `name`: Nome do usuário
 - `email`: E-mail válido e único
 - `password`: Senha que obedeça às regras acima
-
-**Respostas de erro possíveis:**
-
-- `400 Bad Request` — A senha não atende aos critérios de segurança.
-- `401 Unauthorized` — Tentar criar usuário já existente.
-- `422 Unprocessable Entity` — Campos ausentes ou com formato inválido.
 """
 )
 def create_user(user: schema.UserCreate, db: Session = Depends(get_db)):

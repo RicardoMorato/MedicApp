@@ -18,6 +18,10 @@ Verifica a existência de interações medicamentosas entre dois fármacos infor
 
 A rota retorna informações detalhadas sobre a interação entre os princípios ativos dos medicamentos, caso exista.
 
+**Fonte dos dados:**  
+
+A lista de interações medicamentosas é retirada diretamente do site [greghi.com.br](https://greghi.com.br).
+
 **Campos obrigatórios:**
 
 - `name_1`: Nome do primeiro princípio ativo
@@ -33,11 +37,6 @@ Retorna um objeto contendo:
 - `inicio_interacao`: Tempo estimado para o início da interação (em horas)
 - `probabilidade_ocorrencia`: Nível de probabilidade da interação ocorrer
 - `efeito`: Descrição do efeito da interação entre os medicamentos
-
-**Respostas de erro possíveis:**
-
-- `404 Not Found` — Interação não encontrada.
-- `422 Unprocessable Entity` — Campos ausentes ou com formato inválido.
 """
 )
 def check_drugs(drug: InteractionCall, db: Session = Depends(get_db)):
