@@ -11,11 +11,14 @@ router = APIRouter(tags=["Medicaments"])
     "/medicament/search/",
     status_code=status.HTTP_200_OK,
     response_model=MedicamentListResponse,
-    summary="Buscar medicamentos por nome",
     description="""
 **Descrição da rota:**
 
 Busca medicamentos ou fármacos pelo nome informado (total ou parcial) e retorna os dados principais relacionados ao produto.
+
+**Fonte dos dados:**  
+
+A lista de medicamentos tipo A é retirada diretamente do site oficial da ANVISA.
 
 **Parâmetros da consulta:**
 
@@ -33,11 +36,6 @@ Busca medicamentos ou fármacos pelo nome informado (total ou parcial) e retorna
 - `concentracao`: Dosagem do princípio ativo.
 - `forma_farmaceutica`: Forma de apresentação.
 - `data_inclusao`: Data de entrada no sistema.
-
-**Respostas possíveis:**
-
-- `200 OK` — Lista de medicamentos encontrados.
-- `422 Unprocessable Entity` — Algum parâmetro da query está inválido.
 """
 )
 async def search_medicamentos_route(
