@@ -4,6 +4,10 @@ import { SplashScreen } from "expo-router";
 import alerticon from "@/assets/icons/Group.png";
 import styles from "./style";
 import backicon from "@/assets/icons/famicons_arrow-back-outline.png";
+import orangeBackIcon from "@/assets/icons/orangeBackIcon.png";
+import redBackicon from "@/assets/icons/redBackIcon.png";
+import orangegWarningIcon from "@/assets/icons/orangeWarningIcon.png";
+import redWarningIcon from "@/assets/icons/redWarningIcon.png";
 import { useNavigation } from "@react-navigation/native";
 import {
   useFonts,
@@ -16,6 +20,7 @@ import {
 import { Poly_400Regular } from "@expo-google-fonts/poly";
 import { useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Colors } from "@/constants/Colors";
 
 interface DrugInteraction {
   efffect: string;
@@ -60,15 +65,50 @@ const LearnMore = () => {
     return null;
   }
 
+  function chooseColor() {
+    switch (interaction?.intensity) {
+      case "Moderada":
+        return {
+          bgColor: Colors.light.mediumInteractionBgColor,
+          textColor: Colors.light.mediumInteractionTextColor,
+          source: orangeBackIcon,
+          warningSource: orangegWarningIcon,
+        };
+      case "Grave":
+        return {
+          bgColor: Colors.light.highInteractionBgColor,
+          textColor: Colors.light.highInteractionTextColor,
+          source: redBackicon,
+          warningSource: redWarningIcon,
+        };
+      default:
+        return {
+          bgColor: Colors.light.lightInteractionBgColor,
+          textColor: Colors.light.lightInteractionTextColor,
+          source: backicon,
+          warningSource: alerticon,
+        };
+    }
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.headerText}> Saiba mais sobre as interações</Text>
       <View style={styles.headerDivider}></View>
 
-      <View style={styles.content}>
+      <View
+        style={{
+          ...styles.content,
+          backgroundColor: chooseColor().bgColor,
+          borderColor: chooseColor().textColor,
+        }}
+      >
         <View style={styles.medicineBlock}>
           <View style={{ flexDirection: "row", gap: 5 }}>
-            <Image source={alerticon}></Image>
+            <Image
+              style={{ width: 24, height: 24 }}
+              source={chooseColor().warningSource}
+            ></Image>
             <Text style={styles.title}>
               {interaction?.pharma1} + {interaction?.pharma2}
             </Text>
@@ -97,12 +137,25 @@ const LearnMore = () => {
         </View>
 
         <TouchableOpacity
-          style={styles.button}
+          style={{ ...styles.button, borderColor: chooseColor().textColor }}
           onPress={() => navigation.goBack()}
         >
-          <View style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>
-            <Image source={backicon}></Image>
-            <Text style={styles.buttonText}>Voltar</Text>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 5,
+            }}
+          >
+            <Image
+              style={{ width: 16, height: 16 }}
+              source={chooseColor().source}
+            ></Image>
+            <Text
+              style={{ ...styles.buttonText, color: chooseColor().textColor }}
+            >
+              Voltar
+            </Text>
           </View>
         </TouchableOpacity>
       </View>
