@@ -11,7 +11,7 @@ from routers.medicament import router as pesquisar_medicamentos
 from routers.interactions import router as interactions
 from routers.pharma import router as pharma
 
-app = FastAPI()
+app = FastAPI(docs_url=None, redoc_url="/")
 
 app.add_middleware(
     CORSMiddleware,
@@ -27,11 +27,6 @@ app.include_router(auth)
 app.include_router(pesquisar_medicamentos)
 app.include_router(interactions)
 app.include_router(pharma)
-
-
-@app.get("/")
-def read_root(db: Session = Depends(get_db)):
-    return {"Hello": "World"}
 
 
 @app.get("/redoc", include_in_schema=False)
