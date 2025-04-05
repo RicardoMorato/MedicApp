@@ -1,13 +1,15 @@
 from fastapi import FastAPI, Depends
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.openapi.docs import get_redoc_html
+from sqlalchemy.orm import Session
+
+from database import get_db
+from dependencies.auth_dependency import router as auth
 from routers.users import router as users_router
 from routers.user_drugs import router as user_drugs
 from routers.medicament import router as pesquisar_medicamentos
-from dependencies.auth_dependency import router as auth
 from routers.interactions import router as interactions
 from routers.pharma import router as pharma
-from database import get_db
-from sqlalchemy.orm import Session
-from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
@@ -30,3 +32,11 @@ app.include_router(pharma)
 @app.get("/")
 def read_root(db: Session = Depends(get_db)):
     return {"Hello": "World"}
+
+
+@app.get("/redoc", include_in_schema=False)
+async def custom_redoc():
+    return get_redoc_html(
+        openapi_url="https://api.medicapp.digital/openapi.json",  # Corrige erro por conta do proxy reverso do NGINX
+        title="Documentação MedicaApp",
+    )
