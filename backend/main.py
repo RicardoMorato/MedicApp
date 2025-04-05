@@ -6,6 +6,7 @@ from routers.user_drugs import router as user_drugs
 from routers.medicament import router as pesquisar_medicamentos
 from routers.interactions import router as interactions
 from routers.pharma import router as pharma
+from dependencies.auth_dependency import router as auth
 
 app = FastAPI(docs_url="/swagger", redoc_url="/")
 
@@ -22,6 +23,7 @@ app.include_router(user_drugs)
 app.include_router(pesquisar_medicamentos)
 app.include_router(interactions)
 app.include_router(pharma)
+app.include_router(auth)
 
 
 @app.get("/redoc", include_in_schema=False)
