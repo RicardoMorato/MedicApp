@@ -10,6 +10,7 @@ router = APIRouter(prefix="/users", tags=["User"])
 
 @router.post(
     "/signup",
+    summary="Cadastrar usuário",
     response_model=Token,
     status_code=status.HTTP_201_CREATED,
     description="""
@@ -24,6 +25,7 @@ def create_user(user: schema.UserCreate, db: Session = Depends(get_db)):
 
 @router.post(
     "/login",
+    summary="Login do usuário",
     response_model=Token,
     status_code=status.HTTP_201_CREATED,
     description="""
