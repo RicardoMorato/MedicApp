@@ -9,6 +9,7 @@ router = APIRouter(tags=["Interactions"])
 
 @router.post(
     "/interactions",
+    summary="Verificar interação medicamentosa",
     response_model=InteractionResult,
     status_code=status.HTTP_200_OK,
     description="""

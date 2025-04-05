@@ -9,6 +9,7 @@ router = APIRouter(tags=["Pharmaceuticals"])
 
 @router.get(
     "/pharma",
+    summary="Listagem de fármacos",
     response_model=List[Pharma],
     status_code=status.HTTP_200_OK,
     description="""

@@ -10,6 +10,7 @@ router = APIRouter(tags=["User Drugs"])
 
 @router.post(
     "/users/{user_id}/drugs/",
+    summary="Adicionar medicamento do usuário",
     status_code=status.HTTP_201_CREATED,
     response_model= DrugCreateResponse,
     description= 
@@ -28,6 +29,7 @@ def add_drug(drug: DrugCreate, db: Session = Depends(get_db), current_user=Depen
 
 @router.get(
     "/user/{user_id}/medications/",
+    summary="Listar medicmentos do usuário",
     status_code=status.HTTP_200_OK,
     response_model=List[DrugResponse],
     description=
@@ -71,6 +73,7 @@ async def search_user_medications_route(
 
 @router.delete(
     "/users/{user_id}/drugs/{drug_id}",
+    summary="Deletar medicamentos do usuário",
     status_code=status.HTTP_204_NO_CONTENT,
     description="""
 **Descrição da rota:**
