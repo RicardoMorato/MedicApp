@@ -3,7 +3,7 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 import jwt
 from passlib.context import CryptContext
 from database import get_db
@@ -18,8 +18,18 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 100
 router = APIRouter(tags=["Token"])
 
 class Token(BaseModel):
-    access_token: str
-    token_type: str
+    access_token: str = Field(
+        ...,
+        title="Token do usuário",
+        description="Token contendo informações do usuário como ID, nome e Email",
+        example="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjZmMwNDg3Ni1jYmRhLTQwN2UtYjA3Mi0yZjVlZDNiMzMyYTQiLCJ0b2tlbl90eXBlIjoiQmVhcmVyIiwibmFtZSI6IkpvXHUwMGUzbyBkYSBTaWx2YSIsImVtYWlsIjoiam9hbzNAZW1haWwuY29tIiwiZXhwIjoxNzQzODg3MTg4fQ.orscdYQpnO04sO1qPVakNfdoFBTIQg4d8LrkpOEd-g4"
+    )
+    token_type: str =  Field(
+        ...,
+        title="Tipo do Token do usuário",
+        description="Tipo do Token que contém informações do usuário como ID, nome e Email",
+        example="Bearer"
+    )
 
 
 @router.post("/token")
