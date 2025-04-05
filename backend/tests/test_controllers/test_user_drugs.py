@@ -1,6 +1,7 @@
 import pytest
 from models import UserDrugs, User
-from dependencies.auth_dependency import get_password_hash
+from dependencies.auth_dependency import get_password_hash, create_access_token
+from datetime import timedelta
 
 @pytest.fixture
 def user(db_session):
@@ -49,13 +50,17 @@ def auth_header(token):
 
 
 @pytest.fixture
-def token(test_client, user):
-    response = test_client.post(
-        "/token",
-        data={"username": user.email, "password": "Senha123!"},
-        headers={"Content-Type": "application/x-www-form-urlencoded"},
+def token(user):
+    data = {
+        "sub": str(user.id),
+        "name": user.name,
+        "email": user.email
+    }
+    access_token = create_access_token(
+        data=data,
+        expires_delta=timedelta(minutes=60)
     )
-    return response.json()["access_token"]
+    return access_token
 
 
 def test_add_medicament_with_success_should_return_201(test_client, user, auth_header, test_case):
@@ -73,14 +78,15 @@ def test_add_medicament_with_success_should_return_201(test_client, user, auth_h
 
 
 def test_add_medicament_already_created_should_return_400(test_client, user, new_drug, auth_header, test_case):
+    user_id = user.id
     response = test_client.post(
-        f"/users/{user.id}/drugs",
+        f"/users/{user_id}/drugs",
         headers=auth_header,
         json=test_case
     )
 
     response_duplicated = test_client.post(
-        f"/users/{user.id}/drugs",
+        f"/users/{user_id}/drugs",
         headers=auth_header,
         json=test_case
     )
