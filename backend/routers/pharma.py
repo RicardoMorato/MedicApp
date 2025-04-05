@@ -21,10 +21,7 @@ Você pode filtrar os resultados pelo nome do fármaco utilizando o parâmetro `
 **Fonte dos dados:**  
 
 A lista de fármacos é retirada diretamente do site [greghi.com.br](https://greghi.com.br), onde também é realizada a verificação de **interações medicamentosas** entre esses fármacos.
-""",
-    responses={
-        200: {"description": "Lista requisitada com sucesso!"}
-    }
+"""
 )
 async def pharma(
     db: Session = Depends(get_db),
