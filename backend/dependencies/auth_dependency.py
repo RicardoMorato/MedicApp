@@ -32,7 +32,18 @@ class Token(BaseModel):
     )
 
 
-@router.post("/token")
+@router.post(
+    "/token",
+    response_model=Token,
+    summary="Gerar token de acesso para autorização",
+    description="""
+**Descrição da rota:**
+
+Autentica um usuário com nome de usuário e senha.
+
+Se as credenciais estiverem corretas, retorna um token de acesso (JWT) que pode ser usado para autenticação nas próximas requisições.
+"""
+)
 async def login_for_access_token(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()], db: Session = Depends(get_db) ) -> Token:
     user = authenticate_user(db, form_data.username, form_data.password)
