@@ -41,4 +41,4 @@ jobs:
             docker stop medic-app-api || true
             docker rm medic-app-api || true
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/medic-app-api:latest
-            docker run -d --env DB_USER=$DB_USER --env DB_PASSWORD=$DB_PASSWORD --env DB_NAME=$DB_NAME --env DB_HOST=$DB_HOST --env DB_PORT=$DB_PORT -p 80:80 --name medic-app-api ${{ secrets.DOCKERHUB_USERNAME }}/medic-app-api:latest
+            docker run -d --env DB_USER=$DB_USER --env DB_PASSWORD=$DB_PASSWORD --env DB_NAME=$DB_NAME --env DB_HOST=$DB_HOST --env DB_PORT=$DB_PORT -p 8000:8000 --name medic-app-api ${{ secrets.DOCKERHUB_USERNAME }}/medic-app-api:latest
