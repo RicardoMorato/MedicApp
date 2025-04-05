@@ -49,6 +49,8 @@ def delete_user_drug(db: Session, user: int, drug_id: int):
     db.commit()
     
     return
+
+
 def search_medicament_user(db: Session, current_user, name: str, skip: int, limit: int):
     user_id = current_user.id
     query = db.query(UserDrugs).filter(UserDrugs.user_id == user_id).order_by(UserDrugs.name)
@@ -69,4 +71,3 @@ def search_medicament_user(db: Session, current_user, name: str, skip: int, limi
         med.medicamento = to_pascal_case(med.name)
 
     return [DrugResponse.from_orm(med) for med in medicamentos]
-
