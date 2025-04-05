@@ -13,7 +13,7 @@ class UserBase(BaseModel):
     email: str = Field(
         ...,
         title="E-mail do usuário",
-        description="Endereço de e-mail válido que será usado para login.",
+        description="Endereço de e-mail válido que será cadastrado.",
         example="joao@email.com"
     )
 
@@ -47,5 +47,20 @@ class UserCreate(UserBase):
     
 
 class UserLogin(BaseModel):
-    email: str
-    password: str
+    email: str = Field(
+        ...,
+        title="E-mail do usuário",
+        description="Endereço de e-mail válido que será usado para login.",
+        example="joao@email.com"
+    )
+    password: str = Field(
+        ...,
+        title="Senha segura",
+        description=(
+            "Senha do usuário. Deve conter no mínimo 8 caracteres, incluindo:\n"
+            "- Uma letra maiúscula\n"
+            "- Uma letra minúscula\n"
+            "- Um caractere especial"
+        ),
+        example="Senha@123"
+    )

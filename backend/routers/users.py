@@ -12,7 +12,6 @@ router = APIRouter(prefix="/users", tags=["User"])
     "/signup",
     response_model=Token,
     status_code=status.HTTP_201_CREATED,
-    summary="Cria um novo usuário no sistema",
     description="""
 **Descrição da rota:**
 
@@ -42,6 +41,31 @@ def create_user(user: schema.UserCreate, db: Session = Depends(get_db)):
     return controller.create_new_user(db, user)
 
 
-@router.post("/login", status_code=status.HTTP_201_CREATED)
+@router.post(
+    "/login",
+    response_model=Token,
+    status_code=status.HTTP_201_CREATED,
+    description="""
+**Descrição da rota:**
+
+Realiza o login de um usuário previamente cadastrado utilizando `e-mail` e `senha`.
+
+**Requisitos para autenticação:**
+
+- O e-mail deve estar cadastrado no sistema.
+- A senha deve corresponder à senha cadastrada para o usuário.
+
+**Campos obrigatórios:**
+
+- `email`: E-mail válido de um usuário existente
+- `password`: Senha correta associada ao e-mail informado
+
+**Respostas de erro possíveis:**
+
+- `400 Bad Request` — E-mail ou senha não informados corretamente.
+- `401 Unauthorized` — E-mail ou senha incorretos.
+- `422 Unprocessable Entity` — Campos ausentes ou com formato inválido.
+"""
+)
 def login_user(login: schema.UserLogin, db: Session = Depends(get_db)):
     return controller.login_user(db, login)
