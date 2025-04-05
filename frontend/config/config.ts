@@ -1,3 +1,3 @@
-const API_URL = 'http://3.142.251.75'
+const API_URL = "https://docs.medicapp.digital";
 
-export default API_URL
+export default API_URL;
