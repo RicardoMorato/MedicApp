@@ -11,7 +11,7 @@ from routers.medicament import router as pesquisar_medicamentos
 from routers.interactions import router as interactions
 from routers.pharma import router as pharma
 
-app = FastAPI(docs_url=None, redoc_url="/")
+app = FastAPI(docs_url="/swagger", redoc_url="/")
 
 app.add_middleware(
     CORSMiddleware,
