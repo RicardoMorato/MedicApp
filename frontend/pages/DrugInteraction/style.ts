@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
     padding: 0,
     justifyContent: "center",
     alignItems: "center",
-    gap: 20,
   },
   button: {
     backgroundColor: "#FFFFFF",
@@ -18,7 +17,7 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     alignItems: "center",
     width: "90%",
-    boxShadow: '1px 2px 6px rgba(0, 0, 0, 0.25)'
+    boxShadow: "1px 2px 6px rgba(0, 0, 0, 0.25)",
   },
   buttonText: {
     color: "#419DFF",
@@ -31,6 +30,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-around",
     gap: 15,
+    marginBottom: "20%",
   },
   subtitle: {
     fontSize: 18,
@@ -39,8 +39,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: "Poppins_500Medium",
     paddingHorizontal: 20,
-
-    
   },
   highlight: {
     color: "#477FAB",
@@ -89,13 +87,12 @@ const styles = StyleSheet.create({
     elevation: 3,
     gap: 12,
     alignItems: "center",
-    
   },
   medicamentsImageContainer: {
     marginTop: 5,
-    alignItems: 'center',
+    alignItems: "center",
   },
-  
+
   title: {
     fontFamily: "Poppins_700Bold",
     fontSize: 16,
@@ -110,36 +107,36 @@ const styles = StyleSheet.create({
     color: "#595959",
     textAlign: "justify",
     fontFamily: "Poppins_500Medium",
-    width: "83%"
+    width: "83%",
   },
   dropdownText: {
     color: "#595959",
   },
   sectionButton: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 5
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 5,
   },
- 
+
   dropdown: {
     height: 50,
-    borderColor: 'gray',
+    borderColor: "gray",
     borderWidth: 0.5,
     borderRadius: 8,
     paddingHorizontal: 8,
-    boxShadow: '1px 2px 6px rgba(0, 0, 0, 0.25)'
+    boxShadow: "1px 2px 6px rgba(0, 0, 0, 0.25)",
   },
   contentDropdown: {
-    backgroundColor: '#fff', 
-    width: '100%', 
-    borderRadius: 10
+    backgroundColor: "#fff",
+    width: "100%",
+    borderRadius: 10,
   },
   icon: {
     marginRight: 5,
   },
   label: {
-    position: 'absolute',
+    position: "absolute",
     left: 22,
     top: 8,
     zIndex: 999,
@@ -149,7 +146,7 @@ const styles = StyleSheet.create({
   placeholderStyle: {
     paddingLeft: 10,
     fontSize: 14,
-    color: 'gray'
+    color: "gray",
   },
   selectedTextStyle: {
     fontSize: 14,
