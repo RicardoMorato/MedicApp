@@ -1,6 +1,6 @@
 import api from "./api";
 import MockAdapter from "axios-mock-adapter";
-import { checkDrugInteraction, getInteractionDrugsList } from "./drugs.service";
+import { checkDrugInteraction } from "./drugs.service";
 
 describe("Drug Interaction Service", () => {
   let mock: MockAdapter;
@@ -24,7 +24,7 @@ describe("Drug Interaction Service", () => {
 
     it("should return false when API call fails", async () => {
       const drugs = ["Aspirin", "Ibuprofen"];
-      mock.onPost("/interactions/").reply(500);
+      mock.onPost("/interactions/").reply(404);
 
       const result = await checkDrugInteraction(drugs);
       expect(result).toBe(false);
