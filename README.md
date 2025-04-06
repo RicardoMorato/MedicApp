@@ -8,12 +8,17 @@ Nossa solução foi pensada para dar maior autonomia e segurança aos pacientes 
 
 ### Tecnologias escolhidas :
 
-| **Ferramenta** | **Descrição** | **Justificativa para o uso** |
-|----------------|---------------|-------------------------------|
-| `React Native`   | Linguagem de programação escolhida para o frontend | . |
-| `FastAPI`     | Framework da linguagem Python escolhido para o backend | . |
-| `Pytest`      | Biblioteca escolhida para realizar os testes no back-end | . |
-| `Git`          | Software de controle de versões | . |
+| Tecnologia                         | Descrição                                                      | Justificativa para o Uso                                                                 |
+|------------------------------------|----------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| TypeScript                         | Superset do JavaScript com tipagem estática                    | Melhora a legibilidade, manutenção e reduz erros em tempo de desenvolvimento             |
+| React Native                       | Framework para desenvolvimento mobile                          | Permite criar aplicativos nativos para Android e iOS com uma única base de código        |
+| Python                             | Linguagem de programação usada no backend                      | Simples, expressiva e com vasta comunidade e bibliotecas                                 |
+| FastAPI                            | Framework web moderno para APIs em Python                      | Rápido, eficiente e com documentação automática integrada                                |
+| PostgreSQL                         | Banco de dados relacional                                      | Robusto, seguro e com excelente suporte para dados estruturados                          |
+| AWS (Amazon Web Services)          | Plataforma de serviços em nuvem                                | Escalável, confiável e amplamente adotada no mercado para deploy de aplicações           |
+| GitHub Actions                     | Ferramenta de CI/CD integrada ao GitHub                        | Automatiza testes, builds e deploys diretamente a partir dos repositórios                |
+| Pytest                             | Framework de testes em Python                                  | Simples, flexível e adequado para testes automatizados de APIs e lógicas de negócio      |
+| React Native Testing Library       | Biblioteca de testes para interfaces em React Native           | Facilita a criação de testes focados na experiência do usuário                           |
 
 ## Funcionalidades
 
