@@ -4,6 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from pydantic import BaseModel, Field
+from schemas.error_response import ErrorResponse
 import jwt
 from passlib.context import CryptContext
 from database import get_db
@@ -36,10 +37,28 @@ class Token(BaseModel):
     "/token",
     response_model=Token,
     summary="Gerar token de acesso para autorização",
+    status_code=status.HTTP_200_OK,
+    responses={
+    200: {
+    "description": "Token Retornado com sucesso",
+    },
+    401: {
+        "model": ErrorResponse,
+        "description": "Erro de credencial ao verificar existência de usuário",
+        "content": {
+            "application/json": {
+                "example": {
+                    "detail": "Incorrect username or password",
+                    "headers": {"WWW-Authenticate": "Bearer"}
+                }
+            }
+        }
+    }
+    },
     description="""
 **Descrição da rota:**
 
-Autentica um usuário com nome de usuário e senha.
+Autentica um usuário via email e senha.
 
 Se as credenciais estiverem corretas, retorna um token de acesso (JWT) que pode ser usado para autenticação nas próximas requisições.
 """

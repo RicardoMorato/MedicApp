@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from controllers import user_drugs as controller  
 from database import get_db
 from schemas.user_drugs import DrugCreate, DrugCreateResponse, DrugResponse
+from schemas.error_response import ErrorResponse
 from dependencies.auth_dependency import get_current_user
 from typing import List
 
@@ -13,6 +14,22 @@ router = APIRouter(tags=["User Drugs"])
     summary="Adicionar medicamento do usuário",
     status_code=status.HTTP_201_CREATED,
     response_model= DrugCreateResponse,
+    responses={
+    201: {
+    "description": "Medicamento cadastrado com sucesso",
+    },
+    400: {
+        "model": ErrorResponse,
+        "description": "Medicamento do usuário já foi cadastrado",
+        "content": {
+            "application/json": {
+                "example": {
+                    "detail": "Este medicamento já está cadastrado"
+                }
+            }
+        }
+    }
+    },
     description= 
     """
 **Descrição da rota:**
@@ -32,6 +49,11 @@ def add_drug(drug: DrugCreate, db: Session = Depends(get_db), current_user=Depen
     summary="Listar medicmentos do usuário",
     status_code=status.HTTP_200_OK,
     response_model=List[DrugResponse],
+    responses={
+    200: {
+    "description": "Busca pelos medicamentos",
+    }
+    },
     description=
 """
 **Descrição da rota:**
@@ -75,6 +97,22 @@ async def search_user_medications_route(
     "/users/{user_id}/drugs/{drug_id}",
     summary="Deletar medicamentos do usuário",
     status_code=status.HTTP_204_NO_CONTENT,
+    responses={
+    204: {
+    "description": "Medicamento deletado com sucesso",
+    },
+    404: {
+        "model": ErrorResponse,
+        "description": "Medicamento pra ser deletado não foi encontrado",
+        "content": {
+            "application/json": {
+                "example": {
+                    "detail": "Medicamento não encontrado"
+                }
+            }
+        }
+    }
+    },
     description="""
 **Descrição da rota:**
 
