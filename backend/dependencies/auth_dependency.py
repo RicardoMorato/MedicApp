@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from pydantic import BaseModel, Field
-from schemas.error_response import ErrorResponse
+from schemas.error_response import ErrorResponse, ValidationErrorResponse
 import jwt
 from passlib.context import CryptContext
 from database import get_db
@@ -53,6 +53,10 @@ class Token(BaseModel):
                 }
             }
         }
+    },
+    422: {
+            "model": ValidationErrorResponse,
+            "description": "Erro de validação nos dados fornecidos.",
     }
     },
     description="""

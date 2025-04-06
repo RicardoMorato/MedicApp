@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from database import get_db
 from schemas.interactions import InteractionCall, InteractionResult
 from controllers import interactions as controller
-from schemas.error_response import ErrorResponse
+from schemas.error_response import ErrorResponse, ValidationErrorResponse
 
 router = APIRouter(tags=["Interactions"])
 
@@ -27,6 +27,10 @@ router = APIRouter(tags=["Interactions"])
                 }
             }
         }
+    },
+    422: {
+            "model": ValidationErrorResponse,
+            "description": "Erro de validação nos dados fornecidos.",
     }
     },
     description="""
