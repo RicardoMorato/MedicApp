@@ -1,6 +1,6 @@
 import { Colors } from "@/constants/Colors";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet, Text, View } from "react-native";
 
 function HeaderTittle({ title }: { title: string }) {
   return (
@@ -14,7 +14,7 @@ export default HeaderTittle;
 
 const styles = StyleSheet.create({
   headerText: {
-    marginTop: "15%",
+    marginTop: Platform.OS === "ios" ? "15%" : 30,
     color: Colors.light.backgroundGreyBlack,
     fontSize: 20,
     fontFamily: "Poppins_800ExtraBold",
