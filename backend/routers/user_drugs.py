@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from controllers import user_drugs as controller  
 from database import get_db
 from schemas.user_drugs import DrugCreate, DrugCreateResponse, DrugResponse
-from schemas.error_response import ErrorResponse
+from schemas.error_response import ErrorResponse, ValidationErrorResponse
 from dependencies.auth_dependency import get_current_user
 from typing import List
 
@@ -28,6 +28,10 @@ router = APIRouter(tags=["User Drugs"])
                 }
             }
         }
+    },
+    422: {
+            "model": ValidationErrorResponse,
+            "description": "Erro de validação nos dados fornecidos.",
     }
     },
     description= 
@@ -52,6 +56,10 @@ def add_drug(drug: DrugCreate, db: Session = Depends(get_db), current_user=Depen
     responses={
     200: {
     "description": "Busca pelos medicamentos",
+    },
+    422: {
+            "model": ValidationErrorResponse,
+            "description": "Erro de validação nos dados fornecidos.",
     }
     },
     description=
@@ -111,6 +119,10 @@ async def search_user_medications_route(
                 }
             }
         }
+    },
+    422: {
+            "model": ValidationErrorResponse,
+            "description": "Erro de validação nos dados fornecidos.",
     }
     },
     description="""

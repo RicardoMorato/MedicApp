@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from database import get_db
 from controllers import medicament as controller
 from schemas.medicament import MedicamentListResponse
-from typing import List
+from schemas.error_response import ValidationErrorResponse
 
 router = APIRouter(tags=["Medicaments"])
 
@@ -15,6 +15,10 @@ router = APIRouter(tags=["Medicaments"])
     responses={
     200: {
     "description": "Medicamentos listados com sucesso",
+    },
+    422: {
+            "model": ValidationErrorResponse,
+            "description": "Erro de validação nos dados fornecidos.",
     }
     },
     description="""
