@@ -103,7 +103,10 @@ export default function DrugInteractionScreen() {
                 <Text style={styles.highlight}>simultaneamente</Text>.
               </Text>
               <View style={styles.interactionContainer}>
-                <View style={styles.contentDropdown}>
+                <View
+                  style={styles.contentDropdown}
+                  testID="dropdown-drugA-container"
+                >
                   <Dropdown
                     style={[
                       styles.dropdown,
@@ -141,6 +144,7 @@ export default function DrugInteractionScreen() {
                     width: "100%",
                     borderRadius: 10,
                   }}
+                  testID="dropdown-drugB-container"
                 >
                   <Dropdown
                     style={[
