@@ -1,8 +1,6 @@
-import { StyleSheet} from "react-native";
+import { StyleSheet } from "react-native";
 import colors from "@/global/colors";
 import { Colors } from "@/constants/Colors";
-
-
 
 const styles = StyleSheet.create({
   container: {
@@ -10,14 +8,14 @@ const styles = StyleSheet.create({
     padding: 0,
     alignItems: "center",
     gap: 20,
-  }, 
+  },
 
   headerText: {
     color: Colors.light.backgroundGreyBlack,
     fontSize: 18,
     fontWeight: "bold",
     marginLeft: 10,
-  },  
+  },
   headerContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -55,9 +53,9 @@ const styles = StyleSheet.create({
     gap: 5,
   },
   titleForm: {
-    color: Colors.light.whiteText, 
+    color: Colors.light.whiteText,
     fontSize: 18,
-    fontFamily: 'Poppins_500Medium',
+    fontFamily: "Poppins_500Medium",
   },
   input: {
     backgroundColor: colors.background,
@@ -110,7 +108,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    borderWidth: .5,
+    borderWidth: 0.5,
     borderColor: "#419DFF",
   },
   buttonText: {
