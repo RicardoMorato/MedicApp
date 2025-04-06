@@ -50,7 +50,7 @@ export const HomeNav = () => {
         tabBarLabel: ({ children, focused, color }) => (
           <Text
             style={{
-              fontSize: 11,
+              fontSize: 10,
               color: focused
                 ? Colors.light.primary
                 : Colors.light.backgroundGreyBlack,
