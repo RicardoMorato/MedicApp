@@ -46,16 +46,22 @@ export const HomeNav = () => {
             iconName = "home";
           }
           return <Ionicons name={iconName} size={size} color={color} />;
-      },
-      tabBarLabel: ({children, focused, color}) => (<Text style={{
-        fontSize: 11,
-        color: focused ? Colors.light.primary : Colors.light.backgroundGreyBlack,
-        fontWeight: focused ? "600" : "normal",
-        fontFamily: "Poppins_500Medium",
-        textAlign: "center",
-        marginTop: 5,
-      }}>
-        {children}</Text>),
+        },
+        tabBarLabel: ({ children, focused, color }) => (
+          <Text
+            style={{
+              fontSize: 11,
+              color: focused
+                ? Colors.light.primary
+                : Colors.light.backgroundGreyBlack,
+              fontWeight: focused ? "600" : "normal",
+              fontFamily: "Poppins_500Medium",
+              textAlign: "center",
+            }}
+          >
+            {children}
+          </Text>
+        ),
         tabBarStyle: styles.tabBarStyle,
         tabBarItemStyle: styles.tabBarItemStyle,
         tabBarHideOnKeyboard: true,
