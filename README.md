@@ -1,19 +1,19 @@
 # MedicApp
 
-[![Status](https://img.shields.io/badge/status-active-success.svg)]()
-[![GitHub Issues](https://img.shields.io/github/issues/IF977/if977-project-standards.svg)](https://github.com/RicardoMorato/MedicApp/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/IF977/if977-project-standards.svg)](https://github.com/RicardoMorato/MedicApp/pulls)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
-
 ## Descrição
 
-Um aplicativo que permite os usuários acessarem informações detalhadas sobre medicamentos através de uma interface amigável.
-Ele permite que os usuários consultem dados completos sobre medicamentos, incluindo composição, indicações, contra indicações, efeitos colaterais e orientações de uso, de forma simples e prática.
+Um aplicativo que tem como objetivo permitir os usuários acessarem informações detalhadas sobre interações medicamentosas de maneira rápida e fácil.
+Ele permite que os usuários consultem dados sobre medicamentos, incluindo composição e concentração de forma simples e prática.
 Nossa solução foi pensada para dar maior autonomia e segurança aos pacientes e ao público em geral, promovendo o uso seguro e consciente de medicamentos.
 
-## Documentação
+### Tecnologias escolhidas :
 
-O MedicApp possui [uma Wiki](https://github.com/RicardoMorato/MedicApp/wiki)! Lá, você consegue informações sobre as funcionalidades que nosso aplicativo dá suporte, as tecnologias que estamos usando e porque optamos por elas, além das ferramentas e metodologias utilizadas no desenvolvimento do projeto. Sinta-se livre para propor atualizações na documentação, o MedicApp é de todos nós.
+| **Ferramenta** | **Descrição** | **Justificativa para o uso** |
+|----------------|---------------|-------------------------------|
+| `React Native`   | Linguagem de programação escolhida para o frontend | . |
+| `FastAPI`     | Framework da linguagem Python escolhido para o backend | . |
+| `Pytest`      | Biblioteca escolhida para realizar os testes no back-end | . |
+| `Git`          | Software de controle de versões | . |
 
 ## Funcionalidades
 
@@ -21,22 +21,38 @@ Abaixo está uma lista não extensiva das principais funcionalidades que daremos
 
 - Cadastro de Usuários
 - Cadastro de Medicamentos Por Parte do Usuário
-- Pesquisa de Medicamentos
+- Pesquisa de Medicamentos e Fármacos
 - Alertas de Interações Medicamentosas
-- Consulta de Bula dos Medicamentos
-- Gestão de Consumo de Medicamentos
-- Listagem de Genéricos
-- Personalização e Acessibilidade
+- Perfil do usuário contendo suas informações essenciais
 
-## Créditos
+## Estrutura Organizacional
+Adicionar diagramas aqui.
+
+## Links para Recursos importantes
+
+### Documentação
+
+O MedicApp possui [uma Wiki](https://github.com/RicardoMorato/MedicApp/wiki)! Lá, você consegue informações sobre as funcionalidades que nosso aplicativo dá suporte, as tecnologias que estamos usando e porque optamos por elas, além das ferramentas e metodologias utilizadas no desenvolvimento do projeto. Sinta-se livre para propor atualizações na documentação, o MedicApp é de todos nós.
+
+Além disso, o MedicApp também possuiu uma [Documentação Oficial](https://docs.medicapp.digital/), que contém todas as informações detalhadas das rotas da API, incluindo as respostas esperadas, os campos obrigatórios e não obrigatórios de entrada e o retorno da chamada da API.
+
+### Figma
+Desenvolvido pelo nosso Designer Eduardo Matos e com colaboração de Pedro Novaes e Weldon Pereira, utilizamos o figma para desenvolver as telas utilizadas e o prótotipo do nosso app : [Figma do Projeto](https://www.figma.com/design/3LQPNrQ7mijdTFiu6P2u1K/App-MedicApp?node-id=0-1&t=K4Qc69s2wt7yMr6o-1).
+
+### Metodologia de Desenvolvimento Ágil
+Para agilizar o nosso desenvolvimento, utilizamos o quadro kanban dentro do Github Projects para poder organizar nosso código de maneira que fique clara as tasks de cada desenvolvedor e como elas devem estar dentro do código: [Quadro Kanban do Projeto](https://github.com/users/RicardoMorato/projects/2).
+
+## Guia para build local do sistema
+Para ajudar a fazer a build e setup local do sistema, o MedicApp tem uma [BUILD.md](https://github.com/RicardoMorato/MedicApp/blob/main/BUILD.md), onde é ensinado tanto a como rodar o Backend como o Frontend do zero.
+
+## Orientações sobre como Contribuir para o Projeto
+Se você quer contribuir para o nosso projeto, o MedicApp tem um [CONTRIBUTING.md](https://github.com/RicardoMorato/MedicApp/blob/main/CONTRIBUTING.md), onde é passada orientações sobre como é possível contribuir para o nosso projeto
+
+## Autores do Projeto
 
 - Eduardo Matos (Desenvolvedor Front-End e Designer UX/UI)
-- Gabriel Mendonça (Desenvolvedor Back-End)
-- João Antônio (Desenvolvedor Back-End e Documentador)
-- Pedro Novaes (Desenvolvedor Back-End)
-- Ricardo Morato (Gerente, Desenvolvedor Back-End e Responsável pelos Testes)
-- Weldon Pereira (Desenvolvedor Front-End e Documentador)
-
-## Licença
-
-Este projeto está licenciado sob a Licença GNU General Public License v3.0 - veja o arquivo [LICENSE.md](LICENSE) para detalhes.
+- Gabriel Mendonça (Desenvolvedor Back-End e responsável pelos Dados utilizados no projeto)
+- João Antônio (Desenvolvedor Back-End, Responsável pelos testes e Documentador)
+- Pedro Novaes (Desenvolvedor Full-Stack)
+- Ricardo Morato (Gerente de Projeto, Desenvolvedor Back-End, Responsável pela Infraestrutura e Responsável pelos Testes)
+- Weldon Pereira (Desenvolvedor Front-End)
