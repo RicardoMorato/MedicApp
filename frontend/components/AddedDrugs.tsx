@@ -10,6 +10,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import HeaderProfile from '@/components/HeaderProfile';
 
 function PageContent() {
+  const [medications, setMedications] = useState<MedicationUser[]>([]);
+  const [amount, setAmount] = useState<number>(0);
+
+          setAmount(response.data.length);
 
   return (
     <>
