@@ -1,10 +1,11 @@
-import { MedicamentsListed } from '@/components/MedicamentsListed/MedicamentsListed'
-import React, { useEffect, useState, useCallback } from 'react'
-import api from '../../services/api'
-import SplashLoading from '@/components/SplashLoading'
-import { Medication } from '@/interfaces/Medication'
-import { debounce } from 'lodash';
-import HeaderTittle from '@/components/HeaderTittle'
+import { MedicamentsListed } from "@/components/MedicamentsListed/MedicamentsListed";
+import React, { useEffect, useState, useCallback } from "react";
+import api from "../../services/api";
+import SplashLoading from "@/components/SplashLoading";
+import { Medication } from "@/interfaces/Medication";
+import { debounce } from "lodash";
+import HeaderTittle from "@/components/HeaderTittle";
+import FontLoader from "@/components/FontLoader";
 
 function MedicationList() {
   const [medications, setMedications] = useState<Medication[]>([]);
@@ -14,21 +15,23 @@ function MedicationList() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchUsed, setSearchUsed] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const [total, setTotal] = useState(1)
+  const [total, setTotal] = useState(1);
 
   const fetchMedications = useCallback(
     debounce(() => {
-      if (hasMore === false){
-      setMedications([])}
+      if (hasMore === false) {
+        setMedications([]);
+      }
       const params: any = {
         skip: skip,
         limit: limit,
       };
       if (searchQuery) {
-        params.name = searchQuery; 
+        params.name = searchQuery;
       }
-      api.get('/medicament/search/', { params })
-        .then(response => {
+      api
+        .get("/medicament/search/", { params })
+        .then((response) => {
           const { items, total: totalCount } = response.data;
           setTotal(totalCount);
           const medicationsData = items.map((item: any) => ({
@@ -38,33 +41,34 @@ function MedicationList() {
             concentracao: item.concentracao,
             farmaco: item.farmaco,
           }));
-          setMedications(prev => {
-            const existingIds = new Set(prev.map(med => med.id))
-            const uniqueMedications = medicationsData.filter((med: Medication) => !existingIds.has(med.id))
-            return [...prev, ...uniqueMedications]; 
+          setMedications((prev) => {
+            const existingIds = new Set(prev.map((med) => med.id));
+            const uniqueMedications = medicationsData.filter(
+              (med: Medication) => !existingIds.has(med.id)
+            );
+            return [...prev, ...uniqueMedications];
           });
           setLoading(false);
-          
         })
-        .catch(error => {
-          console.error('Erro ao buscar medicamentos:', error);
+        .catch((error) => {
+          console.error("Erro ao buscar medicamentos:", error);
           setLoading(false);
         });
     }, 500),
-    [skip, limit , searchQuery]
+    [skip, limit, searchQuery]
   );
 
   function handleEndReached() {
     if (medications.length < total) {
-      setHasMore(true)
-      if (total < 300){ 
-        setLimit(total)
-      }else {
-        setLimit(prevLimit => prevLimit + 20)
+      setHasMore(true);
+      if (total < 300) {
+        setLimit(total);
+      } else {
+        setLimit((prevLimit) => prevLimit + 20);
       }
-    }else {
-      setHasMore(false)
-      return
+    } else {
+      setHasMore(false);
+      return;
     }
   }
 
@@ -76,36 +80,35 @@ function MedicationList() {
 
   useEffect(() => {
     if (searchUsed && searchQuery === "") {
-      setSkip(0)
-      setLimit(20)
-      setMedications([])
-      fetchMedications()
-      setSearchUsed(false)
-      setHasMore(true)
+      setSkip(0);
+      setLimit(20);
+      setMedications([]);
+      fetchMedications();
+      setSearchUsed(false);
+      setHasMore(true);
     }
-  }, [ fetchMedications])
+  }, [fetchMedications]);
 
   const handleSearchQueryChange = (query: string) => {
-    setMedications([])
-    setSearchQuery(query)
-    setSkip(0)
-    setLimit(20)
-  }
+    setMedications([]);
+    setSearchQuery(query);
+    setSkip(0);
+    setLimit(20);
+  };
 
-  return (
-    (loading
-      ? <SplashLoading /> 
-      : 
-      <><HeaderTittle title="Lista de Medicamentos"/>
-      <MedicamentsListed 
-        medications={medications} 
+  return loading ? (
+    <SplashLoading />
+  ) : (
+    <FontLoader>
+      <HeaderTittle title="Lista de Medicamentos" />
+      <MedicamentsListed
+        medications={medications}
         searchQuery={searchQuery}
         setSearchQuery={(value) => handleSearchQueryChange(value as string)}
         handleEndReached={handleEndReached}
         hasMore={hasMore}
       />
-      </>
-    )
+    </FontLoader>
   );
 }
 
