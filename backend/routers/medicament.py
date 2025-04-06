@@ -12,6 +12,11 @@ router = APIRouter(tags=["Medicaments"])
     summary="Listagem de medicamentos",
     status_code=status.HTTP_200_OK,
     response_model=MedicamentListResponse,
+    responses={
+    200: {
+    "description": "Medicamentos listados com sucesso",
+    }
+    },
     description="""
 **Descrição da rota:**
 

@@ -12,6 +12,11 @@ router = APIRouter(tags=["Pharmaceuticals"])
     summary="Listagem de fármacos",
     response_model=List[Pharma],
     status_code=status.HTTP_200_OK,
+    responses={
+    200: {
+    "description": "Fármacos listados com sucesso",
+    }
+    },
     description="""
 **Desrição da rota:**
 

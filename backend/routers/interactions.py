@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from database import get_db
 from schemas.interactions import InteractionCall, InteractionResult
 from controllers import interactions as controller
+from schemas.error_response import ErrorResponse
 
 router = APIRouter(tags=["Interactions"])
 
@@ -12,6 +13,22 @@ router = APIRouter(tags=["Interactions"])
     summary="Verificar interação medicamentosa",
     response_model=InteractionResult,
     status_code=status.HTTP_200_OK,
+        responses={
+    200: {
+    "description": "Interação medicamentosa existente",
+    },
+    404: {
+        "model": ErrorResponse,
+        "description": "Interação medicamentosa não foi encontrada",
+        "content": {
+            "application/json": {
+                "example": {
+                    "detail": "Esta interação não existe."
+                }
+            }
+        }
+    }
+    },
     description="""
 **Descrição da rota:**
 
