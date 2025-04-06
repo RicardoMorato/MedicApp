@@ -6,22 +6,22 @@ response_user_create = {
     },
     400: {
         "model": ErrorResponse,
-        "description": "Erro de validação da senha...",
+        "description": "Erro de requerimentos da senha",
         "content": {
             "application/json": {
                 "example": {
-                    "detail": "A senha deve conter pelo menos 8 caracteres..."
+                    "detail": "A senha deve conter pelo menos 8 caracteres, uma letra maiúscula, uma letra minúscula e um caractere especial."
                 }
             }
         }
     },
     401: {
         "model": ErrorResponse,
-        "description": "Usuário ou senha inválidos",
+        "description": "Usuário com email já cadastrado",
         "content": {
             "application/json": {
                 "example": {
-                    "detail": "Usuário ou senha inválidos"
+                    "detail": "Um usuário com esse email já foi cadastrado"
                 }
             }
         }
@@ -44,11 +44,11 @@ response_user_login = {
     },
     401: {
         "model": ErrorResponse,
-        "description": "Usuário ou senha errados",
+        "description": "Email ou senha inválidos",
         "content": {
             "application/json": {
                 "example": {
-                    "detail": "Usuário ou senha inválidos"
+                    "detail": "Usuário ou senha inválido"
                 }
             }
         }

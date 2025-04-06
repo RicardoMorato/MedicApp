@@ -26,27 +26,6 @@ class DrugCreate(BaseModel):
         from_attributes = True
 
 
-
-class DrugCreateResponse(BaseModel):
-    message: str = Field(
-        ...,
-        title="Mensagem de Sucesso",
-        description="Mensagem indicando que o medicamento foi cadastrado e associado ao usuário.",
-        example="Medicamento cadastrado com sucesso e associado ao usuário!"
-    )
-    drug: DrugCreate = Field(
-        ...,
-        title="Medicamento Cadastrado",
-        description="Objeto com os dados do medicamento recém cadastrado."
-    )
-    user_drug_association: UUID = Field(
-        ...,
-        title="ID do Usuário Associado",
-        description="Identificador do usuário ao qual o medicamento foi vinculado.",
-        example=42
-    )
-
-
 class DrugResponse(BaseModel):
     id:int = Field(
         ..., 
@@ -57,7 +36,7 @@ class DrugResponse(BaseModel):
         ..., 
         title="Nome Comercial", 
         description="Nome comercial do medicamento.", 
-        example="Paracetamol")
+        example="Ibuprofeno")
     principio_ativo: str = Field(
         ..., 
         title="Princípio Ativo", 
@@ -72,3 +51,23 @@ class DrugResponse(BaseModel):
     class Config:
         orm_mode = True 
         from_attributes = True 
+
+
+class DrugCreateResponse(BaseModel):
+    message: str = Field(
+        ...,
+        title="Mensagem de Sucesso",
+        description="Mensagem indicando que o medicamento foi cadastrado e associado ao usuário.",
+        example="Medicamento cadastrado com sucesso e associado ao usuário!"
+    )
+    drug: DrugResponse = Field(
+        ...,
+        title="Medicamento Cadastrado",
+        description="Objeto com os dados do medicamento recém cadastrado."
+    )
+    user_drug_association: UUID = Field(
+        ...,
+        title="ID do Usuário Associado",
+        description="Identificador do usuário ao qual o medicamento foi vinculado.",
+        example=42
+    )

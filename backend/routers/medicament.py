@@ -28,7 +28,7 @@ async def search_medicamentos_route(
         ge=0,
         title="Pular registros",
         description="Número de registros a serem ignorados (útil para paginação).",
-        example=0
+        example=1
     ),
     limit: int = Query(
         100,
