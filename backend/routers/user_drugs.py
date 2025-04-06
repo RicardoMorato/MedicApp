@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, status, Query
+from fastapi import APIRouter, Depends, status, Query, Path
 from sqlalchemy.orm import Session
 from controllers import user_drugs as controller  
 from database import get_db
@@ -63,5 +63,10 @@ async def search_user_medications_route(
     responses=response_user_drug_delete,
     description=description_user_drug_delete
 )
-def delete_drug(drug_id: int, db: Session = Depends(get_db), current_user=Depends(get_current_user)):
+def delete_drug(drug_id: int = Path(
+        ...,
+        title="ID do medicamento do usuário",
+        description="ID no banco de dados do medicamento cadastrado pelo usuário",
+        example=10), 
+        db: Session = Depends(get_db), current_user=Depends(get_current_user)):
     return controller.delete_user_drug(db, current_user, drug_id)
