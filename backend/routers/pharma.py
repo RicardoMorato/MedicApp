@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from database import get_db
 from controllers import pharma as controller
 from schemas.pharma import Pharma
-from schemas.error_response import ValidationErrorResponse
+from docs.pharma import response_pharma_list, description_pharma_list
 
 router = APIRouter(tags=["Pharmaceuticals"])
 
@@ -13,25 +13,8 @@ router = APIRouter(tags=["Pharmaceuticals"])
     summary="Listagem de fármacos",
     response_model=List[Pharma],
     status_code=status.HTTP_200_OK,
-    responses={
-    200: {
-    "description": "Fármacos listados com sucesso",
-    },
-    422: {
-            "model": ValidationErrorResponse,
-            "description": "Erro de validação nos dados fornecidos.",
-    }
-    },
-    description="""
-**Desrição da rota:**
-
-Retorna uma lista de **fármacos** (medicamentos) cadastrados no sistema.  
-Você pode filtrar os resultados pelo nome do fármaco utilizando o parâmetro `name`.
-
-**Fonte dos dados:**  
-
-A lista de fármacos é retirada diretamente do site [greghi.com.br](https://greghi.com.br), onde também é realizada a verificação de **interações medicamentosas** entre esses fármacos.
-"""
+    responses=response_pharma_list,
+    description=description_pharma_list
 )
 async def pharma(
     db: Session = Depends(get_db),
