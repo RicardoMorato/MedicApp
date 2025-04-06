@@ -61,3 +61,7 @@ Se você quer contribuir para o nosso projeto, o MedicApp tem um [CONTRIBUTING.m
 - Pedro Novaes (Desenvolvedor Full-Stack)
 - Ricardo Morato (Gerente de Projeto, Desenvolvedor Back-End, Responsável pela Infraestrutura e Responsável pelos Testes)
 - Weldon Pereira (Desenvolvedor Front-End)
+
+## Licença
+
+Este projeto está licenciado sob a Licença GNU General Public License v3.0 - veja o arquivo [LICENSE.md](LICENSE) para detalhes.
