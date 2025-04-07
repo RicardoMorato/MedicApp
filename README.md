@@ -97,7 +97,7 @@ Se você quer executar os testes, o MedicApp tem um [TESTING.md](https://github.
 - Gabriel Mendonça (Desenvolvedor Back-End e responsável pelos Dados utilizados no projeto)
 - João Antônio (Desenvolvedor Back-End, Responsável pelos testes e Documentador)
 - Pedro Novaes (Desenvolvedor Full-Stack)
-- Ricardo Morato (Gerente de Projeto, Desenvolvedor Back-End, Responsável pela Infraestrutura e Responsável pelos Testes)
+- Ricardo Morato (Gerente de Projeto, Desenvolvedor Full-Stack, Responsável pela Infraestrutura e Responsável pelos Testes)
 - Weldon Pereira (Desenvolvedor Front-End)
 
 ## Licença
