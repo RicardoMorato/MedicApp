@@ -20,11 +20,18 @@ response_user_drug_create={
         "description": "Erro na autenticação",
         "content": {
             "application/json": {
-                "example": {
-                    "detail": "Not authenticated"
+                "examples": {
+                    "no_token": {
+                        "summary": "Token não enviado",
+                        "value": {"detail": "Not authenticated"}
+                    },
+                    "expired_token": {
+                        "summary": "Token expirado",
+                        "value": {"detail": "Token expired"}
                 }
+            }
         }
-        }
+    }
     },
     422: {
             "model": ValidationErrorResponse,
@@ -51,11 +58,18 @@ response_user_drug_list={
         "description": "Erro na autenticação",
         "content": {
             "application/json": {
-                "example": {
-                    "detail": "Not authenticated"
+                "examples": {
+                    "no_token": {
+                        "summary": "Token não enviado",
+                        "value": {"detail": "Not authenticated"}
+                    },
+                    "expired_token": {
+                        "summary": "Token expirado",
+                        "value": {"detail": "Token expired"}
                 }
             }
         }
+    }
     },
     422: {
             "model": ValidationErrorResponse,
@@ -84,11 +98,18 @@ response_user_drug_delete={
         "description": "Erro na autenticação",
         "content": {
             "application/json": {
-                "example": {
-                    "detail": "Not authenticated"
+                "examples": {
+                    "no_token": {
+                        "summary": "Token não enviado",
+                        "value": {"detail": "Not authenticated"}
+                    },
+                    "expired_token": {
+                        "summary": "Token expirado",
+                        "value": {"detail": "Token expired"}
                 }
             }
         }
+    }
     },
     404: {
         "model": ErrorResponse,

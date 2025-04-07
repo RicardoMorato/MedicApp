@@ -1,7 +1,9 @@
 import pytest
 from models import UserDrugs, User
 from dependencies.auth_dependency import get_password_hash, create_access_token
-from datetime import timedelta
+import jwt
+from config import SECRET_KEY, ALGORITHM
+from datetime import datetime, timedelta, timezone
 
 @pytest.fixture
 def user(db_session):
@@ -61,6 +63,21 @@ def token(user):
         expires_delta=timedelta(minutes=60)
     )
     return access_token
+
+
+@pytest.fixture
+def expired_token(user):
+    payload = {
+        "sub": str(user.id),
+        "email": user.email,
+        "exp": datetime.now(timezone.utc) - timedelta(minutes=1),  # já expirado
+    }
+    token = jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
+    return token
+
+@pytest.fixture
+def auth_header_expired(expired_token):
+    return {"Authorization": f"Bearer {expired_token}"}
 
 
 def test_add_medicament_with_success_should_return_201(test_client, user, auth_header, test_case):
@@ -177,3 +194,48 @@ def test_delete_non_existent_medicament_should_return_404(test_client, user, aut
 
     assert response.status_code == 404
     assert response.json()["detail"] == "Medicamento não encontrado"
+
+
+def test_list_medicaments_without_token_should_return_401(test_client, user):
+    response = test_client.get(f"/user/{user.id}/medications")
+    assert response.status_code == 401
+    assert response.json()["detail"] == "Not authenticated"
+
+
+def test_delete_medicament_without_token_should_return_401(test_client, user, new_drug):
+    drug_id = new_drug[0].id
+    response = test_client.delete(f"/users/{user.id}/drugs/{drug_id}")
+    assert response.status_code == 401
+    assert response.json()["detail"] == "Not authenticated"
+
+
+def test_add_medicament_without_token_should_return_401(test_client, user, test_case):
+    response = test_client.post(
+        f"/users/{user.id}/drugs",
+        json=test_case
+    )
+    assert response.status_code == 401
+    assert response.json()["detail"] == "Not authenticated"
+
+
+def test_add_medicament_with_expired_token_should_return_401(test_client, user, test_case, auth_header_expired):
+    response = test_client.post(
+        f"/users/{user.id}/drugs",
+        headers=auth_header_expired,
+        json=test_case
+    )
+    assert response.status_code == 401
+    assert response.json()["detail"] == "Token expired"
+
+
+def test_list_medicaments_with_expired_token_should_return_401(test_client, user, auth_header_expired):
+    response = test_client.get(f"/user/{user.id}/medications", headers=auth_header_expired)
+    assert response.status_code == 401
+    assert response.json()["detail"] == "Token expired"
+
+
+def test_delete_medicament_with_expired_token_should_return_401(test_client, user, new_drug, auth_header_expired):
+    drug_id = new_drug[0].id
+    response = test_client.delete(f"/users/{user.id}/drugs/{drug_id}", headers=auth_header_expired)
+    assert response.status_code == 401
+    assert response.json()["detail"] == "Token expired"
