@@ -94,73 +94,72 @@ const LearnMore = () => {
 
   return (
     <>
-    <HeaderTittle title="Adicionar Medicamentos" />
-    <View style={styles.container}>
-      
-      <View
-        style={{
-          ...styles.content,
-          backgroundColor: chooseColor().bgColor,
-          borderColor: chooseColor().textColor,
-        }}
-      >
-        <View style={styles.medicineBlock}>
-          <View style={{ flexDirection: "row", gap: 5 }}>
-            <Image
-              style={{ width: 24, height: 24 }}
-              source={chooseColor().warningSource}
-            ></Image>
-            <Text style={styles.title}>
-              {interaction?.pharma1} + {interaction?.pharma2}
-            </Text>
-          </View>
-          <Text style={styles.severity}>
-            Gravidade: {interaction?.intensity}
-          </Text>
-        </View>
-
-        <Text style={styles.effectTitle}>
-          Efeito da interação:{" "}
-          <Text style={styles.effectText}>{interaction?.efffect}</Text>
-        </Text>
-
-        <View style={styles.infoRow}>
-          <View>
-            <Text style={styles.infoTitle}>Início do efeito</Text>
-            <Text style={styles.infoText}>
-              {interaction?.interactionStartTime}
-            </Text>
-          </View>
-          <View>
-            <Text style={styles.infoTitle}>Probabilidade</Text>
-            <Text style={styles.infoText}>{interaction?.possibility}</Text>
-          </View>
-        </View>
-
-        <TouchableOpacity
-          style={{ ...styles.button, borderColor: chooseColor().textColor }}
-          onPress={() => navigation.goBack()}
+      <HeaderTittle title="Detalhamento da Interação" />
+      <View style={styles.container}>
+        <View
+          style={{
+            ...styles.content,
+            backgroundColor: chooseColor().bgColor,
+            borderColor: chooseColor().textColor,
+          }}
         >
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              gap: 5,
-            }}
-          >
-            <Image
-              style={{ width: 16, height: 16 }}
-              source={chooseColor().source}
-            ></Image>
-            <Text
-              style={{ ...styles.buttonText, color: chooseColor().textColor }}
-            >
-              Voltar
+          <View style={styles.medicineBlock}>
+            <View style={{ flexDirection: "row", gap: 5 }}>
+              <Image
+                style={{ width: 24, height: 24 }}
+                source={chooseColor().warningSource}
+              ></Image>
+              <Text style={styles.title}>
+                {interaction?.pharma1} + {interaction?.pharma2}
+              </Text>
+            </View>
+            <Text style={styles.severity}>
+              Gravidade: {interaction?.intensity}
             </Text>
           </View>
-        </TouchableOpacity>
+
+          <Text style={styles.effectTitle}>
+            Efeito da interação:{" "}
+            <Text style={styles.effectText}>{interaction?.efffect}</Text>
+          </Text>
+
+          <View style={styles.infoRow}>
+            <View>
+              <Text style={styles.infoTitle}>Início do efeito</Text>
+              <Text style={styles.infoText}>
+                {interaction?.interactionStartTime}
+              </Text>
+            </View>
+            <View>
+              <Text style={styles.infoTitle}>Probabilidade</Text>
+              <Text style={styles.infoText}>{interaction?.possibility}</Text>
+            </View>
+          </View>
+
+          <TouchableOpacity
+            style={{ ...styles.button, borderColor: chooseColor().textColor }}
+            onPress={() => navigation.goBack()}
+          >
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 5,
+              }}
+            >
+              <Image
+                style={{ width: 16, height: 16 }}
+                source={chooseColor().source}
+              ></Image>
+              <Text
+                style={{ ...styles.buttonText, color: chooseColor().textColor }}
+              >
+                Voltar
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
     </>
   );
 };
