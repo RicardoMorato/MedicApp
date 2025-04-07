@@ -14,13 +14,14 @@ describe("Drug Interaction Service", () => {
   });
 
   afterEach(() => {
-    mock.restore();
+    mock.reset();
   });
 
   describe("checkDrugInteraction", () => {
     it("should return true when API call is successful", async () => {
       const drugs = ["Aspirin", "Ibuprofen"];
-      mock.onPost("/interactions/").reply(200);
+
+      mock.onPost("/interactions").reply(200, { interaction: true });
 
       const result = await checkDrugInteraction(drugs);
       expect(result).toBe(true);
@@ -28,7 +29,8 @@ describe("Drug Interaction Service", () => {
 
     it("should return false when API call fails", async () => {
       const drugs = ["Aspirin", "Ibuprofen"];
-      mock.onPost("/interactions/").reply(404);
+
+      mock.onPost("/interactions").reply(404);
 
       const result = await checkDrugInteraction(drugs);
       expect(result).toBe(false);
@@ -36,7 +38,8 @@ describe("Drug Interaction Service", () => {
 
     it("should send correct payload to API", async () => {
       const drugs = ["Aspirin", "Ibuprofen"];
-      mock.onPost("/interactions/").reply(200);
+
+      mock.onPost("/interactions").reply(200);
 
       await checkDrugInteraction(drugs);
 
