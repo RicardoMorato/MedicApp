@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  render,
-  fireEvent,
-  waitFor,
-  screen,
-} from "@testing-library/react-native";
+import { render, fireEvent, waitFor, act } from "@testing-library/react-native";
 import DrugInteractionScreen from "./index";
 import {
   checkDrugInteraction,
@@ -102,7 +97,10 @@ describe("DrugInteractionScreen", () => {
     const { getByText } = render(<DrugInteractionScreen />);
 
     const button = getByText("Verificar Interação");
-    fireEvent.press(button);
+
+    act(() => {
+      fireEvent.press(button);
+    });
 
     await waitFor(() => {
       expect(alertSpy).toHaveBeenCalledWith(
