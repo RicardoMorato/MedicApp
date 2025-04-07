@@ -2,6 +2,10 @@ import api from "./api";
 import MockAdapter from "axios-mock-adapter";
 import { checkDrugInteraction } from "./drugs.service";
 
+jest.mock("@react-native-async-storage/async-storage", () =>
+  require("@react-native-async-storage/async-storage/jest/async-storage-mock")
+);
+
 describe("Drug Interaction Service", () => {
   let mock: MockAdapter;
 
