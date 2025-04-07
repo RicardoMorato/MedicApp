@@ -21,6 +21,7 @@ import { Poly_400Regular } from "@expo-google-fonts/poly";
 import { useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Colors } from "@/constants/Colors";
+import HeaderTittle from "@/components/HeaderTittle";
 
 interface DrugInteraction {
   efffect: string;
@@ -92,10 +93,10 @@ const LearnMore = () => {
   }
 
   return (
+    <>
+    <HeaderTittle title="Adicionar Medicamentos" />
     <View style={styles.container}>
-      <Text style={styles.headerText}> Saiba mais sobre as interações</Text>
-      <View style={styles.headerDivider}></View>
-
+      
       <View
         style={{
           ...styles.content,
@@ -160,6 +161,7 @@ const LearnMore = () => {
         </TouchableOpacity>
       </View>
     </View>
+    </>
   );
 };
 
