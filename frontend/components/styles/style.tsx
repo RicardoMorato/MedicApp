@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
     container: {
       flex: 1,
       borderRadius: 10,
+      maxHeight: Dimensions.get('window').height/ 1.2,
   
     },
     sectionMain: {
