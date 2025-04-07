@@ -1,9 +1,16 @@
 # MedicApp
 
+![version](https://img.shields.io/badge/version-1.0.0-blue.svg)
+![Build](https://github.com/RicardoMorato/MedicApp/actions/workflows/deploy.yml/badge.svg)
+![Build](https://github.com/RicardoMorato/MedicApp/actions/workflows/run_tests.yml/badge.svg)
+![License](https://img.shields.io/github/license/RicardoMorato/MedicApp)
+[![Docs](https://img.shields.io/badge/docs-available-blue.svg)](https://docs.medicapp.digital)
+![AWS](https://img.shields.io/badge/deploy-AWS-yellow.svg)
+
+
 ## Descrição
 
-Um aplicativo que tem como objetivo permitir os usuários acessarem informações detalhadas sobre interações medicamentosas de maneira rápida e fácil.
-Ele permite que os usuários consultem dados sobre medicamentos, incluindo composição e concentração de forma simples e prática.
+Um aplicativo que tem como objetivo permitir os usuários acessarem informações detalhadas sobre interações medicamentosas de maneira rápida e fácil, dados sobre medicamentos, incluindo composição e concentração de forma simples e prática.
 Nossa solução foi pensada para dar maior autonomia e segurança aos pacientes e ao público em geral, promovendo o uso seguro e consciente de medicamentos.
 
 ### Tecnologias escolhidas :
@@ -41,6 +48,8 @@ O MedicApp possui [uma Wiki](https://github.com/RicardoMorato/MedicApp/wiki)! L�
 
 Além disso, o MedicApp também possuiu uma [Documentação Oficial](https://docs.medicapp.digital/), que contém todas as informações detalhadas das rotas da API, incluindo as respostas esperadas, os campos obrigatórios e não obrigatórios de entrada e o retorno da chamada da API.
 
+Uma segunda opção de consulta a documentação do MedicApp é via [Swagger](https://api.medicapp.digital/swagger), onde além de poder visualizar as rotas, suas respostas e entradas esperadas, é possível testar elas! 
+
 ### Figma
 Desenvolvido pelo nosso Designer Eduardo Matos e com colaboração de Pedro Novaes e Weldon Pereira, utilizamos o figma para desenvolver as telas utilizadas e o prótotipo do nosso app : [Figma do Projeto](https://www.figma.com/design/3LQPNrQ7mijdTFiu6P2u1K/App-MedicApp?node-id=0-1&t=K4Qc69s2wt7yMr6o-1).
 
@@ -51,7 +60,7 @@ Para agilizar o nosso desenvolvimento, utilizamos o quadro kanban dentro do Gith
 Para ajudar a fazer a build e setup local do sistema, o MedicApp tem uma [BUILD.md](https://github.com/RicardoMorato/MedicApp/blob/main/BUILD.md), onde é ensinado tanto a como rodar o Backend como o Frontend do zero.
 
 ## Orientações sobre como Contribuir para o Projeto
-Se você quer contribuir para o nosso projeto, o MedicApp tem um [CONTRIBUTING.md](https://github.com/RicardoMorato/MedicApp/blob/main/CONTRIBUTING.md), onde é passada orientações sobre como é possível contribuir para o nosso projeto
+Se você quer contribuir para o nosso projeto, o MedicApp tem um [CONTRIBUTING.md](https://github.com/RicardoMorato/MedicApp/blob/main/CONTRIBUTING.md), onde é passada orientações sobre como é possível contribuir para o nosso projeto.
 
 ## Autores do Projeto
 
