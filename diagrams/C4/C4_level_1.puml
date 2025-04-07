@@ -1,0 +1,14 @@
+@startuml MedicApp_Context
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+' Estilo opcional
+LAYOUT_WITH_LEGEND()
+title Diagrama C4 - Nível 1 (Contexto) - MedicApp
+
+Person(usuario, "Usuário", "Pessoa que utiliza o sistema para verificar interações medicamentosas")
+
+System(medicApp, "MedicApp", "Permite que usuários chequem interações medicamentosas entre diversos medicamentos")
+
+Rel(usuario, medicApp, "Utiliza")
+
+@enduml
