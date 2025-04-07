@@ -1,0 +1,22 @@
+
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Diagrama C4 - Nível 2 (Containers) - MedicApp
+
+Person(usuario, "Usuário", "Pessoa que utiliza o sistema para verificar interações medicamentosas")
+
+System_Boundary(medicApp, "MedicApp") {
+    Container(appMobile, "App Mobile", "Typescript, React Native", "Provê funcionalidades da API para o usuário")
+    Container(api, "API", "Python, FastAPI", "Gerencia dados de medicamentos, interações, login e perfil")
+    ContainerDb(db, "Banco de Dados", "PostgreSQL", "Armazena dados de medicamentos, princípios ativos, interações, perfis de usuários, login e cadastro")
+}
+
+usuario --> appMobile : Usa
+appMobile --> api : Requisições HTTP/HTTPS
+api --> db : Lê/Escreve
+
+@enduml
