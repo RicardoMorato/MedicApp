@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
   },
   tabBarItemStyle: {
-    paddingVertical: 10,
+    paddingVertical: 9,
     borderRadius: 999,
   }
 })
