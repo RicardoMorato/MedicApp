@@ -62,6 +62,9 @@ Para ajudar a fazer a build e setup local do sistema, o MedicApp tem uma [BUILD.
 ## Orientações sobre como Contribuir para o Projeto
 Se você quer contribuir para o nosso projeto, o MedicApp tem um [CONTRIBUTING.md](https://github.com/RicardoMorato/MedicApp/blob/main/CONTRIBUTING.md), onde é passada orientações sobre como é possível contribuir para o nosso projeto.
 
+## Orientações sobre como executar os Testes
+Se você quer executar os testes, o MedicApp tem um [TESTING.md](https://github.com/RicardoMorato/MedicApp/blob/main/backend/TESTING.md), onde é passada orientações sobre como é possível testar o nosso projeto.
+
 ## Autores do Projeto
 
 - Eduardo Matos (Desenvolvedor Front-End e Designer UX/UI)
