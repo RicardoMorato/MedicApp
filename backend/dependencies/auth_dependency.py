@@ -14,7 +14,7 @@ from config import SECRET_KEY, ALGORITHM
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-ACCESS_TOKEN_EXPIRE_MINUTES = 100
+ACCESS_TOKEN_EXPIRE_MINUTES = 4320  # 3 dias pra poder expirar
 
 router = APIRouter(tags=["Token"])
 

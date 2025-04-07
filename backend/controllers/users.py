@@ -5,7 +5,7 @@ from schemas import users as schema
 from fastapi import HTTPException, status
 from dependencies.auth_dependency import hash_password, verify_password, create_access_token
 
-ACCESS_TOKEN_EXPIRE_MINUTES = 60
+ACCESS_TOKEN_EXPIRE_MINUTES = 4320 # 3 dias pra poder expirar 
 
 def create_new_user(db: Session, user: schema.UserCreate):
     user_exists = db.query(User).filter(User.email == user.email).first()
