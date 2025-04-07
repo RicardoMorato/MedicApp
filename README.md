@@ -7,7 +7,6 @@
 [![Docs](https://img.shields.io/badge/docs-available-blue.svg)](https://docs.medicapp.digital)
 ![AWS](https://img.shields.io/badge/deploy-AWS-yellow.svg)
 
-
 ## Descrição
 
 Um aplicativo que tem como objetivo permitir os usuários acessarem informações detalhadas sobre interações medicamentosas de maneira rápida e fácil, dados sobre medicamentos, incluindo composição e concentração de forma simples e prática.
@@ -15,17 +14,17 @@ Nossa solução foi pensada para dar maior autonomia e segurança aos pacientes 
 
 ### Tecnologias escolhidas :
 
-| Tecnologia                         | Descrição                                                      | Justificativa para o Uso                                                                 |
-|------------------------------------|----------------------------------------------------------------|-------------------------------------------------------------------------------------------|
-| TypeScript                         | Superset do JavaScript com tipagem estática                    | Melhora a legibilidade, manutenção e reduz erros em tempo de desenvolvimento             |
-| React Native                       | Framework para desenvolvimento mobile                          | Permite criar aplicativos nativos para Android e iOS com uma única base de código        |
-| Python                             | Linguagem de programação usada no backend                      | Simples, expressiva e com vasta comunidade e bibliotecas                                 |
-| FastAPI                            | Framework web moderno para APIs em Python                      | Rápido, eficiente e com documentação automática integrada                                |
-| PostgreSQL                         | Banco de dados relacional                                      | Robusto, seguro e com excelente suporte para dados estruturados                          |
-| AWS (Amazon Web Services)          | Plataforma de serviços em nuvem                                | Escalável, confiável e amplamente adotada no mercado para deploy de aplicações           |
-| GitHub Actions                     | Ferramenta de CI/CD integrada ao GitHub                        | Automatiza testes, builds e deploys diretamente a partir dos repositórios                |
-| Pytest                             | Framework de testes em Python                                  | Simples, flexível e adequado para testes automatizados de APIs e lógicas de negócio      |
-| React Native Testing Library       | Biblioteca de testes para interfaces em React Native           | Facilita a criação de testes focados na experiência do usuário                           |
+| Tecnologia                   | Descrição                                            | Justificativa para o Uso                                                            |
+| ---------------------------- | ---------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| TypeScript                   | Superset do JavaScript com tipagem estática          | Melhora a legibilidade, manutenção e reduz erros em tempo de desenvolvimento        |
+| React Native                 | Framework para desenvolvimento mobile                | Permite criar aplicativos nativos para Android e iOS com uma única base de código   |
+| Python                       | Linguagem de programação usada no backend            | Simples, expressiva e com vasta comunidade e bibliotecas                            |
+| FastAPI                      | Framework web moderno para APIs em Python            | Rápido, eficiente e com documentação automática integrada                           |
+| PostgreSQL                   | Banco de dados relacional                            | Robusto, seguro e com excelente suporte para dados estruturados                     |
+| AWS (Amazon Web Services)    | Plataforma de serviços em nuvem                      | Escalável, confiável e amplamente adotada no mercado para deploy de aplicações      |
+| GitHub Actions               | Ferramenta de CI/CD integrada ao GitHub              | Automatiza testes, builds e deploys diretamente a partir dos repositórios           |
+| Pytest                       | Framework de testes em Python                        | Simples, flexível e adequado para testes automatizados de APIs e lógicas de negócio |
+| React Native Testing Library | Biblioteca de testes para interfaces em React Native | Facilita a criação de testes focados na experiência do usuário                      |
 
 ## Funcionalidades
 
@@ -38,6 +37,7 @@ Abaixo está uma lista não extensiva das principais funcionalidades que daremos
 - Perfil do usuário contendo suas informações essenciais
 
 ## Estrutura Organizacional
+
 Adicionar diagramas aqui.
 
 ## Links para Recursos importantes
@@ -48,22 +48,27 @@ O MedicApp possui [uma Wiki](https://github.com/RicardoMorato/MedicApp/wiki)! L�
 
 Além disso, o MedicApp também possuiu uma [Documentação Oficial](https://docs.medicapp.digital/), que contém todas as informações detalhadas das rotas da API, incluindo as respostas esperadas, os campos obrigatórios e não obrigatórios de entrada e o retorno da chamada da API.
 
-Uma segunda opção de consulta a documentação do MedicApp é via [Swagger](https://api.medicapp.digital/swagger), onde além de poder visualizar as rotas, suas respostas e entradas esperadas, é possível testar elas! 
+Uma segunda opção de consulta a documentação do MedicApp é via [Swagger](https://api.medicapp.digital/swagger), onde além de poder visualizar as rotas, suas respostas e entradas esperadas, é possível testar elas!
 
 ### Figma
-Desenvolvido pelo nosso Designer Eduardo Matos e com colaboração de Pedro Novaes e Weldon Pereira, utilizamos o figma para desenvolver as telas utilizadas e o prótotipo do nosso app : [Figma do Projeto](https://www.figma.com/design/3LQPNrQ7mijdTFiu6P2u1K/App-MedicApp?node-id=0-1&t=K4Qc69s2wt7yMr6o-1).
+
+Desenvolvido pelo nosso Designer Eduardo Matos e com colaboração de Pedro Novaes e Weldon Pereira, utilizamos o figma para desenvolver as telas utilizadas e o prótotipo do nosso app: [Figma do Projeto](https://www.figma.com/design/3LQPNrQ7mijdTFiu6P2u1K/App-MedicApp?node-id=0-1&t=K4Qc69s2wt7yMr6o-1).
 
 ### Metodologia de Desenvolvimento Ágil
+
 Para agilizar o nosso desenvolvimento, utilizamos o quadro kanban dentro do Github Projects para poder organizar nosso código de maneira que fique clara as tasks de cada desenvolvedor e como elas devem estar dentro do código: [Quadro Kanban do Projeto](https://github.com/users/RicardoMorato/projects/2).
 
 ## Guia para build local do sistema
+
 Para ajudar a fazer a build e setup local do sistema, o MedicApp tem uma [BUILD.md](https://github.com/RicardoMorato/MedicApp/blob/main/BUILD.md), onde é ensinado tanto a como rodar o Backend como o Frontend do zero.
 
 ## Orientações sobre como Contribuir para o Projeto
+
 Se você quer contribuir para o nosso projeto, o MedicApp tem um [CONTRIBUTING.md](https://github.com/RicardoMorato/MedicApp/blob/main/CONTRIBUTING.md), onde é passada orientações sobre como é possível contribuir para o nosso projeto.
 
 ## Orientações sobre como executar os Testes
-Se você quer executar os testes, o MedicApp tem um [TESTING.md](https://github.com/RicardoMorato/MedicApp/blob/main/backend/TESTING.md), onde é passada orientações sobre como é possível testar o nosso projeto.
+
+Se você quer executar os testes, o MedicApp tem um [TESTING.md](https://github.com/RicardoMorato/MedicApp/blob/main/TESTING.md), onde é passada orientações sobre como é possível testar o nosso projeto.
 
 ## Autores do Projeto
 
