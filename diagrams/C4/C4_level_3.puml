@@ -1,0 +1,44 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Diagrama C4 - Nível 3 (Componentes da API - MedicApp)
+
+Person(usuario, "Usuário", "(App Mobile)")
+
+package "MedicApp - API (FastAPI)" {
+    Container(authService, "Auth Service", "Componente: Serviço", "Criação, checagem e validação de token JWT e sessão do usuário")
+
+    Container(userController, "User Controller", "Componente: FastAPI Controller", "Login, Cadastro e informações do usuário")
+
+    Container(pharmaController, "Pharma Controller", "Componente: FastAPI Controller", "Listagem de nomes dos medicamentos")
+
+    Container(drugsController, "Drugs Controller", "Componente: FastAPI Controller", "Listagem das informações de todos os medicamentos, detalhes de um medicamento específico")
+
+    Container(interactionsController, "Interactions Controller", "Componente: FastAPI Controller", "Checagem de interações entre medicamentos")
+
+    Container(userDrugsController, "User Drugs Controller", "Componente: FastAPI Controller", "Listagem de medicamentos do usuário")
+}
+
+ContainerDb(DB, "Banco de Dados", "PostgreSQL", "Armazena dados de medicamentos, princípios ativos, interações, perfis de usuários, login e cadastro")
+
+' Requisições do App Mobile
+usuario --> userController : Requisições HTTP\n(SignIn / SignUp)
+usuario --> pharmaController : Requisições HTTP\n(Listagem de nomes)
+usuario --> drugsController : Requisições HTTP\n(Info de medicamentos)
+usuario --> interactionsController : Requisições HTTP\n(Interações)
+usuario --> userDrugsController : Requisições HTTP\n(Medicamentos do usuário)
+
+userController --> authService
+userDrugsController --> authService
+
+' Conexão dos controllers com o banco
+userController --> DB
+pharmaController --> DB
+drugsController --> DB
+interactionsController --> DB
+userDrugsController --> DB
+
+@enduml
