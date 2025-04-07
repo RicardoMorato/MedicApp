@@ -11,9 +11,11 @@ import DrugInteraction from "@/pages/DrugInteraction";
 import LearnMore from "@/pages/LearnMore";
 import Profile from "@/pages/Profile";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from "@/constants/Colors";
+import { jwtDecode } from "jwt-decode";
+import { useNavigation } from "@react-navigation/native";
 
 export const HomeNav = () => {
   const Stack = createNativeStackNavigator();
@@ -154,17 +156,49 @@ export const LoginNav = () => {
 
 export default function Routes() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  async function getData() {
-    const data = await AsyncStorage.getItem("isLoggedIn");
-    console.log(data, "at app.jsx");
-    setIsLoggedIn(data ? true : false);
+  const navigation = useNavigation(); 
+
+  async function validateToken() {
+    const token = await AsyncStorage.getItem("userToken");
+    if (token) {
+      try {
+        const decoded: any = jwtDecode(token);
+        if (decoded.exp * 1000 < Date.now()) {
+          Alert.alert("Desconectado", "Reconecte novamente para continuar.")
+          await AsyncStorage.removeItem("userToken")
+          await AsyncStorage.removeItem("isLoggedIn")
+          setIsLoggedIn(false);
+          navigation.reset({
+            index: 0,
+            routes: [{ name: "Signin" as never }],
+          });
+        } else {
+          setIsLoggedIn(true);
+        }
+      } catch (error) {
+        console.error("Erro ao decodificar o token:", error)
+        setIsLoggedIn(false);
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "Signin" as never}], 
+        });
+      }
+    } else {
+      setIsLoggedIn(false);
+      navigation.reset({
+        index: 0,
+        routes: [{name: "Signin" as never }],
+      });
+    }
   }
+
   useEffect(() => {
-    getData();
+    validateToken();
     setTimeout(() => {
       SplashScreen.hide();
     }, 900);
   }, [isLoggedIn]);
+
   return <>{isLoggedIn ? <HomeNav /> : <LoginNav />}</>;
 }
 
