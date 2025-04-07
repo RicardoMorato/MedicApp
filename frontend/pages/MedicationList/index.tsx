@@ -2,13 +2,13 @@ import { MedicamentsListed } from "@/components/MedicamentsListed/MedicamentsLis
 import React, { useEffect, useState, useCallback } from "react";
 import api from "../../services/api";
 import SplashLoading from "@/components/SplashLoading";
-import { Medication } from "@/interfaces/Medication";
+import { Medication, MedicationDetails } from "@/interfaces/Medication";
 import { debounce } from "lodash";
 import HeaderTittle from "@/components/HeaderTittle";
 import FontLoader from "@/components/FontLoader";
 
 function MedicationList() {
-  const [medications, setMedications] = useState<Medication[]>([]);
+  const [medications, setMedications] = useState<MedicationDetails[]>([]);
   const [loading, setLoading] = useState(true);
   const [skip, setSkip] = useState(0);
   const [limit, setLimit] = useState(20);
@@ -40,6 +40,9 @@ function MedicationList() {
             data_inclusao: item.data_inclusao,
             concentracao: item.concentracao,
             farmaco: item.farmaco,
+            detentor: item.detentor,
+            forma_farmaceutica: item.forma_farmaceutica, 
+            registro: item.registro,
           }));
           setMedications((prev) => {
             const existingIds = new Set(prev.map((med) => med.id));
