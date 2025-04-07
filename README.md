@@ -38,7 +38,27 @@ Abaixo está uma lista não extensiva das principais funcionalidades que daremos
 
 ## Estrutura Organizacional
 
-Adicionar diagramas aqui.
+Os diagramas podem ser vistos também na pasta [diagrams](https://github.com/RicardoMorato/MedicApp/tree/main/diagrams), onde você pode ver o código-fonte que originou os diagramas C4 abaixo.
+
+### Diagrama Entidade-Relacionamento:
+
+<img width="706" alt="diagrama_ER" src="https://github.com/user-attachments/assets/81c7120f-1719-4266-ae17-1e8016d87e0e" />
+
+### Diagramas C4
+
+- Nível 1
+
+![image](https://github.com/user-attachments/assets/16967cff-5a78-44fe-9206-4663642cc78f)
+
+- Nível 2
+
+![image](https://github.com/user-attachments/assets/de1aa9b5-e3cb-4c67-98e1-f9ccad1f0411)
+
+- Nível 3
+
+![image](https://github.com/user-attachments/assets/1d03b2ef-334a-417e-98cc-53b591f56785)
+
+
 
 ## Links para Recursos importantes
 
