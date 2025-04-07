@@ -18,3 +18,8 @@ export async function utilDecodeTokenEmail() {
   const email = jwtDecode<CustomJwtPayload>(token).email
   return email
 }
+export async function utilDecodeTokenExp() {
+  const token = await AsyncStorage.getItem("userToken") || ""
+  const exp = jwtDecode<CustomJwtPayload>(token).exp
+  return exp
+}
