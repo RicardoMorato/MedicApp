@@ -1,8 +1,9 @@
 # MedicApp
 
 ![version](https://img.shields.io/badge/version-1.0.0-blue.svg)
-![Build](https://github.com/RicardoMorato/MedicApp/actions/workflows/deploy.yml/badge.svg)
-![Build](https://github.com/RicardoMorato/MedicApp/actions/workflows/run_tests.yml/badge.svg)
+![Continuous Deployment](https://github.com/RicardoMorato/MedicApp/actions/workflows/deploy.yml/badge.svg)
+![Backend Tests](https://github.com/RicardoMorato/MedicApp/actions/workflows/run_tests_backend.yml/badge.svg)
+![Frontend Tests](https://github.com/RicardoMorato/MedicApp/actions/workflows/run_tests_frontend.yml/badge.svg)
 ![License](https://img.shields.io/github/license/RicardoMorato/MedicApp)
 [![Docs](https://img.shields.io/badge/docs-available-blue.svg)](https://docs.medicapp.digital)
 ![AWS](https://img.shields.io/badge/deploy-AWS-yellow.svg)
