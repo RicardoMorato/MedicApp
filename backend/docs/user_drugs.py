@@ -15,11 +15,22 @@ response_user_drug_create={
             }
         }
     },
+    401: {
+        "model": ErrorResponse,
+        "description": "Erro na autenticação",
+        "content": {
+            "application/json": {
+                "example": {
+                    "detail": "Not authenticated"
+                }
+        }
+        }
+    },
     422: {
             "model": ValidationErrorResponse,
             "description": "Erro de validação nos dados fornecidos.",
     }
-    }
+}
 
 description_user_drug_create = """
 **Descrição da rota:**
@@ -35,12 +46,23 @@ response_user_drug_list={
     200: {
     "description": "Busca pelos medicamentos",
     },
+    401: {
+        "model": ErrorResponse,
+        "description": "Erro na autenticação",
+        "content": {
+            "application/json": {
+                "example": {
+                    "detail": "Not authenticated"
+                }
+            }
+        }
+    },
     422: {
             "model": ValidationErrorResponse,
             "description": "Erro de validação nos dados fornecidos.",
     }
-    }
-    
+}
+
 description_user_drug_list = """
 **Descrição da rota:**
 
@@ -57,6 +79,17 @@ response_user_drug_delete={
     204: {
     "description": "Medicamento deletado com sucesso",
     },
+    401: {
+        "model": ErrorResponse,
+        "description": "Erro na autenticação",
+        "content": {
+            "application/json": {
+                "example": {
+                    "detail": "Not authenticated"
+                }
+            }
+        }
+    },
     404: {
         "model": ErrorResponse,
         "description": "Medicamento pra ser deletado não foi encontrado",
@@ -72,7 +105,7 @@ response_user_drug_delete={
             "model": ValidationErrorResponse,
             "description": "Erro de validação nos dados fornecidos.",
     }
-    }
+}
 
 description_user_drug_delete = """
 **Descrição da rota:**

@@ -25,7 +25,7 @@ router = APIRouter(tags=["User Drugs"])
     status_code=status.HTTP_201_CREATED,
     response_model=DrugCreateResponse,
     responses=response_user_drug_create,
-    description=description_user_drug_create,
+    description=description_user_drug_create
 )
 def add_drug(
     drug: DrugCreate,
@@ -40,7 +40,7 @@ def add_drug(
     summary="Deletar medicamentos do usuário",
     status_code=status.HTTP_204_NO_CONTENT,
     responses=response_user_drug_delete,
-    description=description_user_drug_delete,
+    description=description_user_drug_delete
 )
 def delete_drug(
     drug_id: int = Path(
@@ -61,7 +61,7 @@ def delete_drug(
     status_code=status.HTTP_200_OK,
     response_model=List[DrugResponse],
     responses=response_user_drug_list,
-    description=description_user_drug_list,
+    description=description_user_drug_list
 )
 async def search_user_medications(
     user=Depends(get_current_user),
