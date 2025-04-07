@@ -3,12 +3,12 @@ import { useState, useEffect } from 'react';
 import { styles } from '../styles/style';
 import { Item } from '../Item/Item';
 import Header from '../Header';
-import { Medication } from '../../interfaces/Medication';
+import { Medication, MedicationDetails } from '../../interfaces/Medication';
 import SplashLoading from '../SplashLoading';
 import { Colors } from '@/constants/Colors';
 
 interface MedicamentsListedProps {
-    medications: Medication[]
+    medications: MedicationDetails[]
     setSearchQuery: React.Dispatch<React.SetStateAction<string>>
     searchQuery: string
     handleEndReached?: () => void
@@ -36,7 +36,7 @@ export const MedicamentsListed = ({ medications, searchQuery, setSearchQuery, ha
             ||
             medicament.farmaco.toLowerCase().includes(searchQuery.toLowerCase())
         )
-        .reduce((sections: { titleLetter: string, data: Medication[] }[], medicament) => {
+        .reduce((sections: { titleLetter: string, data: MedicationDetails[] }[], medicament) => {
             const firstLetter = normalizeLetter(medicament.medicamento[0].toUpperCase());
             const section = sections.find(section => section.titleLetter === firstLetter);
             if (section) {

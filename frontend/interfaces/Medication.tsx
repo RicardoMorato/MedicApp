@@ -11,3 +11,13 @@ export interface MedicationUser {
   principio_ativo: string;
   concentracao: string;
 }
+export interface MedicationDetails {
+  id: string;
+  medicamento: string;
+  data_inclusao: string;
+  concentracao: string;
+  farmaco: string;
+  detentor: string;
+  forma_farmaceutica: string;
+  registro: number;
+}

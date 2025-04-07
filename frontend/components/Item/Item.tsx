@@ -2,9 +2,9 @@ import { Text, View, TouchableOpacity, Animated, Easing } from 'react-native';
 import React, { useState } from 'react';
 import { styles } from '../styles/style';
 import { useNavigation } from '@react-navigation/native';
-import { ItemProps } from '../../interfaces/ItemProps';
+import { ItemDetailsProps, ItemProps } from '../../interfaces/ItemProps';
 
-const ItemComponent: React.FC<ItemProps> = ({ item }) => {
+const ItemComponent: React.FC<ItemDetailsProps> = ({ item }) => {
   const [expanded, setExpanded] = useState(false);
   const [animation] = useState(new Animated.Value(0));
   const navigation = useNavigation<any>();
@@ -39,10 +39,20 @@ const ItemComponent: React.FC<ItemProps> = ({ item }) => {
         <Text style={styles.farmaco}>{item.farmaco}</Text>
         <Animated.View style={{ height, overflow: 'hidden' }}>
           <View style={styles.dividerCard} />
-          <Text style={styles.itemDescription}>{item.data_inclusao}</Text>
+          <Text style={styles.itemDescription}>{item.detentor}</Text>
           <TouchableOpacity
             style={styles.linkToDetails}
-            onPress={() => navigation.navigate('MedicationDetails')}
+            onPress={() =>
+              navigation.navigate("MedicationDetails", {
+                medicamento: item.medicamento,
+                concentracao: item.concentracao,
+                data_inclusao: item.data_inclusao,
+                detentor: item.detentor,
+                farmaco: item.farmaco,
+                forma_farmaceutica: item.forma_farmaceutica,
+                registro: item.registro,
+              })
+            }
           >
             <Text style={styles.details}>Ver detalhes</Text>
           </TouchableOpacity>
